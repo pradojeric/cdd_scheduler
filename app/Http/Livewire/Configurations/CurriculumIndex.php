@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Livewire\Configurations;
+
+use App\Models\Configurations\Course;
+use App\Models\Configurations\Curriculum;
+use Livewire\Component;
+
+class CurriculumIndex extends Component
+{
+    public $course;
+
+    public function mount(Course $course)
+    {
+        $this->course = $course;
+    }
+
+    public function activateCurriculum(Curriculum $curriculum)
+    {
+        $curriculum->activateCurriculum();
+        $this->course = $curriculum->course;
+    }
+
+    public function render()
+    {
+        return view('livewire.configurations.curriculum-index', [
+            'curricula' => $this->course->curricula,
+        ]);
+    }
+}

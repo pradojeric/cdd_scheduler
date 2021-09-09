@@ -1,0 +1,251 @@
+<div>
+
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white border-b border-gray-200 flex space-x-2 min-w-full">
+
+            <div class="flex flex-col w-1/4 space-y-2">
+
+                <x-select class="text-sm" wire:model="selectedCourse">
+                    <option value="" selected>Select Course</option>
+                    @foreach ($courses as $course)
+                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endforeach
+                </x-select>
+
+                @if($selectedCourse)
+
+                    <x-select class="text-sm" wire:model="selectedSection">
+                        <option value="" selected>Select Section</option>
+                        @foreach ($sections as $section)
+                            <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+                        @endforeach
+                    </x-select>
+
+                    @if($selectedSection)
+
+                        <x-select class="text-sm" wire:model="selectedSubject">
+                            <option value="" selected>Select Subjects</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->getSubjectTitle() }}</option>
+                                @if ($subject->hasLab())
+                                    <option value="{{ $subject->id }}L">{{ $subject->getSubjectTitle($subject->hasLab()) }}</option>
+                                @endif
+                            @endforeach
+                        </x-select>
+
+                        @if($selectedSubject)
+
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3/4">
+                                <x-select class="text-sm w-full" wire:model="selectedFaculty">
+                                    <option value="" selected>Select Faculty</option>
+                                    @foreach ($faculties as $faculty)
+                                        <option value="{{ $faculty->id }}" class="{{ $faculty->hasNoUnits() ? 'text-red-500' : '' }}">{{ $faculty->name }}</option>
+                                    @endforeach
+                                </x-select>
+                            </div>
+                            <div class="flex space-x-2">
+                                <x-input type="checkbox" wire:model="allFaculties" value="1" id="allFaculties" />
+                                <x-label for="allFaculties" value="All Faculties" />
+                            </div>
+                        </div>
+
+                        <x-select class="text-sm" wire:model="selectedBuilding">
+                            <option value="" selected>Select Building</option>
+                            @foreach ($buildings as $building)
+                                <option value="{{ $building->id }}">{{ $building->code }} - {{ $building->name }}</option>
+                            @endforeach
+                        </x-select>
+
+                        @if($selectedBuilding != '')
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3/4">
+                                    <x-select class="text-sm w-full" wire:model="selectedRoom">
+                                        <option value="" selected>Select Room</option>
+                                        @foreach ($rooms as $room)
+                                        <option value="{{ $room->id }}">{{ $room->name }} ({{ strtolower($room->roomType->name) }})</option>
+                                        @endforeach
+                                    </x-select>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <x-input type="checkbox" wire:model="allRooms" value="1" id="allRooms" />
+                                    <x-label for="allRooms" value="All Rooms" />
+                                </div>
+                            </div>
+
+                        @endif
+
+                        <div class="flex items-center">
+                            <label for="start" class="text-sm w-10" >Start</label>
+                            <x-input type="time" class="h-8" id="start" wire:model="start" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label for="end" class="text-sm w-10" >End</label>
+                            <x-input type="time" class="h-8" id="end" wire:model="end" />
+                        </div>
+
+                        <div class="flex items-center">
+                            <label for="hours" class="text-sm w-12" >Hours</label>
+                            <x-input type="text" class="h-8 w-12 mr-1" id="hours" wire:model="hours" readonly /> per week
+                        </div>
+
+                        <div>
+                            @foreach ($days as $day)
+                                <div>
+                                    <x-input type="checkbox" wire:model="pickedDays.{{ $day }}" value=1 id="{{ $day }}" />
+                                    <label for="{{ $day }}" class="text-sm" >{{ ucfirst($day) }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+
+
+                        <div class="flex justify-end mx-2">
+
+                            <div class="flex items-center space-x-2 mr-5">
+                                <x-input type="checkbox" id="override" wire:model="override" value="1" />
+                                <x-label for="override" :value="_('Override')" />
+
+                            </div>
+                            <x-button wire:click="addSchedule">Add</x-button>
+                        </div>
+
+                        @endif
+
+                    @endif
+
+                @endif
+
+
+                @if(count($blockSubjects) > 0)
+                    <div class="w-full">
+                        <table class="w-full">
+                            <thead>
+                                <th>Subject</th>
+                                <th>Time</th>
+                                <th>Room</th>
+
+                            </thead>
+                            <tbody class="text-xs divide-y">
+                                @foreach ($blockSubjects as $item)
+                                    <tr>
+                                        <td class="align-top">{{ $item->code }}</td>
+                                        <td class="pl-6">
+                                            @if ($item->schedules->first())
+                                                <ul>
+                                                    @foreach (optional($item->schedules->first())->timeSchedules as $s)
+                                                        <li>{{ $s->time }} {{ $s->lab ? '(Lab)' : '' }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </td>
+                                        <td class="text-center">
+                                            @if ($item->schedules->first())
+                                                <ul>
+                                                    @foreach (optional($item->schedules->first())->timeSchedules as $s)
+                                                        <li>{{ $s->room->name }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-end mx-2">
+
+                        <a href="{{ route('sections.show', $sectionModel) }}" class="px-2 py-1 text-xs text-white rounded-lg shadow-sm bg-green-500 hover:bg-green-300 ">
+                            Go to Section {{ $sectionModel->section_name }}
+                        </a>
+
+                    </div>
+                @endif
+
+                <x-auth-session-status :status="session('success')" />
+                @if($errors->any())
+                    <div class="bg-red-600 p-2 mb-1 rounded-lg shadow-sm">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="text-white text-sm">
+                                    {{ $error }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @enderror
+            </div>
+
+            <div class="w-full overflow-x-auto">
+
+                <div class="flex items-center space-x-2 mb-2">
+                    <div class="text-xs">
+                        Show Grid by:
+                    </div>
+                    <div>
+                        <x-input type="radio" wire:model.lazy="gridReport" name="gridReport" value="faculty" id="faculty" />
+                        <label for="faculty" class="text-sm" >{{ _('Faculty') }}</label>
+                    </div>
+                    <div>
+                        <x-input type="radio" wire:model.lazy="gridReport" name="gridReport" value="room" id="room" />
+                        <label for="room" class="text-sm" >{{ _('Room') }}</label>
+                    </div>
+                    <div>
+                        <x-input type="radio" wire:model.lazy="gridReport" name="gridReport" value="section" id="section" />
+                        <label for="section" class="text-sm" >{{ _('Section') }}</label>
+                    </div>
+                </div>
+
+                <table class="border min-w-full">
+                    <thead>
+                        <tr class="uppercase tracking-tighter border">
+                            <th class="w-24">Time</th>
+                            @foreach ($days as $i => $day)
+                                <th>{{ $day }}</th>
+                            @endforeach
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach ($timeRange as $i => $time)
+                            <tr class="border">
+                                <td class=" h-12 flex items-start justify-center">
+                                    {{ $i }}
+                                </td>
+                                @foreach ($days as $day)
+                                    @if(array_key_exists($day, $time) && $time[$day])
+
+                                        @if (strtotime($i) == strtotime($time[$day]->start))
+                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center" rowspan={{ $time[$day]->getBlockPer(30) }}>
+                                                <div>
+                                                    {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
+                                                </div>
+                                                <div class="truncate w-36 mx-1 italic">
+                                                    {{ $time[$day]->schedule->subject->title }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->section->section_name }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->room->name ?? "-" }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->faculty->name ?? "-" }}
+                                                </div>
+                                            </td>
+                                        @endif
+                                    @else
+                                        <td>&nbsp</td>
+                                    @endif
+                                @endforeach
+                            </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
