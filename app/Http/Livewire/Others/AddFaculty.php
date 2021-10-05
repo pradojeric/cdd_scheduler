@@ -14,6 +14,7 @@ class AddFaculty extends Component
     public $search = '';
     public $schedule = null;
     public $selectedFaculty = null;
+    public $override = false;
 
     private $dayNames = [
         'M' => 'monday',
@@ -46,33 +47,34 @@ class AddFaculty extends Component
 
     public function selectFaculty(Faculty $faculty)
     {
-
         $this->selectedFaculty = $faculty;
     }
 
     public function updateFaculty()
     {
         $this->validate();
-        if($this->selectedFaculty->hasNoUnits())
-        {
-            $this->addError('error', 'The faculty has no units');
-            return;
-        }
-        $exists = false;
-        $pickedDays = [];
-
-        // dd($this->schedule->timeSchedules);
-        foreach($this->schedule->timeSchedules as $schedule) {
-            foreach($this->dayNames as $day)
+        if(!$this->override){
+            if($this->selectedFaculty->hasNoUnits())
             {
-                $pickedDays[$day] = $schedule->$day;
-            }
-            $exists = resolve(FacultyService::class)->checkFacultyConflict($this->selectedFaculty, $schedule->start, $schedule->end, $pickedDays);
-
-            if($exists)
-            {
-                $this->addError('error', 'Faculty is conflicted to other schedule');
+                $this->addError('error', 'The faculty has no units');
                 return;
+            }
+            $exists = false;
+            $pickedDays = [];
+
+            // dd($this->schedule->timeSchedules);
+            foreach($this->schedule->timeSchedules as $schedule) {
+                foreach($this->dayNames as $day)
+                {
+                    $pickedDays[$day] = $schedule->$day;
+                }
+                $exists = resolve(FacultyService::class)->checkFacultyConflict($this->selectedFaculty, $schedule->start, $schedule->end, $pickedDays);
+
+                if($exists)
+                {
+                    $this->addError('error', 'Faculty is conflicted to other schedule');
+                    return;
+                }
             }
         }
 
@@ -95,14 +97,14 @@ class AddFaculty extends Component
             $suggestedFaculties = resolve(FacultyService::class)->getPreferredFaculty($this->schedule->subject) ?? Faculty::where(function($query){
                     $query->where('department_id', $this->schedule->section->course->department_id);
                 }
-            )->orderBy('name')->get();
+            )->orderBy('last_name')->get();
         }
 
         $faculties = Faculty::query();
 
         $faculties->when($this->search != '', function($query){
             $query->whereRaw("UPPER(name) LIKE '%". strtoupper($this->search) ."%'");
-        })->orderBy('name');
+        })->orderBy('last_name');
 
         return view('livewire.others.add-faculty', [
             'faculties' => $faculties->get(),

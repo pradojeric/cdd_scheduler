@@ -22,11 +22,8 @@
                     <x-nav-link :href="route('subjects.index')" :active="request()->routeIs('subjects*')">
                         {{ __('Subjects') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('schedule.index')" :active="request()->routeIs('schedule.index')">
-                        {{ __('Schedule') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('schedule-by-subject.index')" :active="request()->routeIs('schedule-by-subject.index')">
-                        {{ __('Schedule By Subject') }}
+                    <x-nav-link :href="route('schedule.course')" :active="request()->routeIs('schedule*')">
+                        {{ __('Scheduler') }}
                     </x-nav-link>
                     <x-nav-link :href="route('sections.index')" :active="request()->routeIs('sections*')">
                         {{ __('Sections') }}

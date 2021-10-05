@@ -32,7 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('view-schedule', function($user, Faculty $faculty){
-            return $user->faculty->id == $faculty->id || $user->hasRole('admin');
+            return optional($user->faculty)->id == $faculty->id || $user->hasRole('admin');
         });
     }
 }

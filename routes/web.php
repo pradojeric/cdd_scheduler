@@ -48,8 +48,8 @@ Route::middleware(['auth'])->group(function(){
         Route::resource('sections', SectionController::class);
         Route::resource('subjects', SubjectController::class);
 
-        Route::get('schedule', [ScheduleController::class, 'index'])->name('schedule.index');
-        Route::get('schedule-by-subject', [ScheduleController::class, 'bySubject'])->name('schedule-by-subject.index');
+        Route::get('/schedule/course', [ScheduleController::class, 'index'])->name('schedule.course');
+        Route::get('/schedule/subject', [ScheduleController::class, 'bySubject'])->name('schedule.subject');
     });
 
     Route::resource('faculties', FacultyController::class);

@@ -47,7 +47,8 @@
                                                 <a href="#" class="w-full" wire:click.prevent="selectFaculty({{ $faculty }})">
                                                     <li class="w-full my-1 px-3 py-2  rounded-lg shadow-md text-white
                                                     {{ $faculty->hasNoUnits() ? 'bg-red-500 hover:bg-red-300' : 'bg-green-500 hover:bg-green-300' }}">
-                                                    {{ $faculty->name }}
+                                                    {{ $faculty->name }} (RU: {{ $faculty->countRemainingUnits() }})
+
                                                 </li>
                                             </a>
                                             @endforeach
@@ -63,7 +64,7 @@
                                                 <a href="#" class="w-full" wire:click.prevent="selectFaculty({{ $suggested }})">
                                                     <li class="w-full my-1 px-3 py-2  rounded-lg shadow-md text-white
                                                         {{ $suggested->hasNoUnits() ? 'bg-red-500 hover:bg-red-300' : 'bg-green-500 hover:bg-green-300' }}">
-                                                        {{ $suggested->name }}
+                                                        {{ $suggested->name }} (RU: {{ $faculty->countRemainingUnits() }})
                                                     </li>
                                                 </a>
                                             @endforeach
@@ -73,7 +74,7 @@
                                 </div>
                             </div>
 
-                            <div class="w-2/3 px-2 py-1 text-sm bg-gray-50">
+                            <div class="w-2/3 px-2 py-1 text-sm bg-gray-50 overflow-auto">
                                 @foreach ($errors->all() as $error)
                                     <div class="bg-red-500 px-3 py-2 rounded-lg shadow-sm">
                                         <span class="text-white">{{ $error }}</span>
@@ -86,6 +87,20 @@
                                         </div>
                                         <div>
                                             Name: {{ $selectedFaculty->name }}
+                                        </div>
+                                        <div class="flex">
+                                            <span class="mr-2">
+                                                Preferred Subjects:
+                                            </span>
+                                            <div class="ml-10">
+                                                <ul class=" list-disc text-xs">
+                                                    @foreach ($selectedFaculty->preferredSubjects->sortBy('subject_code') as $subject)
+                                                    <li>
+                                                        {{ $subject->subject_code }} - {{ $subject->subject_title }}
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </div>
                                         <div>
                                             Units: <span class="{{ $selectedFaculty->hasNoUnits() ? 'text-red-500' : 'text-green-500' }}">{{ $selectedFaculty->countRemainingUnits() }}</span> ({{ $selectedFaculty->rate }})
@@ -121,7 +136,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <div class="bg-gray-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse items-center">
+
                         <button type="button" wire:click="updateFaculty"
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-green-500 shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Add
@@ -130,6 +146,8 @@
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel
                         </button>
+                        <x-label for="override" :value="_('Override')" />
+                        <x-input type="checkbox" id="override" wire:model="override" value="1" />
                     </div>
                 </div>
             </div>
