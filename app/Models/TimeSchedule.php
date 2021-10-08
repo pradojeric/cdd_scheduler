@@ -3,12 +3,24 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Configurations\Settings;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TimeSchedule extends Model
 {
     use HasFactory;
+
+    protected static function booted()
+    {
+        static::addGlobalScope('current_sy', function (Builder $builder) {
+            $builder->whereHas('schedule', function($query){
+                $query->where('school_year', Settings::first()->getRawOriginal('school_year'))
+                    ->where('term', Settings::first()->term);
+            });
+        });
+    }
 
     protected $fillable = [
         'room_id', 'schedule_id', 'start', 'end', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'lab',
