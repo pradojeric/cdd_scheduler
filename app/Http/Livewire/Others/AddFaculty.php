@@ -94,7 +94,7 @@ class AddFaculty extends Component
 
         if($this->schedule){
 
-            $suggestedFaculties = resolve(FacultyService::class)->getPreferredFaculty($this->schedule->subject) ?? Faculty::where(function($query){
+            $suggestedFaculties = resolve(FacultyService::class)->getPreferredFaculty($this->schedule->subject) ?? Faculty::active()->where(function($query){
                     $query->where('department_id', $this->schedule->section->course->department_id);
                 }
             )->orderBy('last_name')->get();

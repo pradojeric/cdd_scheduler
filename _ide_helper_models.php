@@ -237,6 +237,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Schedule[] $schedules
  * @property-read int|null $schedules_count
  * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Faculty active()
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty query()

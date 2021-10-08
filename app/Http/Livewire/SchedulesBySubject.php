@@ -65,12 +65,12 @@ class SchedulesBySubject extends Schedulers
         }
 
         if($this->allFaculties){
-            $faculties = Faculty::all();
+            $faculties = Faculty::active()->get();
         }else{
             if($this->selectedSubject){
                 $subject = Subject::find($this->selectedSubject);
 
-                $faculties = count(resolve(FacultyService::class)->getPreferredFaculty($subject)) > 0 ? resolve(FacultyService::class)->getPreferredFaculty($subject)  : $faculties = Faculty::all();
+                $faculties = count(resolve(FacultyService::class)->getPreferredFaculty($subject)) > 0 ? resolve(FacultyService::class)->getPreferredFaculty($subject)  : $faculties = Faculty::active()->get();
             }
         }
 

@@ -141,7 +141,6 @@ class FacultyController extends Controller
     public function update(Request $request, Faculty $faculty)
     {
         //
-
         $request->validate([
             'code' => 'required',
             'first_name' => 'required',
@@ -156,6 +155,7 @@ class FacultyController extends Controller
 
 
         if($faculty->user == null ){
+
             $user = User::create([
                 'name' => $name,
                 'email' => Str::slug($name, '.').".faculty@cdd.edu.ph",
@@ -164,14 +164,17 @@ class FacultyController extends Controller
 
             $user->assignRole('faculty');
         }else{
-            $user = $faculty->user()->update([
+            $faculty->user()->update([
                 'name' => $name,
                 'email' => Str::slug($name, '.').".faculty@cdd.edu.ph",
             ]);
+
+            $user = $faculty->user;
         }
 
+
         $faculty->update([
-            'user_id' => $user->id ?? null,
+            'user_id' => $user->id,
             'code' => $request->code,
             'first_name' => $first_name,
             'last_name' => $last_name,

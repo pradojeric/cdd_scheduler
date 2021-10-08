@@ -52,7 +52,7 @@ class FacultyService
 
     public function getPreferredFaculty(Subject $subject)
     {
-        return Faculty::whereHas('preferredSubjects', function($query) use ($subject){
+        return Faculty::active()->whereHas('preferredSubjects', function($query) use ($subject){
             $query->where('subject_code', $subject->code);
         })->get();
     }
