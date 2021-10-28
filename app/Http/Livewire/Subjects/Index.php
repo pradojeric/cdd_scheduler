@@ -6,23 +6,41 @@ use App\Models\Configurations\CurriculumSubject;
 use App\Models\Subject;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
 
     public $allSubjects;
+    public $perPage = 10;
+    public $pages = [
+        10, 25, 50, 100
+    ];
+
+    public function updatingPerPage()
+    {
+        $this->resetPage();
+    }
+
+    protected $listeners = [
+        'updateSubjects',
+    ];
+
+
 
     public function importSubjects()
     {
         $this->resetErrorBag();
 
-        $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
-            ->leftJoin('courses', 'courses.id', 'curricula.course_id')
-            ->select('*', 'curriculum_subjects.code as code')
-            ->get();
+
 
         try {
-            DB::transaction(function () use ($allSubjects) {
+            DB::transaction(function () {
+                $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
+                    ->leftJoin('courses', 'courses.id', 'curricula.course_id')
+                    ->select('*', 'curriculum_subjects.code as code')
+                    ->get();
 
                 foreach($allSubjects as $subject)
                 {
@@ -42,23 +60,25 @@ class Index extends Component
         }
     }
 
-    public function updateSubjects()
+    public function updateSubjects($delete = false)
     {
         $this->resetErrorBag();
 
-        $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
-            ->leftJoin('courses', 'courses.id', 'curricula.course_id')
-            ->select('*', 'curriculum_subjects.code as code')
-            ->get();
-
         try {
-            DB::transaction(function () use ($allSubjects) {
+            DB::transaction(function () use ($delete) {
 
-                $oldSubjects = Subject::all();
+                if($delete){
+                    $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
+                        ->leftJoin('courses', 'courses.id', 'curricula.course_id')
+                        ->select('*', 'curriculum_subjects.code as code')
+                        ->get();
 
-                $diff = $oldSubjects->diffKeys($allSubjects);
+                    $oldSubjects = Subject::all();
 
-                Subject::destroy($diff);
+                    $diff = $oldSubjects->diffKeys($allSubjects);
+
+                    Subject::destroy($diff);
+                }
 
                 foreach($allSubjects as $subject)
                 {
@@ -75,16 +95,25 @@ class Index extends Component
 
                 session()->flash('success', 'Successfully updated subjects');
             });
+
+            $this->emit('openModal');
         } catch (\Exception $e) {
             //throw $th;
             $this->addError('error', 'Sorry! There seems to be an error importing Subjects! Contact Administrator!');
         }
     }
 
+    public function removeSubject($id)
+    {
+        //
+        dd($id);
+        Subject::find($id)->delete();
+    }
+
     public function render()
     {
         return view('livewire.subjects.index', [
-            'subjects' => Subject::orderBy('course_id')->orderBy('year')->orderBy('term')->get(),
+            'subjects' => Subject::orderBy('course_id')->orderBy('year')->orderBy('term')->paginate($this->perPage),
         ]);
     }
 }

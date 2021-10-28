@@ -18,8 +18,10 @@
   'schedulers' => 'App\\Http\\Livewire\\Schedulers',
   'schedules' => 'App\\Http\\Livewire\\Schedules',
   'schedules-by-course' => 'App\\Http\\Livewire\\SchedulesByCourse',
+  'schedules-by-custom' => 'App\\Http\\Livewire\\SchedulesByCustom',
   'schedules-by-subject' => 'App\\Http\\Livewire\\SchedulesBySubject',
   'sections.section-index' => 'App\\Http\\Livewire\\Sections\\SectionIndex',
   'sections.section-show' => 'App\\Http\\Livewire\\Sections\\SectionShow',
   'subjects.index' => 'App\\Http\\Livewire\\Subjects\\Index',
+  'subjects.subject-modal' => 'App\\Http\\Livewire\\Subjects\\SubjectModal',
 );
