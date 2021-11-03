@@ -41,7 +41,7 @@ class UsersSettings extends Component
     {
         $this->validate();
 
-        if(!$this->user){
+        if($this->user){
             $user = $this->user->update(
                 [
                     'id' => $this->user->id,
