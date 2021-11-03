@@ -31,7 +31,6 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasRole('superadmin') ? true : null;
         });
 
-
         Gate::define('view-schedule', function($user, Faculty $faculty){
             return optional($user->faculty)->id == $faculty->id || $user->hasRole('admin');
         });

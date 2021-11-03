@@ -42,7 +42,7 @@ class UsersSettings extends Component
         $this->validate();
 
 
-        $user = $this->user->updateOrCreate(
+        $user = User::updateOrCreate(
             [
                 'id' => $this->user->id,
             ],[
