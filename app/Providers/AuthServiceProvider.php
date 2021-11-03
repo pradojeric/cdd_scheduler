@@ -27,14 +27,15 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole('superadmin') ? true : null;
+        });
 
 
         Gate::define('view-schedule', function($user, Faculty $faculty){
             return optional($user->faculty)->id == $faculty->id || $user->hasRole('admin');
         });
 
-        Gate::after(function ($user, $ability) {
-            return $user->hasRole('superadmin') ? true : null;
-        });
+
     }
 }

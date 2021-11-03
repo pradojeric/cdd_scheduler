@@ -12,7 +12,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    @hasrole('admin')
+                    @hasanyrole('admin|superadmin')
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                             {{ __('Dashboard') }}
                         </x-nav-link>
@@ -55,7 +55,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        @hasrole('admin')
+                        @hasanyrole('admin|superadmin')
                             <x-dropdown-link :href="route('departments.index')">
                                 {{ __('Departments') }}
                             </x-dropdown-link>
