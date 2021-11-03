@@ -19,7 +19,7 @@
         @endif
 
         @if($selected == "custom")
-            Coming soon...
+            @livewire('schedules-by-custom', [], key('schedule-3'))
         @endif
     </div>
 </div>

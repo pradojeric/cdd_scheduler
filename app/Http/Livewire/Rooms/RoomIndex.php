@@ -28,7 +28,7 @@ class RoomIndex extends Component
 
     public function mount()
     {
-        $this->rooms = Room::orderBy('name')->get();
+        $this->rooms = Room::with(['building', 'roomType'])->orderBy('name')->get();
 
         $this->pickedDays = collect($this->dayNames)
             ->mapWithKeys(fn ($day) => [$day => 0]);
@@ -42,7 +42,7 @@ class RoomIndex extends Component
 
     public function clear()
     {
-        $this->rooms = Room::orderBy('name')->get();
+        $this->rooms = Room::with(['building', 'roomType'])->orderBy('name')->get();
     }
 
     public function render()

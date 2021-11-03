@@ -59,9 +59,21 @@ class SectionShow extends Component
     public function render()
     {
         $blockSubjects = resolve(SectionService::class)->getSubjects($this->section);
-        $r = TimeSchedule::whereHas('schedule', function($query){
-            $query->where('section_id', $this->section->id);
-        });
+        $customSubjects = Subject::with([
+                'schedules',
+                'schedules.timeSchedules'
+            ])->whereHas('schedules', function($query){
+                $query->where('section_id', $this->section->id);
+            }
+        )->whereNotIn('id', $blockSubjects->subjects->pluck('id'))
+        ->get();
+
+        $r = TimeSchedule::with([
+                'schedule',
+                'schedule.timeSchedules'
+            ])->whereHas('schedule', function($query){
+                $query->where('section_id', $this->section->id);
+            });
 
         $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
 
@@ -69,6 +81,7 @@ class SectionShow extends Component
             'blockSubjects' => $blockSubjects->subjects ?? [],
             'days' => $this->dayNames,
             'schedules' => $schedules,
+            'customSubjects' => $customSubjects ?? [],
         ]);
     }
 }

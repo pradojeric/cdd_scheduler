@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Configurations;
 
+
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -48,4 +51,11 @@ class SettingsController extends Controller
     {
         return view('pages.configurations.roles_and_permissions.index');
     }
+
+    public function backupDatabase()
+    {
+
+
+    }
+
 }

@@ -107,7 +107,7 @@ class SectionIndex extends Component
     public function render()
     {
         return view('livewire.sections.section-index', [
-            'sections' => Section::paginate($this->perPage),
+            'sections' => Section::with('course')->paginate($this->perPage),
             'courses' => Course::all(),
         ]);
     }

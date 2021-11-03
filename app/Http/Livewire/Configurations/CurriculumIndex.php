@@ -17,7 +17,11 @@ class CurriculumIndex extends Component
 
     public function activateCurriculum(Curriculum $curriculum)
     {
-        $curriculum->activateCurriculum();
+        //$curriculum->activateCurriculum();
+        $curriculum->update([
+            'active' => !$curriculum->active,
+        ]);
+        Curriculum::where('id', '<>', $curriculum->id)->where('course_id', $curriculum->course_id)->update(['active' => 0]);
         $this->course = $curriculum->course;
     }
 

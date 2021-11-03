@@ -182,6 +182,11 @@ class Schedulers extends Component
         $subjectCode = Subject::find($this->selectedSubject)->code;
         $subject = Subject::where('code', $subjectCode)->where('course_id', $section->course_id)->first();
 
+        if(!$subject){
+            $this->addError('custom_error', 'Subject not suitable for this section!');
+            return;
+        }
+
         $data = [
             'school_year' => $this->config->getRawOriginal('school_year'),
             'term' => $this->config->term,

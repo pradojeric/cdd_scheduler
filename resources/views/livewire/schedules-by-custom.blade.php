@@ -1,6 +1,6 @@
 <div>
 
-    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg" wire:init="customOverride">
         <div class="p-6 bg-white border-b border-gray-200 flex space-x-2 min-w-full">
 
             <div class="flex flex-col w-1/4 space-y-2">
@@ -15,21 +15,18 @@
                     @endforeach
                 </x-select>
 
-                @if($selectedSubject)
+
 
                     <div class="flex items-center space-x-2">
-                        <div class="w-3/4">
+
                             <x-select class="text-sm w-full" wire:model="selectedFaculty">
                                 <option value="" selected>Select Faculty</option>
                                 @foreach ($faculties as $faculty)
                                     <option value="{{ $faculty->id }}" class="{{ $faculty->hasNoUnits() ? 'text-red-500' : '' }}">{{ $faculty->name }} (RU: {{ $faculty->countRemainingUnits() }})</option>
                                 @endforeach
                             </x-select>
-                        </div>
-                        <div class="flex space-x-2">
-                            <x-input type="checkbox" wire:model="allFaculties" value="1" id="allFaculties" />
-                            <x-label for="allFaculties" value="All Faculties" />
-                        </div>
+
+
                     </div>
                     <div>
                         <span class="text-xs text-gray-500 -mt-10">Note: RU => Remaining Units</span>
@@ -75,78 +72,31 @@
 
                     @if($selectedBuilding != '')
                         <div class="flex items-center space-x-2">
-                            <div class="w-3/4">
+                            {{-- <div class="w-3/4"> --}}
                                 <x-select class="text-sm w-full" wire:model="selectedRoom">
                                     <option value="" selected>Select Room</option>
                                     @foreach ($rooms as $room)
                                     <option value="{{ $room->id }}">{{ $room->name }} ({{ strtolower($room->roomType->name) }})</option>
                                     @endforeach
                                 </x-select>
-                            </div>
-                            <div class="flex space-x-2">
+                            {{-- </div> --}}
+                            {{-- <div class="flex space-x-2">
                                 <x-input type="checkbox" wire:model="allRooms" value="1" id="allRooms" />
                                 <x-label for="allRooms" value="All Rooms" />
-                            </div>
+                            </div> --}}
                         </div>
                     @endif
 
                     <div class="flex justify-end mx-2">
 
-                        <div class="flex items-center space-x-2 mr-5">
+                        {{-- <div class="flex items-center space-x-2 mr-5">
                             <x-input type="checkbox" id="override" wire:model="override" value="1" />
                             <x-label for="override" :value="_('Override')" />
 
-                        </div>
+                        </div> --}}
                         <x-button wire:click="addSchedule">Add</x-button>
                     </div>
 
-                @endif
-
-                @if(count($sections) > 0)
-                    <div class="w-full">
-                        <table class="w-full">
-                            <thead>
-                                <th>Section</th>
-                                <th>Time</th>
-                                <th>Room</th>
-                                <th>Faculty</th>
-                            </thead>
-                            <tbody class="text-xs divide-y">
-                                @foreach ($sections as $item)
-                                    <tr>
-                                        <td class="align-top">{{ $item->section_name }}</td>
-                                        <td class="pl-6">
-                                            @if ($item->schedules->first())
-                                                <ul>
-                                                    @foreach (optional($item->schedules->first())->timeSchedules as $s)
-                                                        <li>{{ $s->time }} {{ $s->lab ? '(Lab)' : '' }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </td>
-                                        <td class="text-center">
-                                            @if ($item->schedules->first())
-                                                <ul>
-                                                    @foreach (optional($item->schedules->first())->timeSchedules as $s)
-                                                        <li>{{ $s->room->name }}</li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                        </td>
-                                        <td class="align-top text-center">
-                                            @if ($item->schedules->first())
-                                                {{  optional($item->schedules->first()->faculty)->name }}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="flex justify-end mx-2">
-
-                    </div>
-                @endif
 
                 <x-auth-session-status :status="session('success')" />
                 @if($errors->any())

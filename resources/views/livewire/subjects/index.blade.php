@@ -60,32 +60,30 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($subjects as $subject)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $subject->course->code }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $subject->code }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $subject->title }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $subject->total_units }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <button type="button" class="text-red-500 hover:text-red-300" x-data x-on:click="
-                                event.preventDefault();
-                                if(confirm('Do you want to delete this subject?')){
-                                    alert('Sorry! Not yet implemented');
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->course->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->total_units }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <button type="button" class="text-red-500 hover:text-red-300" x-data
+                                    x-on:click="
+                                        event.preventDefault();
+                                        if(confirm('Do you want to delete this subject?')){
+                                            alert('Sorry! Not yet implemented');
 
-                                }
-                            ">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-
+                                        }
+                                    ">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
                     @empty
-
-                    <tr>
-                        <td colspan=4 class="text-center px-6 py-4">
-                            Press the import button
-                        </td>
-                    </tr>
-
+                        <tr>
+                            <td colspan=4 class="text-center px-6 py-4">
+                                Press the import button
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>

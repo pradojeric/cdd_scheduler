@@ -81,7 +81,7 @@ class Room extends Component
         return view('livewire.dashboard.room', [
             'datasets' => json_encode($datasets),
             'labels' => json_encode($labels),
-            'allRooms' => RoomModel::where('is_room', 1)->orderBy('name')->get(),
+            'allRooms' => RoomModel::with('roomType')->where('is_room', 1)->orderBy('name')->get(),
         ]);
     }
 }

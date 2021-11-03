@@ -78,7 +78,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
-        $r = TimeSchedule::whereHas('schedule', function($query) use ($room){
+        $r = TimeSchedule::with(['schedule', 'schedule.section'])->whereHas('schedule', function($query) use ($room){
             $query->where('room_id', $room->id);
         });
 

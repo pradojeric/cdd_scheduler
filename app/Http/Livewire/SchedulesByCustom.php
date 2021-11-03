@@ -11,9 +11,15 @@ use App\Services\FacultyService;
 use App\Services\SectionService;
 use App\Services\ScheduleService;
 use App\Models\Configurations\Building;
+use App\Models\Section;
 
 class SchedulesByCustom extends Schedulers
 {
+    public function customOverride()
+    {
+        $this->override = true;
+    }
+
     public function render()
     {
         $sections = [];
@@ -30,35 +36,15 @@ class SchedulesByCustom extends Schedulers
 
         if($this->selectedBuilding)
         {
-            if(!$this->allRooms)
-            {
-                $rooms = resolve(RoomService::class)->getAllUnoccupiedRoom($this->start, $this->end, $this->pickedDays);
-            }
 
             $rooms->whereHas('building', function($query) {
                 $query->where('id', $this->selectedBuilding);
             });
         }
 
-        if($this->selectedSubject) {
-            $subject = Subject::find($this->selectedSubject);
-            $sections = resolve(SectionService::class)->getSections($subject);
+        $sections = Section::orderBy('course_id')->orderBy('year')->orderBy('term')->orderBy('block')->get();
+        $faculties = Faculty::active()->get();
 
-            if(!is_numeric($this->selectedSubject))
-            {
-                $rooms->laboratory();
-            }
-        }
-
-        if($this->allFaculties){
-            $faculties = Faculty::active()->get();
-        }else{
-            if($this->selectedSubject){
-                $subject = Subject::find($this->selectedSubject);
-
-                $faculties = count(resolve(FacultyService::class)->getPreferredFaculty($subject)) > 0 ? resolve(FacultyService::class)->getPreferredFaculty($subject)  : $faculties = Faculty::active()->get();
-            }
-        }
 
         if($this->gridReport == 'faculty')
         {

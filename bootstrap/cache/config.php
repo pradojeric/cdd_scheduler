@@ -122,6 +122,124 @@
     ),
     'password_timeout' => 10800,
   ),
+  'backup' => 
+  array (
+    'backup' => 
+    array (
+      'name' => 'Cdd_Scheduler',
+      'source' => 
+      array (
+        'files' => 
+        array (
+          'include' => 
+          array (
+            0 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system',
+          ),
+          'exclude' => 
+          array (
+            0 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\vendor',
+            1 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\node_modules',
+          ),
+          'follow_links' => false,
+          'ignore_unreadable_directories' => false,
+          'relative_path' => NULL,
+        ),
+        'databases' => 
+        array (
+          0 => 'mysql',
+        ),
+      ),
+      'database_dump_compressor' => NULL,
+      'database_dump_file_extension' => '',
+      'destination' => 
+      array (
+        'filename_prefix' => '',
+        'disks' => 
+        array (
+          0 => 'local',
+        ),
+      ),
+      'temporary_directory' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\app/backup-temp',
+      'password' => NULL,
+      'encryption' => 'default',
+    ),
+    'notifications' => 
+    array (
+      'notifications' => 
+      array (
+        'Spatie\\Backup\\Notifications\\Notifications\\BackupHasFailed' => 
+        array (
+          0 => 'mail',
+        ),
+        'Spatie\\Backup\\Notifications\\Notifications\\UnhealthyBackupWasFound' => 
+        array (
+          0 => 'mail',
+        ),
+        'Spatie\\Backup\\Notifications\\Notifications\\CleanupHasFailed' => 
+        array (
+          0 => 'mail',
+        ),
+        'Spatie\\Backup\\Notifications\\Notifications\\BackupWasSuccessful' => 
+        array (
+          0 => 'mail',
+        ),
+        'Spatie\\Backup\\Notifications\\Notifications\\HealthyBackupWasFound' => 
+        array (
+          0 => 'mail',
+        ),
+        'Spatie\\Backup\\Notifications\\Notifications\\CleanupWasSuccessful' => 
+        array (
+          0 => 'mail',
+        ),
+      ),
+      'notifiable' => 'Spatie\\Backup\\Notifications\\Notifiable',
+      'mail' => 
+      array (
+        'to' => 'your@example.com',
+        'from' => 
+        array (
+          'address' => NULL,
+          'name' => 'Cdd_Scheduler',
+        ),
+      ),
+      'slack' => 
+      array (
+        'webhook_url' => '',
+        'channel' => NULL,
+        'username' => NULL,
+        'icon' => NULL,
+      ),
+    ),
+    'monitor_backups' => 
+    array (
+      0 => 
+      array (
+        'name' => 'Cdd_Scheduler',
+        'disks' => 
+        array (
+          0 => 'local',
+        ),
+        'health_checks' => 
+        array (
+          'Spatie\\Backup\\Tasks\\Monitor\\HealthChecks\\MaximumAgeInDays' => 1,
+          'Spatie\\Backup\\Tasks\\Monitor\\HealthChecks\\MaximumStorageInMegabytes' => 5000,
+        ),
+      ),
+    ),
+    'cleanup' => 
+    array (
+      'strategy' => 'Spatie\\Backup\\Tasks\\Cleanup\\Strategies\\DefaultStrategy',
+      'default_strategy' => 
+      array (
+        'keep_all_backups_for_days' => 7,
+        'keep_daily_backups_for_days' => 16,
+        'keep_weekly_backups_for_weeks' => 8,
+        'keep_monthly_backups_for_months' => 4,
+        'keep_yearly_backups_for_years' => 2,
+        'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
+      ),
+    ),
+  ),
   'broadcasting' => 
   array (
     'default' => 'log',
@@ -288,6 +406,12 @@
         'engine' => NULL,
         'options' => 
         array (
+        ),
+        'dump' => 
+        array (
+          'dump_binary_path' => 'C:/xampp/mysql/bin',
+          0 => 'use_single_transaction',
+          'timeout' => 300,
         ),
       ),
       'mysql_second' => 
@@ -703,6 +827,109 @@
     ),
     'compiled' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\framework\\views',
   ),
+  'debugbar' => 
+  array (
+    'enabled' => NULL,
+    'except' => 
+    array (
+      0 => 'telescope*',
+      1 => 'horizon*',
+    ),
+    'storage' => 
+    array (
+      'enabled' => true,
+      'driver' => 'file',
+      'path' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\debugbar',
+      'connection' => NULL,
+      'provider' => '',
+      'hostname' => '127.0.0.1',
+      'port' => 2304,
+    ),
+    'include_vendors' => true,
+    'capture_ajax' => true,
+    'add_ajax_timing' => false,
+    'error_handler' => false,
+    'clockwork' => false,
+    'collectors' => 
+    array (
+      'phpinfo' => true,
+      'messages' => true,
+      'time' => true,
+      'memory' => true,
+      'exceptions' => true,
+      'log' => true,
+      'db' => true,
+      'views' => true,
+      'route' => true,
+      'auth' => false,
+      'gate' => true,
+      'session' => true,
+      'symfony_request' => true,
+      'mail' => true,
+      'laravel' => false,
+      'events' => false,
+      'default_request' => false,
+      'logs' => false,
+      'files' => false,
+      'config' => false,
+      'cache' => false,
+      'models' => true,
+      'livewire' => true,
+    ),
+    'options' => 
+    array (
+      'auth' => 
+      array (
+        'show_name' => true,
+      ),
+      'db' => 
+      array (
+        'with_params' => true,
+        'backtrace' => true,
+        'backtrace_exclude_paths' => 
+        array (
+        ),
+        'timeline' => false,
+        'duration_background' => true,
+        'explain' => 
+        array (
+          'enabled' => false,
+          'types' => 
+          array (
+            0 => 'SELECT',
+          ),
+        ),
+        'hints' => false,
+        'show_copy' => false,
+      ),
+      'mail' => 
+      array (
+        'full_log' => false,
+      ),
+      'views' => 
+      array (
+        'timeline' => false,
+        'data' => false,
+      ),
+      'route' => 
+      array (
+        'label' => true,
+      ),
+      'logs' => 
+      array (
+        'file' => NULL,
+      ),
+      'cache' => 
+      array (
+        'values' => true,
+      ),
+    ),
+    'inject' => true,
+    'route_prefix' => '_debugbar',
+    'route_domain' => NULL,
+    'theme' => 'auto',
+    'debug_backtrace_limit' => 50,
+  ),
   'dompdf' => 
   array (
     'show_warnings' => false,
@@ -724,6 +951,20 @@
       'enable_remote' => true,
       'font_height_ratio' => 1.1,
       'enable_html5_parser' => false,
+    ),
+  ),
+  'querydetector' => 
+  array (
+    'enabled' => NULL,
+    'threshold' => 1,
+    'except' => 
+    array (
+    ),
+    'log_channel' => 'daily',
+    'output' => 
+    array (
+      0 => 'BeyondCode\\QueryDetector\\Outputs\\Alert',
+      1 => 'BeyondCode\\QueryDetector\\Outputs\\Log',
     ),
   ),
   'flare' => 

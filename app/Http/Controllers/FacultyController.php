@@ -28,7 +28,7 @@ class FacultyController extends Controller
     public function index()
     {
         //
-        $faculties = Faculty::orderBy('last_name')->orderBy('first_name')->paginate(25);
+        $faculties = Faculty::with('department')->orderBy('last_name')->orderBy('first_name')->paginate(25);
         return view('pages.faculties.index', compact('faculties'));
     }
 

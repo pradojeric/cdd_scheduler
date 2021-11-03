@@ -30,6 +30,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/test', [SettingsController::class, 'backupDatabase']);
+
 Route::middleware(['auth'])->group(function(){
 
     Route::middleware(['role:superadmin|admin'])->group(function(){

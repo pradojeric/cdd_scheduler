@@ -40,6 +40,7 @@ class Index extends Component
                 $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
                     ->leftJoin('courses', 'courses.id', 'curricula.course_id')
                     ->select('*', 'curriculum_subjects.code as code')
+                    ->where('curricula.active', 1)
                     ->get();
 
                 foreach($allSubjects as $subject)
@@ -67,12 +68,13 @@ class Index extends Component
         try {
             DB::transaction(function () use ($delete) {
 
-                if($delete){
-                    $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
+                $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
                         ->leftJoin('courses', 'courses.id', 'curricula.course_id')
                         ->select('*', 'curriculum_subjects.code as code')
+                        ->where('curricula.active', 1)
                         ->get();
 
+                if($delete){
                     $oldSubjects = Subject::all();
 
                     $diff = $oldSubjects->diffKeys($allSubjects);
@@ -113,7 +115,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.subjects.index', [
-            'subjects' => Subject::orderBy('course_id')->orderBy('year')->orderBy('term')->paginate($this->perPage),
+            'subjects' => Subject::with('course')->orderBy('course_id')->orderBy('year')->orderBy('term')->paginate($this->perPage),
         ]);
     }
 }

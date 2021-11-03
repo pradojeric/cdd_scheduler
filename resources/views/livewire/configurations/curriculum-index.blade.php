@@ -18,14 +18,10 @@
                 <td class="p-2 text-center">{{ $curriculum->description }}</td>
                 <td class="p-2 text-center">{{ $curriculum->active ? 'Active' : 'Inactive' }}</td>
                 <td class="p-2 text-right">
-                    @if($curriculum->active)
-                        <a href="#" class="mr-2 text-red-500" wire:click="activateCurriculum({{ $curriculum->id }})">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    @else
-                        <a href="#" class="mr-2 text-green-500" wire:click="activateCurriculum({{ $curriculum->id }})">
+                    @if(!$curriculum->active)
+                        <button  class="mr-2 text-green-500" wire:click="activateCurriculum({{ $curriculum->id }})">
                             <i class="fa fa-check"></i>
-                        </a>
+                        </button>
                     @endif
                     <a href="{{ route('curricula.show', $curriculum) }}">
                         <i class="fa fa-edit"></i>
