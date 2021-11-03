@@ -13,24 +13,24 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @hasrole('admin')
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms*')">
-                        {{ __('Rooms') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('subjects.index')" :active="request()->routeIs('subjects*')">
-                        {{ __('Subjects') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('schedule.course')" :active="request()->routeIs('schedule*')">
-                        {{ __('Scheduler') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('sections.index')" :active="request()->routeIs('sections*')">
-                        {{ __('Sections') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('faculties.index')" :active="request()->routeIs('faculties*')">
-                        {{ __('Faculties') }}
-                    </x-nav-link>
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms*')">
+                            {{ __('Rooms') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('subjects.index')" :active="request()->routeIs('subjects*')">
+                            {{ __('Subjects') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('schedule.course')" :active="request()->routeIs('schedule*')">
+                            {{ __('Scheduler') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('sections.index')" :active="request()->routeIs('sections*')">
+                            {{ __('Sections') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('faculties.index')" :active="request()->routeIs('faculties*')">
+                            {{ __('Faculties') }}
+                        </x-nav-link>
                     @endrole
                 </div>
             </div>
