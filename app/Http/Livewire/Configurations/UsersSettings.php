@@ -21,7 +21,7 @@ class UsersSettings extends Component
     protected $rules = [
         'name' => 'required',
         'email' => 'required',
-        'password' => 'required_with:passwordConfirmation|same:passwordConfirmation|required_unless:user,null',
+        'password' => 'nullable|required_with:passwordConfirmation|same:passwordConfirmation',
         'role' => 'required',
     ];
 
@@ -54,7 +54,7 @@ class UsersSettings extends Component
                 ]);
             }
         }else{
-
+            if(!$this->password) return $this->addError('password', 'Password is required!');
 
             $this->user = User::create([
                 'name' => $this->name,
