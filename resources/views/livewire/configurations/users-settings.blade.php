@@ -30,14 +30,14 @@
                                 @endforeach
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap flex justify-end space-x-2">
-                                <a href="#" wire:click="openUserModal({{ $user }})"
+                                <button type="button" wire:click="openUserModal({{ $user }})"
                                     class="text-indigo-600 hover:text-indigo-900">
                                     <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="#"
+                                </button>
+                                <button type="button" wire:click="deleteUser({{ $user->id }})"
                                     class="text-red-600 hover:text-red-900">
                                     <i class="fa fa-trash"></i>
-                                </a>
+                                </button>
                             </td>
                         </tr>
                     @endforeach

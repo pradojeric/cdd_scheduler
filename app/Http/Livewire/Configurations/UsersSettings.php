@@ -68,9 +68,9 @@ class UsersSettings extends Component
         $this->close();
     }
 
-    public function deleteUser()
+    public function deleteUser($id)
     {
-
+        User::findOrFail($id)->delete();
     }
 
     public function close()
