@@ -21,7 +21,7 @@ class UsersSettings extends Component
     protected $rules = [
         'name' => 'required',
         'email' => 'required',
-        'password' => 'required_with:passwordConfirmation|same:passwordConfirmation',
+        'password' => 'required_with:passwordConfirmation|same:passwordConfirmation|required_unless:user,null',
         'role' => 'required',
     ];
 
@@ -54,6 +54,8 @@ class UsersSettings extends Component
                 ]);
             }
         }else{
+
+
             $this->user = User::create([
                 'name' => $this->name,
                 'email' => $this->email,
@@ -64,6 +66,11 @@ class UsersSettings extends Component
         $this->user->assignRole($this->role);
 
         $this->close();
+    }
+
+    public function deleteUser()
+    {
+
     }
 
     public function close()
