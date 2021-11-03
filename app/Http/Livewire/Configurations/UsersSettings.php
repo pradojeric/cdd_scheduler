@@ -41,15 +41,22 @@ class UsersSettings extends Component
     {
         $this->validate();
 
-
-        $user = User::updateOrCreate(
-            [
-                'id' => $this->user->id,
-            ],[
+        if($this->user->getAttribute('name')){
+            $user = $this->user->update(
+                [
+                    'id' => $this->user->id,
+                ],
+                [
+                    'name' => $this->name,
+                    'email' => $this->email,
+                ]
+            );
+        }else{
+            $user = User::create([
                 'name' => $this->name,
                 'email' => $this->email,
-            ]
-        );
+            ]);
+        }
 
         if($this->password)
         {
