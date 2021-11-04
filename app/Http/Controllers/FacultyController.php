@@ -148,9 +148,10 @@ class FacultyController extends Controller
         //
         $request->validate([
             'name' => 'required',
-            'email' => 'email|required|unique:users,email,'.$faculty->id,
+            'email' => 'email|required|unique:users,email,'.$faculty->user->id,
             'code' => 'required',
             'first_name' => 'required',
+            'middle_name' => 'nullable',
             'last_name' => 'required',
             'department' => 'required|exists:departments,id',
             'rate' => 'required|numeric|min:0',
@@ -159,7 +160,6 @@ class FacultyController extends Controller
         $first_name = ucwords($request->first_name);
         $last_name = ucwords($request->last_name);
         $middle_name = ucwords($request->middle_name);
-
 
         if($faculty->user == null ){
 
