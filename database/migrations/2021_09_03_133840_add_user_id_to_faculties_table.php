@@ -17,6 +17,7 @@ class AddUserIdToFacultiesTable extends Migration
             $table->foreignId('user_id')->after('id')->nullable();
             $table->string('first_name')->after('name');
             $table->string('last_name')->after('name');
+            $table->string('middle_name')->after('name');
             $table->dropColumn('name');
         });
     }
@@ -33,6 +34,7 @@ class AddUserIdToFacultiesTable extends Migration
             $table->dropColumn('user_id');
             $table->dropColumn('first_name');
             $table->dropColumn('last_name');
+            $table->dropColumn('middle_name');
             $table->string('name');
         });
     }
