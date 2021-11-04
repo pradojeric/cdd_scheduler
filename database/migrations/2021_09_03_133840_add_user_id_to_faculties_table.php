@@ -34,7 +34,6 @@ class AddUserIdToFacultiesTable extends Migration
             $table->dropColumn('user_id');
             $table->dropColumn('first_name');
             $table->dropColumn('last_name');
-            $table->dropColumn('middle_name');
             $table->string('name');
         });
     }
