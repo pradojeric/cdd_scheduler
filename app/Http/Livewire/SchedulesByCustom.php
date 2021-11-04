@@ -71,7 +71,7 @@ class SchedulesByCustom extends Schedulers
         $roomsAvailable = resolve(ScheduleService::class)->getTimeSchedules($r, $get);
 
         return view('livewire.schedules-by-custom', [
-            'subjects' => Subject::termSubjects($this->config->term)->orderBy('code')->get()->unique('code'),
+            'subjects' => Subject::orderBy('code')->get()->unique('code'),
             'faculties' => $faculties,
             'sections' => $sections,
             'buildings' => Building::all(),

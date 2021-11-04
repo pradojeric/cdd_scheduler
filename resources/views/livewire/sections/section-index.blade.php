@@ -1,8 +1,22 @@
 <div>
+    <div wire:loading>
+        <div class="inset-0 z-40 fixed bg-gray-500 opacity-80">
+            <div class="flex justify-center items-center h-screen w-screen">
+                <div class="text-7xl">
+                    <i class="fa fa-spinner fa-spin"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <x-auth-session-status :status="session('success')" />
+
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
+            <div class="flex justify-end">
+                <button type="button" wire:click="massCreateSections"
+                    class="p-2 bg-green-500 hover:bg-green-300 rounded shadow-sm text-white text-xs uppercase">Mass Add Section</button>
+            </div>
 
             <div class="flex items-center space-x-2">
                 <div class="flex flex-col">
@@ -41,10 +55,9 @@
                 </div>
             </div>
 
-
         </div>
         <div>
-            <table class="min-w-full divide-y-2 divide-double">
+            <table class="min-w-full divide-y-2 divide-double" wire:target="deleteSection" wire:loading.class="inset-0 w-screen h-screen z-40 bg-blue-500">
                 <thead class="bg-gray-100">
                     <tr>
                         <th scope="col"
@@ -63,20 +76,24 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($sections as $section)
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $section->course->name }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $section->section_name }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">{{ $section->graduating }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap flex space-x-2 justify-end">
-                            <a href="{{ route('sections.show', $section) }}" class="hover:text-gray-500">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <a href="#" wire:click.prevent="editSection({{ $section->id }})"
-                                class="text-indigo-600 hover:text-indigo-900"><i class="fa fa-edit"></i></a>
-                            <a href="#" x-data x-on:click.prevent="deleteSection({{ $section->id }})"
-                                class="text-red-600 hover:text-red-900"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
+                        <tr wire:key="{{ $section->id }}">
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->course->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->section_name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->graduating }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap flex space-x-2 justify-end">
+                                <a href="{{ route('sections.show', $section) }}" class="hover:text-gray-500">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a href="#" wire:click.prevent="editSection({{ $section->id }})"
+                                    class="text-indigo-600 hover:text-indigo-900"><i class="fa fa-edit"></i></a>
+                                <a href="#" x-data x-on:click.prevent='
+                                        if(confirm("Are you sure about that?")){
+                                            $wire.deleteSection({{ $section }});
+                                        }
+                                    '
+                                    class="text-red-600 hover:text-red-900"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -88,12 +105,3 @@
     </div>
 
 </div>
-
-<script>
-    function deleteSection(id)
-    {
-        if(confirm("Are you sure about that?")){
-            Livewire.emit('deleteSection', id)
-        }
-    }
-</script>

@@ -46,6 +46,32 @@ class SectionIndex extends Component
         $this->config = Settings::first();
     }
 
+    public function massCreateSections()
+    {
+        $courses = Course::all();
+        foreach($courses as $course)
+        {
+
+            foreach($this->years as $y => $year) {
+
+                if($y > 4) continue;
+
+                $blocksCount = Section::where('year', $y)->where('term', $this->config->term)->where('course_id', $course->id)->count() + 1;
+
+                Section::create([
+                    'course_id' => $course->id,
+                    'school_year' => $this->config->getRawOriginal('school_year'),
+                    'year' => $y,
+                    'term' => $this->config->term,
+                    'block' => $blocksCount,
+                    'graduating' => $this->graduating ?? false,
+                ]);
+            }
+
+        }
+        session()->flash('success', 'Mass creation of sections is successful');
+    }
+
     public function addSection()
     {
         $this->validate();
@@ -89,25 +115,23 @@ class SectionIndex extends Component
 
     public function deleteSection(Section $section)
     {
-
         $sections = Section::where('course_id', $section->id);
-        if($sections->count() > 0){
+
+        if($sections->count() > 1){
             $sections->each(function($s){
                 $s->decrement('block');
             });
         }
 
-        $this->section = $section;
-        $this->section->delete();
+        $section->delete();
 
-        $this->reset(['course', 'year']);
         session()->flash('success', 'Section successfully deleted');
     }
 
     public function render()
     {
         return view('livewire.sections.section-index', [
-            'sections' => Section::with('course')->paginate($this->perPage),
+            'sections' => Section::with('course')->orderBy('course_id')->orderBy('year')->paginate($this->perPage),
             'courses' => Course::all(),
         ]);
     }
