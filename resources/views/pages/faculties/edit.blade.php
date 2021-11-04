@@ -57,11 +57,11 @@
                             <div>
                                 <div>
                                     <x-label for="name" :value="_('Username')"></x-label>
-                                    <x-input id="name" type="text" name="name" :value="$faculty->name" class="mt-1 w-96" />
+                                    <x-input id="name" type="text" name="name" :value="$faculty->user->name" class="mt-1 w-96" />
                                 </div>
                                 <div>
                                     <x-label for="email" :value="_('Email')"></x-label>
-                                    <x-input id="email" type="email" name="email" :value="$faculty->email" class="mt-1 w-96" />
+                                    <x-input id="email" type="email" name="email" :value="$faculty->user->email" class="mt-1 w-96" />
                                 </div>
                                 <div class="text-xs italic">
                                     Note: Default password is colegio2021
