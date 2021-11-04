@@ -29,12 +29,16 @@
                             <x-input id="code" type="text" name="code" :value="$faculty->code" class="mt-1 w-96" />
                         </div>
                         <div>
-                            <x-label for="name" :value="_('First Name')"></x-label>
-                            <x-input id="name" type="text" name="first_name" :value="$faculty->first_name" class="mt-1 w-96" />
+                            <x-label for="first_name" :value="_('First Name')"></x-label>
+                            <x-input id="first_name" type="text" name="first_name" :value="$faculty->first_name" class="mt-1 w-96" />
                         </div>
                         <div>
-                            <x-label for="name" :value="_('Last Name')"></x-label>
-                            <x-input id="name" type="text" name="last_name" :value="$faculty->last_name" class="mt-1 w-96" />
+                            <x-label for="middle_name" :value="_('Middle Name')"></x-label>
+                            <x-input id="middle_name" type="text" name="middle_name" :value="$faculty->middle_name" class="mt-1 w-96" />
+                        </div>
+                        <div>
+                            <x-label for="last_name" :value="_('Last Name')"></x-label>
+                            <x-input id="last_name" type="text" name="last_name" :value="$faculty->last_name" class="mt-1 w-96" />
                         </div>
                         <div>
                             <x-label for="rate" :value="_('Units given')"></x-label>

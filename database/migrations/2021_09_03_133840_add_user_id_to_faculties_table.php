@@ -16,7 +16,7 @@ class AddUserIdToFacultiesTable extends Migration
         Schema::table('faculties', function (Blueprint $table) {
             $table->foreignId('user_id')->after('id')->nullable();
             $table->string('last_name')->after('name');
-            $table->string('middle_name')->after('name');
+            $table->string('middle_name')->after('name')->nullable();
             $table->string('first_name')->after('name');
             $table->dropColumn('name');
         });
