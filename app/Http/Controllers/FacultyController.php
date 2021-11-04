@@ -54,8 +54,11 @@ class FacultyController extends Controller
     {
         //
         $request->validate([
+            'name' => 'required',
+            'email' => 'email|required',
             'code' => 'required',
             'first_name' => 'required',
+            'middle_name' => 'nullable',
             'last_name' => 'required',
             'department' => 'required|exists:departments,id',
             'rate' => 'required|numeric|min:0',
@@ -64,11 +67,11 @@ class FacultyController extends Controller
         $first_name = ucwords($request->first_name);
         $last_name = ucwords($request->last_name);
         $middle_name = ucwords($request->middle_name);
-        $name = $first_name. " ". $last_name. " ".$middle_name;
+        // $name = $first_name. " ".$middle_name." ".$last_name;
 
         $user = User::create([
-            'name' => $name,
-            'email' => Str::slug($name, '.').".faculty@cdd.edu.ph",
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make('colegio2021'),
         ]);
 
@@ -144,6 +147,8 @@ class FacultyController extends Controller
     {
         //
         $request->validate([
+            'name' => 'required',
+            'email' => 'email|required|unique:users,email,'.$faculty->id,
             'code' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
@@ -154,27 +159,25 @@ class FacultyController extends Controller
         $first_name = ucwords($request->first_name);
         $last_name = ucwords($request->last_name);
         $middle_name = ucwords($request->middle_name);
-        $name = $first_name. " ".$last_name." ".$middle_name;
 
 
         if($faculty->user == null ){
 
             $user = User::create([
-                'name' => $name,
-                'email' => Str::slug($name, '.').".faculty@cdd.edu.ph",
+                'name' => $request->name,
+                'email' => $request->email,
                 'password' => Hash::make('colegio2021'),
             ]);
 
             $user->assignRole('faculty');
         }else{
             $faculty->user()->update([
-                'name' => $name,
-                'email' => Str::slug($name, '.').".faculty@cdd.edu.ph",
+                'name' => $request->name,
+                'email' => $request->email,
             ]);
 
             $user = $faculty->user;
         }
-
 
         $faculty->update([
             'user_id' => $user->id,

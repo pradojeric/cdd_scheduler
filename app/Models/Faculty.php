@@ -13,7 +13,7 @@ class Faculty extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code', 'department_id', 'first_name', 'last_name', 'rate', 'status', 'user_id'
+        'code', 'department_id', 'first_name', 'middle_name', 'last_name', 'rate', 'status', 'user_id'
     ];
 
     public function setNameAttribute($value)
@@ -28,7 +28,7 @@ class Faculty extends Model
 
     public function getNameAttribute()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return "{$this->first_name} {$this->middle_name} {$this->last_name}";
     }
 
     public function getActiveStatusAttribute()

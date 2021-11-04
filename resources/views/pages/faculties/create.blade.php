@@ -11,36 +11,54 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form action="{{ route('faculties.store') }}" method="post" class="space-y-2" autocomplete="off">
                         @csrf
-                        <div>
-                            <x-label for="department" :value="_('Department')"></x-label>
-                            <x-select id="department" name="department" class="mt-1 w-96">
-                                <option selected disabled>Select Department</option>
-                                @foreach ($departments as $dept)
-                                <option value="{{ $dept->id }}">{{ $dept->name }}</option>
-                                @endforeach
-                            </x-select>
+                        <div class="flex">
+                            <div class="mr-10">
+                                <div>
+                                    <x-label for="department" :value="_('Department')"></x-label>
+                                    <x-select id="department" name="department" class="mt-1 w-96 text-sm">
+                                        <option selected disabled>Select Department</option>
+                                        @foreach ($departments as $dept)
+                                        <option value="{{ $dept->id }}">{{ $dept->name }}</option>
+                                        @endforeach
+                                    </x-select>
+                                </div>
+                                <div>
+                                    <x-label for="code" :value="_('Faculty ID')"></x-label>
+                                    <x-input id="code" type="text" name="code" :value="old('code')" class="mt-1 w-96" />
+                                </div>
+                                <div>
+                                    <x-label for="first_name" :value="_('First Name')"></x-label>
+                                    <x-input id="first_name" type="text" name="first_name" :value="old('first_name')" class="mt-1 w-96" />
+                                </div>
+                                <div>
+                                    <x-label for="middle_name" :value="_('Middle Name')"></x-label>
+                                    <x-input id="middle_name" type="text" name="middle_name" :value="old('middle_name')" class="mt-1 w-96" />
+                                </div>
+                                <div>
+                                    <x-label for="last_name" :value="_('Last Name')"></x-label>
+                                    <x-input id="last_name" type="text" name="last_name" :value="old('last_name')" class="mt-1 w-96" />
+                                </div>
+                                <div>
+                                    <x-label for="rate" :value="_('Units given')"></x-label>
+                                    <x-input id="rate" type="number" name="rate" :value="old('rate') ?? 0" class="mt-1 w-96"
+                                        min=0 />
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <x-label for="name" :value="_('Username')"></x-label>
+                                    <x-input id="name" type="text" name="name" :value="old('name')" class="mt-1 w-96" />
+                                </div>
+                                <div>
+                                    <x-label for="email" :value="_('Email')"></x-label>
+                                    <x-input id="email" type="email" name="email" :value="old('email')" class="mt-1 w-96" />
+                                </div>
+                                <div class="text-xs italic">
+                                    Note: Default password is colegio2021
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <x-label for="code" :value="_('Faculty Code')"></x-label>
-                            <x-input id="code" type="text" name="code" :value="old('code')" class="mt-1 w-96" />
-                        </div>
-                        <div>
-                            <x-label for="first_name" :value="_('First Name')"></x-label>
-                            <x-input id="first_name" type="text" name="first_name" :value="old('first_name')" class="mt-1 w-96" />
-                        </div>
-                        <div>
-                            <x-label for="middle_name" :value="_('Middle Name')"></x-label>
-                            <x-input id="middle_name" type="text" name="middle_name" :value="old('middle_name')" class="mt-1 w-96" />
-                        </div>
-                        <div>
-                            <x-label for="last_name" :value="_('Last Name')"></x-label>
-                            <x-input id="last_name" type="text" name="last_name" :value="old('last_name')" class="mt-1 w-96" />
-                        </div>
-                        <div>
-                            <x-label for="rate" :value="_('Units given')"></x-label>
-                            <x-input id="rate" type="number" name="rate" :value="old('rate') ?? 0" class="mt-1 w-96"
-                                min=0 />
-                        </div>
+
                         <div>
                             <x-button type="submit">Save</x-button>
                             <x-button type="submit" name="more">Save and Add More</x-button>

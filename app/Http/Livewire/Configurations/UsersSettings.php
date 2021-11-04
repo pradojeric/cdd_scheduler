@@ -18,12 +18,15 @@ class UsersSettings extends Component
     public $passwordConfirmation;
     public $role;
 
-    protected $rules = [
-        'name' => 'required',
-        'email' => 'required|unique:users,email',
-        'password' => 'nullable|required_with:passwordConfirmation|same:passwordConfirmation',
-        'role' => 'required',
-    ];
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|unique:users,email,'.$this->user->id,
+            'password' => 'nullable|required_with:passwordConfirmation|same:passwordConfirmation',
+            'role' => 'required',
+        ];
+    }
 
     public function openUserModal(User $user = null)
     {
