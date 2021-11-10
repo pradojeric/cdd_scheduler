@@ -70,14 +70,17 @@ class Index extends Component
 
                 $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
                         ->leftJoin('courses', 'courses.id', 'curricula.course_id')
+                        ->when($delete, function($query) {
+                            $query->where('curriculate.active', true);
+                        })
                         ->select('*', 'curriculum_subjects.code as code')
-                        ->where('curricula.active', 1)
                         ->get();
+
 
                 if($delete){
                     $oldSubjects = Subject::all();
 
-                    $diff = $oldSubjects->diffKeys($allSubjects);
+                    $diff = $oldSubjects->diff($allSubjects);
 
                     Subject::destroy($diff);
                 }
@@ -85,12 +88,14 @@ class Index extends Component
                 foreach($allSubjects as $subject)
                 {
                     Subject::updateOrCreate(
-                        ['uuid' => $subject->uuid],
+                        [
+                            'uuid' => $subject->uuid
+                        ],
                         $subject->only([
                             'uuid',
                             'course_id', 'year', 'term', 'code', 'title', 'curriculum_id',
                             'lec_hours', 'lec_units', 'lab_hours', 'lab_units',
-                            'prereq',
+                            'prereq', 'active',
                         ]
                     ));
                 }
@@ -115,7 +120,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.subjects.index', [
-            'subjects' => Subject::with('course')->orderBy('course_id')->orderBy('year')->orderBy('term')->paginate($this->perPage),
+            'subjects' => Subject::with('course')->orderBy('course_id')->orderBy('code')->orderBy('year')->orderBy('term')->paginate($this->perPage),
         ]);
     }
 }

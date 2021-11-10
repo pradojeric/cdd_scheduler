@@ -8,9 +8,9 @@
                 <x-select class="text-sm" wire:model="selectedSubject">
                     <option value="" selected>Select Subjects</option>
                     @foreach ($subjects as $subject)
-                        <option value="{{ $subject->id }}">{{ $subject->getSubjectTitle() }}</option>
+                        <option value="{{ $subject->id }}">{{ $subject->getSubjectTitle() }} {{ $subject->active ? '' : '(OLD)' }}</option>
                         @if ($subject->hasLab())
-                            <option value="{{ $subject->id }}L">{{ $subject->getSubjectTitle($subject->hasLab()) }}</option>
+                            <option value="{{ $subject->id }}L">{{ $subject->getSubjectTitle($subject->hasLab()) }} {{ $subject->active ? '' : '(OLD)' }}</option>
                         @endif
                     @endforeach
                 </x-select>

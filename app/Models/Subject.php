@@ -12,7 +12,7 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = [
-        'course_id' ,'year', 'term' ,'curriculum_id' ,'code', 'title', 'lec_hours', 'lab_hours', 'lec_units', 'lab_units', 'prereq', 'status', 'uuid'
+        'course_id' ,'year', 'term' ,'curriculum_id' ,'code', 'title', 'lec_hours', 'lab_hours', 'lec_units', 'lab_units', 'prereq', 'uuid', 'active'
     ];
 
     public function setCodeAttribute($value)
@@ -43,6 +43,11 @@ class Subject extends Model
     public function totalUnits()
     {
         return $this->lab_units + $this->lec_units;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('active', true);
     }
 
     public function scopeTermSubjects($query, $term)

@@ -33,7 +33,8 @@ class SectionService
         return Course::with([
             'subjects' => function($query) use ($section){
                 $query->where('year', $section->year)
-                    ->where('term', $section->term);
+                    ->where('term', $section->term)
+                    ->where('active', true);
             },
             'subjects.schedules' => function($query) use ($section){
                 $query->where('section_id', $section->id);

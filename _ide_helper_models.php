@@ -223,12 +223,13 @@ namespace App\Models{
  * @property int|null $user_id
  * @property string $code
  * @property int $department_id
- * @property string $last_name
- * @property string $first_name
  * @property float $rate
  * @property int $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $first_name
+ * @property string|null $middle_name
+ * @property string $last_name
  * @property-read \App\Models\Configurations\Department $department
  * @property-read mixed $active_status
  * @property mixed $name
@@ -247,6 +248,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereMiddleName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Faculty whereUpdatedAt($value)
@@ -402,15 +404,18 @@ namespace App\Models{
  * @property string|null $prereq
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $active
  * @property-read \App\Models\Configurations\Course $course
  * @property-read \App\Models\Configurations\Curriculum $curriculum
  * @property-read mixed $total_units
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Schedule[] $schedules
  * @property-read int|null $schedules_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject active()
  * @method static \Illuminate\Database\Eloquent\Builder|Subject newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Subject newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Subject query()
  * @method static \Illuminate\Database\Eloquent\Builder|Subject termSubjects($term)
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCourseId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCreatedAt($value)

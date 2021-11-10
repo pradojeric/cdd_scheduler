@@ -1,5 +1,5 @@
 <div>
-    <div wire:loading>
+    <div wire:loading.delay wire:target="massCreateSections, deleteSection, addSection, updateSection">
         <div class="inset-0 z-40 fixed bg-gray-500 opacity-80">
             <div class="flex justify-center items-center h-screen w-screen">
                 <div class="text-7xl">
