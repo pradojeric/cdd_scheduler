@@ -1,7 +1,7 @@
 <?php return array (
   'app' => 
   array (
-    'name' => 'Cdd_Scheduler',
+    'name' => 'CddScheduler',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://school_system.test',
@@ -143,7 +143,7 @@
   array (
     'backup' => 
     array (
-      'name' => 'Cdd_Scheduler',
+      'name' => 'CddScheduler',
       'source' => 
       array (
         'files' => 
@@ -216,7 +216,7 @@
         'from' => 
         array (
           'address' => NULL,
-          'name' => 'Cdd_Scheduler',
+          'name' => 'CddScheduler',
         ),
       ),
       'slack' => 
@@ -231,7 +231,7 @@
     array (
       0 => 
       array (
-        'name' => 'Cdd_Scheduler',
+        'name' => 'CddScheduler',
         'disks' => 
         array (
           0 => 'local',
@@ -362,7 +362,7 @@
         'driver' => 'octane',
       ),
     ),
-    'prefix' => 'cdd_scheduler_cache',
+    'prefix' => 'cddscheduler_cache',
   ),
   'cors' => 
   array (
@@ -487,7 +487,7 @@
       'options' => 
       array (
         'cluster' => 'redis',
-        'prefix' => 'cdd_scheduler_database_',
+        'prefix' => 'cddscheduler_database_',
       ),
       'default' => 
       array (
@@ -689,7 +689,7 @@
     'from' => 
     array (
       'address' => NULL,
-      'name' => 'Cdd_Scheduler',
+      'name' => 'CddScheduler',
     ),
     'markdown' => 
     array (
@@ -839,7 +839,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'cdd_scheduler_session',
+    'cookie' => 'cddscheduler_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,
@@ -1107,7 +1107,7 @@
         array (
           '--disable-notifications' => true,
         ),
-        'name' => 'Cdd_Scheduler',
+        'name' => 'CddScheduler',
         'source' => 
         array (
           'files' => 
@@ -1185,7 +1185,7 @@
       array (
         0 => 
         array (
-          'name' => 'Cdd_Scheduler',
+          'name' => 'CddScheduler',
           'disks' => 
           array (
             0 => 'local',

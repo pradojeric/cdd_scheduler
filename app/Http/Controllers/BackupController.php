@@ -15,7 +15,7 @@ class BackupController extends Controller
     {
         $disk = Storage::disk('backups');
 
-        $files = $disk->files('/Cdd-Scheduler');
+        $files = $disk->files('/CddScheduler');
         $backups = [];
         // make an array of backup files, with their filesize and creation date
 
@@ -24,7 +24,7 @@ class BackupController extends Controller
             if (substr($f, -4) == '.zip' && $disk->exists($f)) {
                 $backups[] = [
                     'file_path' => $f,
-                    'file_name' => str_replace('Cdd-Scheduler/', '', $f),
+                    'file_name' => str_replace('CddScheduler/', '', $f),
                     // 'file_name' => "Ok",
                     'file_size' => $disk->size($f),
                     'last_modified' => $disk->lastModified($f),
@@ -66,7 +66,7 @@ class BackupController extends Controller
      */
     public function download($file_name)
     {
-        $file = 'Cdd-Scheduler/' . $file_name;
+        $file = 'CddScheduler/' . $file_name;
         $disk = Storage::disk('backups');
         if ($disk->exists($file)) {
             $fs = Storage::disk('backups')->getDriver();
@@ -89,7 +89,7 @@ class BackupController extends Controller
      */
     public function delete($file_name)
     {
-        $file = 'Cdd-Scheduler/' . $file_name;
+        $file = 'CddScheduler/' . $file_name;
         $disk = Storage::disk('backups');
         if ($disk->exists($file)) {
             $disk->delete($file);
