@@ -36,6 +36,5 @@
     </body>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    @include('sweetalert::alert')
     {{ $script ?? '' }}
 </html>
