@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Prologue\Alerts\Facades\Alert;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+
 
 class BackupController extends Controller
 {
@@ -50,11 +50,10 @@ class BackupController extends Controller
             // log the results
             Log::info("Backpack\BackupManager -- new backup started from admin interface \r\n" . $output);
             // return the results as a response to the ajax call
-            Alert::success('New backup created');
+            session()->flash('success', 'New Backup Created');
             return redirect()->back();
         } catch (Exception $e) {
-            // Flash::error($e->getMessage());
-            dd($e->getMessage());
+            session()->flash('error', $e->getMessage());
             return redirect()->back();
         }
     }
@@ -93,6 +92,7 @@ class BackupController extends Controller
         $disk = Storage::disk('backups');
         if ($disk->exists($file)) {
             $disk->delete($file);
+            session()->flash('success', 'Backup successfully deleted');
             return redirect()->back();
         } else {
             abort(404, "The backup file doesn't exist.");

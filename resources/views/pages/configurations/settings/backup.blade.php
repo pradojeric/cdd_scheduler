@@ -8,6 +8,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <x-auth-session-status :status="session()->get('success')" />
+                <x-auth-validation-errors />
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="{{ route('backup.create') }}" class="px-2 py-1 bg-green-500 hover:bg-green-300 text-white rounded shadow-sm">Create BackUp</a>
                     <table class="table w-full border mt-5">
