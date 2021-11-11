@@ -1,4 +1,23 @@
 <?php return array (
+  'backpack/backupmanager' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Backpack\\BackupManager\\BackupManagerServiceProvider',
+    ),
+  ),
+  'backpack/crud' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Backpack\\CRUD\\BackpackServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'CRUD' => 'Backpack\\CRUD\\app\\Library\\CrudPanel\\CrudPanelFacade',
+      'Widget' => 'Backpack\\CRUD\\app\\Library\\Widget',
+    ),
+  ),
   'barryvdh/laravel-debugbar' => 
   array (
     'providers' => 
@@ -33,6 +52,17 @@
     'providers' => 
     array (
       0 => 'BeyondCode\\QueryDetector\\QueryDetectorServiceProvider',
+    ),
+  ),
+  'creativeorange/gravatar' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Creativeorange\\Gravatar\\GravatarServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Gravatar' => 'Creativeorange\\Gravatar\\Facades\\Gravatar',
     ),
   ),
   'facade/ignition' => 
@@ -104,6 +134,24 @@
     'providers' => 
     array (
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'prologue/alerts' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Prologue\\Alerts\\AlertsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Alert' => 'Prologue\\Alerts\\Facades\\Alert',
+    ),
+  ),
+  'spatie/laravel-backup' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Backup\\BackupServiceProvider',
     ),
   ),
   'spatie/laravel-permission' => 

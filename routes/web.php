@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\FacultyController;
@@ -52,6 +53,11 @@ Route::middleware(['auth'])->group(function(){
 
         Route::get('/schedule/course', [ScheduleController::class, 'index'])->name('schedule.course');
         Route::get('/schedule/subject', [ScheduleController::class, 'bySubject'])->name('schedule.subject');
+
+        Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+        Route::get('/backup/create', [BackupController::class, 'create'])->name('backup.create');
+        Route::get('/backup/download/{file_name}', [BackupController::class, 'download'])->name('backup.download');
+        Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete'])->name('backup.delete');
     });
 
     Route::resource('faculties', FacultyController::class);

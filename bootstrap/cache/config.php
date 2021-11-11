@@ -101,10 +101,20 @@
         'provider' => 'users',
         'hash' => false,
       ),
+      'backpack' => 
+      array (
+        'driver' => 'session',
+        'provider' => 'backpack',
+      ),
     ),
     'providers' => 
     array (
       'users' => 
+      array (
+        'driver' => 'eloquent',
+        'model' => 'App\\Models\\User',
+      ),
+      'backpack' => 
       array (
         'driver' => 'eloquent',
         'model' => 'App\\Models\\User',
@@ -118,6 +128,13 @@
         'table' => 'password_resets',
         'expire' => 60,
         'throttle' => 60,
+      ),
+      'backpack' => 
+      array (
+        'provider' => 'backpack',
+        'table' => 'password_resets',
+        'expire' => 60,
+        'throttle' => 600,
       ),
     ),
     'password_timeout' => 10800,
@@ -156,7 +173,7 @@
         'filename_prefix' => '',
         'disks' => 
         array (
-          0 => 'local',
+          0 => 'backups',
         ),
       ),
       'temporary_directory' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\app/backup-temp',
@@ -409,7 +426,7 @@
         ),
         'dump' => 
         array (
-          'dump_binary_path' => 'C:/xampp/mysql/bin',
+          'dump_binary_path' => 'C:/xampp/mysql/bin/',
           0 => 'use_single_transaction',
           'timeout' => 300,
         ),
@@ -517,6 +534,16 @@
         'url' => NULL,
         'endpoint' => NULL,
         'use_path_style_endpoint' => false,
+      ),
+      'backups' => 
+      array (
+        'driver' => 'local',
+        'root' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\backups',
+      ),
+      'root' => 
+      array (
+        'driver' => 'local',
+        'root' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system',
       ),
     ),
     'links' => 
@@ -827,6 +854,7 @@
     ),
     'compiled' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\framework\\views',
   ),
+  0 => 'config/backup.php',
   'debugbar' => 
   array (
     'enabled' => NULL,
@@ -967,6 +995,18 @@
       1 => 'BeyondCode\\QueryDetector\\Outputs\\Log',
     ),
   ),
+  'gravatar' => 
+  array (
+    'default' => 
+    array (
+      'size' => 80,
+      'fallback' => 'mp',
+      'secure' => false,
+      'maximumRating' => 'g',
+      'forceDefault' => false,
+      'forceExtension' => 'jpg',
+    ),
+  ),
   'flare' => 
   array (
     'key' => NULL,
@@ -1042,6 +1082,271 @@
       'max_upload_time' => 5,
     ),
     'manifest_path' => NULL,
+  ),
+  'prologue' => 
+  array (
+    'alerts' => 
+    array (
+      'levels' => 
+      array (
+        0 => 'info',
+        1 => 'warning',
+        2 => 'error',
+        3 => 'success',
+      ),
+      'session_key' => 'alert_messages',
+    ),
+  ),
+  'backpack' => 
+  array (
+    'backupmanager' => 
+    array (
+      'backup' => 
+      array (
+        'backpack_flags' => 
+        array (
+          '--disable-notifications' => true,
+        ),
+        'name' => 'Cdd_Scheduler',
+        'source' => 
+        array (
+          'files' => 
+          array (
+            'include' => 
+            array (
+              0 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system',
+            ),
+            'exclude' => 
+            array (
+              0 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\vendor',
+              1 => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\node_modules',
+            ),
+            'follow_links' => false,
+          ),
+          'databases' => 
+          array (
+            0 => 'mysql',
+          ),
+        ),
+        'database_dump_compressor' => NULL,
+        'destination' => 
+        array (
+          'filename_prefix' => '',
+          'disks' => 
+          array (
+            0 => 'backups',
+          ),
+        ),
+        'temporary_directory' => 'C:\\Users\\ARQminingfarms\\Desktop\\SS\\school_system\\storage\\app/backup-temp',
+      ),
+      'notifications' => 
+      array (
+        'notifications' => 
+        array (
+          'Spatie\\Backup\\Notifications\\Notifications\\BackupHasFailed' => 
+          array (
+            0 => 'mail',
+          ),
+          'Spatie\\Backup\\Notifications\\Notifications\\UnhealthyBackupWasFound' => 
+          array (
+            0 => 'mail',
+          ),
+          'Spatie\\Backup\\Notifications\\Notifications\\CleanupHasFailed' => 
+          array (
+            0 => 'mail',
+          ),
+          'Spatie\\Backup\\Notifications\\Notifications\\BackupWasSuccessful' => 
+          array (
+            0 => 'mail',
+          ),
+          'Spatie\\Backup\\Notifications\\Notifications\\HealthyBackupWasFound' => 
+          array (
+            0 => 'mail',
+          ),
+          'Spatie\\Backup\\Notifications\\Notifications\\CleanupWasSuccessful' => 
+          array (
+            0 => 'mail',
+          ),
+        ),
+        'notifiable' => 'Spatie\\Backup\\Notifications\\Notifiable',
+        'mail' => 
+        array (
+          'to' => 'your@example.com',
+        ),
+        'slack' => 
+        array (
+          'webhook_url' => '',
+          'channel' => NULL,
+          'username' => NULL,
+          'icon' => NULL,
+        ),
+      ),
+      'monitor_backups' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Cdd_Scheduler',
+          'disks' => 
+          array (
+            0 => 'local',
+          ),
+          'health_checks' => 
+          array (
+            'Spatie\\Backup\\Tasks\\Monitor\\HealthChecks\\MaximumAgeInDays' => 1,
+            'Spatie\\Backup\\Tasks\\Monitor\\HealthChecks\\MaximumStorageInMegabytes' => 5000,
+          ),
+        ),
+      ),
+      'cleanup' => 
+      array (
+        'strategy' => 'Spatie\\Backup\\Tasks\\Cleanup\\Strategies\\DefaultStrategy',
+        'default_strategy' => 
+        array (
+          'keep_all_backups_for_days' => 7,
+          'keep_daily_backups_for_days' => 16,
+          'keep_weekly_backups_for_weeks' => 8,
+          'keep_monthly_backups_for_months' => 4,
+          'keep_yearly_backups_for_years' => 2,
+          'delete_oldest_backups_when_using_more_megabytes_than' => 5000,
+        ),
+      ),
+    ),
+    'crud' => 
+    array (
+      'operations' => 
+      array (
+        'list' => 
+        array (
+          'contentClass' => 'col-md-12',
+          'responsiveTable' => true,
+          'persistentTable' => true,
+          'searchableTable' => true,
+          'persistentTableDuration' => false,
+          'defaultPageLength' => 10,
+          'pageLengthMenu' => 
+          array (
+            0 => 
+            array (
+              0 => 10,
+              1 => 25,
+              2 => 50,
+              3 => 100,
+              4 => -1,
+            ),
+            1 => 
+            array (
+              0 => 10,
+              1 => 25,
+              2 => 50,
+              3 => 100,
+              4 => 'backpack::crud.all',
+            ),
+          ),
+          'actionsColumnPriority' => 1,
+          'resetButton' => true,
+        ),
+        'create' => 
+        array (
+          'contentClass' => 'col-md-8 bold-labels',
+          'tabsType' => 'horizontal',
+          'groupedErrors' => true,
+          'inlineErrors' => true,
+          'autoFocusOnFirstField' => true,
+          'defaultSaveAction' => 'save_and_back',
+          'showSaveActionChange' => true,
+          'showCancelButton' => true,
+          'saveAllInputsExcept' => false,
+        ),
+        'update' => 
+        array (
+          'contentClass' => 'col-md-8 bold-labels',
+          'tabsType' => 'horizontal',
+          'groupedErrors' => true,
+          'inlineErrors' => true,
+          'autoFocusOnFirstField' => true,
+          'defaultSaveAction' => 'save_and_back',
+          'showSaveActionChange' => true,
+          'showCancelButton' => true,
+          'saveAllInputsExcept' => false,
+        ),
+        'show' => 
+        array (
+          'contentClass' => 'col-md-8',
+        ),
+        'reorder' => 
+        array (
+          'contentClass' => 'col-md-8 col-md-offset-2',
+        ),
+      ),
+      'show_translatable_field_icon' => true,
+      'translatable_field_icon_position' => 'right',
+      'locales' => 
+      array (
+        'en' => 'English',
+        'fr' => 'French',
+        'it' => 'Italian',
+        'ro' => 'Romanian',
+      ),
+    ),
+    'base' => 
+    array (
+      'default_date_format' => 'D MMM YYYY',
+      'default_datetime_format' => 'D MMM YYYY, HH:mm',
+      'html_direction' => 'ltr',
+      'project_name' => 'Backpack Admin Panel',
+      'home_link' => '',
+      'meta_robots_content' => 'noindex, nofollow',
+      'styles' => 
+      array (
+        0 => 'packages/backpack/base/css/bundle.css',
+        1 => 'packages/source-sans-pro/source-sans-pro.css',
+        2 => 'packages/line-awesome/css/line-awesome.min.css',
+      ),
+      'mix_styles' => 
+      array (
+      ),
+      'project_logo' => '<b>Back</b>pack',
+      'breadcrumbs' => true,
+      'header_class' => 'app-header bg-light border-0 navbar',
+      'body_class' => 'app aside-menu-fixed sidebar-lg-show',
+      'sidebar_class' => 'sidebar sidebar-pills bg-light',
+      'footer_class' => 'app-footer d-print-none',
+      'developer_name' => 'Cristian Tabacitu',
+      'developer_link' => 'http://tabacitu.ro',
+      'show_powered_by' => true,
+      'scripts' => 
+      array (
+        0 => 'packages/backpack/base/js/bundle.js',
+      ),
+      'mix_scripts' => 
+      array (
+      ),
+      'cachebusting_string' => '4.1.60@bec5cfa11f0cd0712c79256748acf5850080c0ee',
+      'registration_open' => true,
+      'route_prefix' => 'admin',
+      'web_middleware' => 'web',
+      'setup_auth_routes' => true,
+      'setup_dashboard_routes' => true,
+      'setup_my_account_routes' => true,
+      'setup_password_recovery_routes' => true,
+      'password_recovery_throttle_notifications' => 600,
+      'password_recovery_throttle_access' => '3,10',
+      'user_model_fqn' => 'App\\Models\\User',
+      'middleware_class' => 
+      array (
+        0 => 'App\\Http\\Middleware\\CheckIfAdmin',
+        1 => 'Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull',
+      ),
+      'middleware_key' => 'admin',
+      'authentication_column' => 'email',
+      'authentication_column_name' => 'Email',
+      'guard' => 'backpack',
+      'passwords' => 'backpack',
+      'avatar_type' => 'gravatar',
+      'view_namespace' => 'backpack::',
+      'root_disk_name' => 'root',
+      'license_code' => false,
+    ),
   ),
   'trustedproxy' => 
   array (

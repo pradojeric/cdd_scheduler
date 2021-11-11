@@ -116,7 +116,7 @@ return [
              * The disk names on which the backups will be stored.
              */
             'disks' => [
-                'local',
+                'backups',
             ],
         ],
 
@@ -158,6 +158,8 @@ return [
             \Spatie\Backup\Notifications\Notifications\HealthyBackupWasFound::class => ['mail'],
             \Spatie\Backup\Notifications\Notifications\CleanupWasSuccessful::class => ['mail'],
         ],
+
+
 
         /*
          * Here you can specify the notifiable to which the notifications should be sent. The default
