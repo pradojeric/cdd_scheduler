@@ -20383,441 +20383,330 @@
      
 }
 
-    namespace RealRashid\SweetAlert\Facades { 
+    namespace Prologue\Alerts\Facades { 
             /**
      * 
      *
+     * @method static \Prologue\Alerts\AlertsMessageBag success(string $text)
+     * @method static \Prologue\Alerts\AlertsMessageBag error(string $text)
+     * @method static \Prologue\Alerts\AlertsMessageBag warning(string $text)
+     * @method static \Prologue\Alerts\AlertsMessageBag info(string $text)
      */ 
         class Alert {
                     /**
-         * The default configuration for middleware alert.
+         * Store the messages in the current session.
          *
-         * @return \RealRashid\SweetAlert\$config 
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function middleware()
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->middleware();
-        }
-                    /**
-         * Flash an alert message.
-         *
-         * @param string $title
-         * @param string $text
-         * @param array $icon
-         * @return void 
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function alert($title = '', $text = '', $icon = null)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        $instance->alert($title, $text, $icon);
-        }
-                    /**
-         * Display a success typed alert message with a text and a title.
-         *
-         * @param string $title
-         * @param string $text
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function success($title = '', $text = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->success($title, $text);
-        }
-                    /**
-         * Display a info typed alert message with a text and a title.
-         *
-         * @param string $title
-         * @param string $text
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function info($title = '', $text = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->info($title, $text);
-        }
-                    /**
-         * Display a warning typed alert message with a text and a title.
-         *
-         * @param string $title
-         * @param string $text
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function warning($title = '', $text = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->warning($title, $text);
-        }
-                    /**
-         * Display a question typed alert message with a text and a title.
-         *
-         * @param string $title
-         * @param string $text
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function question($title = '', $text = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->question($title, $text);
-        }
-                    /**
-         * Display a error typed alert message with a text and a title.
-         *
-         * @param string $title
-         * @param string $text
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function error($title = '', $text = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->error($title, $text);
-        }
-                    /**
-         * Display a message with a custom image and CSS animation disabled.
-         *
-         * @param string $title
-         * @param string $text
-         * @param string $imageUrl
-         * @param integer $imageWidth
-         * @param integer $imageHeight
-         * @param string $imageAlt
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function image($title, $text, $imageUrl, $imageWidth, $imageHeight, $imageAlt)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->image($title, $text, $imageUrl, $imageWidth, $imageHeight, $imageAlt);
-        }
-                    /**
-         * Display a html typed alert message with html code.
-         *
-         * @param string $title
-         * @param string $code
-         * @param string $icon
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function html($title = '', $code = '', $icon = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->html($title, $code, $icon);
-        }
-                    /**
-         * Display a toast message
-         *
-         * @param string $title
-         * @param string $icon
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function toast($title = '', $icon = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->toast($title, $icon);
-        }
-                    /**
-         * Convert any alert modal to Toast
-         *
-         * @param string $position
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function toToast($position = '')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->toToast($position);
-        }
-                    /**
-         * Convert any alert modal to html
-         *
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function toHtml()
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->toHtml();
-        }
-                    /**
-         * Add a custom image to alert
-         *
-         * @param string $imageUrl
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function addImage($imageUrl)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->addImage($imageUrl);
-        }
-                    /**
-         * Add footer section to alert()
-         *
-         * @param string $code
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function footer($code)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->footer($code);
-        }
-                    /**
-         * positioned alert dialog
-         *
-         * @param string $position
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function position($position = 'top-end')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->position($position);
-        }
-                    /**
-         * Modal window width
-         * including paddings
-         * (box-sizing: border-box).
-         * 
-         * Can be in px or %. The default width is 32rem
-         *
-         * @param string $width
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function width($width = '32rem')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->width($width);
-        }
-                    /**
-         * Modal window padding.
-         * 
-         * The default padding is 1.25rem.
-         *
-         * @param string $padding
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function padding($padding = '1.25rem')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->padding($padding);
-        }
-                    /**
-         * Modal window background
-         * (CSS background property).
-         * 
-         * The default background is '#fff'.
-         *
-         * @param string $background
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function background($background = '#fff')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->background($background);
-        }
-                    /**
-         * Set to false if you want to
-         * focus the first element in tab
-         * order instead of "Confirm"-button by default.
-         *
-         * @param boolean $focus
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function focusConfirm($focus = true)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->focusConfirm($focus);
-        }
-                    /**
-         * Set to true if you want to focus the
-         * "Cancel"-button by default.
-         *
-         * @param boolean $focus
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function focusCancel($focus = false)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->focusCancel($focus);
-        }
-                    /**
-         * Custom animation with [Animate.css](https://daneden.github.io/animate.css/)
-         * CSS classes for animations when showing a popup (fade in):
-         * CSS classes for animations when hiding a popup (fade out):
-         *
-         * @param string $showAnimation
-         * @param string $hideAnimation
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function animation($showAnimation, $hideAnimation)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->animation($showAnimation, $hideAnimation);
-        }
-                    /**
-         * Persistent the alert modal
-         *
-         * @param boolean $showConfirmBtn
-         * @param boolean $showCloseBtn
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function persistent($showConfirmBtn = true, $showCloseBtn = false)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->persistent($showConfirmBtn, $showCloseBtn);
-        }
-                    /**
-         * auto close alert modal after
-         * specifid time
-         *
-         * @param integer $milliseconds
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function autoClose($milliseconds = 5000)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->autoClose($milliseconds);
-        }
-                    /**
-         * Display confirm button
-         *
-         * @param string $btnText
-         * @param string $btnColor
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function showConfirmButton($btnText = 'Ok', $btnColor = '#3085d6')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->showConfirmButton($btnText, $btnColor);
-        }
-                    /**
-         * Display cancel button
-         *
-         * @param string $btnText
-         * @param string $btnColor
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function showCancelButton($btnText = 'Cancel', $btnColor = '#aaa')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->showCancelButton($btnText, $btnColor);
-        }
-                    /**
-         * Display close button
-         *
-         * @param string $closeButtonAriaLabel
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function showCloseButton($closeButtonAriaLabel = 'aria-label')
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->showCloseButton($closeButtonAriaLabel);
-        }
-                    /**
-         * Hide close button from alert or toast
-         *
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function hideCloseButton()
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->hideCloseButton();
-        }
-                    /**
-         * Apply default styling to buttons.
-         * 
-         * If you want to use your own classes (e.g. Bootstrap classes)
-         * set this parameter to false.
-         *
-         * @param boolean $buttonsStyling
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function buttonsStyling($buttonsStyling)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->buttonsStyling($buttonsStyling);
-        }
-                    /**
-         * Use any HTML inside icons (e.g. Font Awesome)
-         *
-         * @param string $iconHtml
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function iconHtml($iconHtml)
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->iconHtml($iconHtml);
-        }
-                    /**
-         * If set to true, the timer will have a progress bar at the bottom of a popup.
-         * 
-         * Mostly, this feature is useful with toasts.
-         *
-         * @author Rashid Ali <realrashid05@gmail.com>
-         * @static 
-         */ 
-        public static function timerProgressBar()
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->timerProgressBar();
-        }
-                    /**
-         * Reverse buttons position
-         *
-         * @author Faber44 <https://github.com/Faber44>
-         * @static 
-         */ 
-        public static function reverseButtons()
-        {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->reverseButtons();
-        }
-                    /**
-         * Flash the config options for alert.
-         *
-         * @author Rashid Ali <realrashid05@gmail.com>
+         * @return \Prologue\Alerts\AlertsMessageBag 
          * @static 
          */ 
         public static function flash()
         {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
                         return $instance->flash();
         }
                     /**
-         * Build Flash config options for flashing.
+         * Deletes all messages.
          *
-         * @author Rashid Ali <realrashid05@gmail.com>
+         * @param bool $withSession
+         * @return \Prologue\Alerts\AlertsMessageBag 
          * @static 
          */ 
-        public static function buildConfig()
+        public static function flush($withSession = true)
         {
-                        /** @var \RealRashid\SweetAlert\Toaster $instance */
-                        return $instance->buildConfig();
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->flush($withSession);
+        }
+                    /**
+         * Checks to see if any messages exist.
+         *
+         * @param null $key A specific level you wish to check for.
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($level = null)
+        {
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->has($level);
+        }
+                    /**
+         * Get the number of messages in the message bag.
+         *
+         * @param null $level A specific level name you wish to count.
+         * @return int 
+         * @static 
+         */ 
+        public static function count($level = null)
+        {
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->count($level);
+        }
+                    /**
+         * Returns the alert levels from the config.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getLevels()
+        {
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getLevels();
+        }
+                    /**
+         * Returns the Illuminate Session Store.
+         *
+         * @return \Illuminate\Session\Store 
+         * @static 
+         */ 
+        public static function getSession()
+        {
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getSession();
+        }
+                    /**
+         * Returns the Illuminate Config Repository.
+         *
+         * @return \Illuminate\Config\Repository 
+         * @static 
+         */ 
+        public static function getConfig()
+        {
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getConfig();
+        }
+                    /**
+         * Get the keys present in the message bag.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function keys()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->keys();
+        }
+                    /**
+         * Add a message to the message bag.
+         *
+         * @param string $key
+         * @param string $message
+         * @return \Prologue\Alerts\AlertsMessageBag 
+         * @static 
+         */ 
+        public static function add($key, $message)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->add($key, $message);
+        }
+                    /**
+         * Add a message to the message bag if the given conditional is "true".
+         *
+         * @param bool $boolean
+         * @param string $key
+         * @param string $message
+         * @return \Prologue\Alerts\AlertsMessageBag 
+         * @static 
+         */ 
+        public static function addIf($boolean, $key, $message)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->addIf($boolean, $key, $message);
+        }
+                    /**
+         * Merge a new array of messages into the message bag.
+         *
+         * @param \Illuminate\Contracts\Support\MessageProvider|array $messages
+         * @return \Prologue\Alerts\AlertsMessageBag 
+         * @static 
+         */ 
+        public static function merge($messages)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->merge($messages);
+        }
+                    /**
+         * Determine if messages exist for any of the given keys.
+         *
+         * @param array|string $keys
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasAny($keys = [])
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->hasAny($keys);
+        }
+                    /**
+         * Get the first message from the message bag for a given key.
+         *
+         * @param string|null $key
+         * @param string|null $format
+         * @return string 
+         * @static 
+         */ 
+        public static function first($key = null, $format = null)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->first($key, $format);
+        }
+                    /**
+         * Get all of the messages from the message bag for a given key.
+         *
+         * @param string $key
+         * @param string|null $format
+         * @return array 
+         * @static 
+         */ 
+        public static function get($key, $format = null)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->get($key, $format);
+        }
+                    /**
+         * Get all of the messages for every key in the message bag.
+         *
+         * @param string|null $format
+         * @return array 
+         * @static 
+         */ 
+        public static function all($format = null)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->all($format);
+        }
+                    /**
+         * Get all of the unique messages for every key in the message bag.
+         *
+         * @param string|null $format
+         * @return array 
+         * @static 
+         */ 
+        public static function unique($format = null)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->unique($format);
+        }
+                    /**
+         * Get the raw messages in the message bag.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function messages()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->messages();
+        }
+                    /**
+         * Get the raw messages in the message bag.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getMessages()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getMessages();
+        }
+                    /**
+         * Get the messages for the instance.
+         *
+         * @return \Illuminate\Support\MessageBag 
+         * @static 
+         */ 
+        public static function getMessageBag()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getMessageBag();
+        }
+                    /**
+         * Get the default message format.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getFormat()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->getFormat();
+        }
+                    /**
+         * Set the default message format.
+         *
+         * @param string $format
+         * @return \Illuminate\Support\MessageBag 
+         * @static 
+         */ 
+        public static function setFormat($format = ':message')
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->setFormat($format);
+        }
+                    /**
+         * Determine if the message bag has any messages.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEmpty()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->isEmpty();
+        }
+                    /**
+         * Determine if the message bag has any messages.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isNotEmpty()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->isNotEmpty();
+        }
+                    /**
+         * Determine if the message bag has any messages.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function any()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->any();
+        }
+                    /**
+         * Get the instance as an array.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->toArray();
+        }
+                    /**
+         * Convert the object into something JSON serializable.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function jsonSerialize()
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->jsonSerialize();
+        }
+                    /**
+         * Convert the object to its JSON representation.
+         *
+         * @param int $options
+         * @return string 
+         * @static 
+         */ 
+        public static function toJson($options = 0)
+        {            //Method inherited from \Illuminate\Support\MessageBag         
+                        /** @var \Prologue\Alerts\AlertsMessageBag $instance */
+                        return $instance->toJson($options);
         }
          
     }
@@ -24345,7 +24234,7 @@ namespace  {
             class Gravatar extends \Creativeorange\Gravatar\Facades\Gravatar {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Livewire extends \Livewire\Livewire {}
-            class Alert extends \RealRashid\SweetAlert\Facades\Alert {}
+            class Alert extends \Prologue\Alerts\Facades\Alert {}
      
 }
 
