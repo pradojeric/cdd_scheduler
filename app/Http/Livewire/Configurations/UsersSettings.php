@@ -22,7 +22,7 @@ class UsersSettings extends Component
     {
         return [
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$this->user->id,
+            'email' => 'required|unique:users,email,'.optional($this->user)->id,
             'password' => 'nullable|required_with:passwordConfirmation|same:passwordConfirmation',
             'role' => 'required',
         ];
