@@ -31,15 +31,22 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/test', [SettingsController::class, 'backupDatabase']);
 
 Route::middleware(['auth'])->group(function(){
+
+    Route::middleware(['role:superadmin'])->group(function(){
+        Route::get('/roles-permissions', [SettingsController::class, 'rolesAndPermissions'])->name('settings.roles-permissions');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+        Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
+        Route::get('/backup/create', [BackupController::class, 'create'])->name('backup.create');
+        Route::get('/backup/download/{file_name}', [BackupController::class, 'download'])->name('backup.download');
+        Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete'])->name('backup.delete');
+    });
 
     Route::middleware(['role:superadmin|admin'])->group(function(){
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
-        Route::get('/roles-permissions', [SettingsController::class, 'rolesAndPermissions'])->name('settings.roles-permissions');
-        Route::get('/users', [UserController::class, 'index'])->name('users.index');
 
         Route::resource('departments', DepartmentController::class);
         Route::resource('courses', CourseController::class);
@@ -54,10 +61,6 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/schedule/course', [ScheduleController::class, 'index'])->name('schedule.course');
         Route::get('/schedule/subject', [ScheduleController::class, 'bySubject'])->name('schedule.subject');
 
-        Route::get('/backup', [BackupController::class, 'index'])->name('backup.index');
-        Route::get('/backup/create', [BackupController::class, 'create'])->name('backup.create');
-        Route::get('/backup/download/{file_name}', [BackupController::class, 'download'])->name('backup.download');
-        Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete'])->name('backup.delete');
     });
 
     Route::resource('faculties', FacultyController::class);
