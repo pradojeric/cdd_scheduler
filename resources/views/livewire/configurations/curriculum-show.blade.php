@@ -1,9 +1,14 @@
 <div>
     <div class="w-full">
         @if($errors->any())
-            <span class="w-full bg-red-500 text-white px-2 py-1 rounded-lg shadow-sm">
-                Please fill all fields!
-            </span>
+        <ul>
+
+            @foreach ($errors->all() as $error)
+            <li class="text-red-500 text-xs">
+                {{ $error }}
+            </li>
+            @endforeach
+        </ul>
         @endif
 
         <div class="flex justify-between mb-2">
@@ -51,7 +56,7 @@
                                     </tr>
                                     <tbody class="divide-y">
                                         @foreach ($term as $k => $subject)
-                                            <tr class="divide-x">
+                                            <tr class="divide-x border ">
                                                 <td class="p-2 text-center">
                                                     <button class="bg-red-500 px-2 py-1 text-xs text-white rounded-lg" wire:click="subSubject({{ $i }}, {{ $j }}, {{ $k }})"><i class="fa fa-minus"></i></button>
                                                 </td>
@@ -59,7 +64,7 @@
                                                     <x-input class="w-full" wire:model.lazy="subjects.{{ $i }}.term.{{ $j }}.{{ $k }}.code" />
                                                 </td>
                                                 <td class="p-2">
-                                                    <x-input class="w-full" wire:model.lazy="subjects.{{ $i }}.term.{{ $j }}.{{ $k }}.title" />
+                                                    <x-input class="w-full is-invalid" wire:model.lazy="subjects.{{ $i }}.term.{{ $j }}.{{ $k }}.title" />
                                                 </td>
                                                 <td class="p-2">
                                                     <x-input class="w-full" wire:model.lazy="subjects.{{ $i }}.term.{{ $j }}.{{ $k }}.lech" />

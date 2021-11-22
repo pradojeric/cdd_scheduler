@@ -146,8 +146,8 @@ class CurriculumShow extends Component
     public function updateCurriculum()
     {
 
-
         $this->validate();
+
         try{
             DB::beginTransaction();
 

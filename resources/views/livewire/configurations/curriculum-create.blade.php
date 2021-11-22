@@ -2,9 +2,12 @@
     <div class="w-full">
 
         @if($errors->any())
-            <span class="w-full bg-red-500 text-white px-2 py-1 rounded-lg shadow-sm">
-                Please fill all fields!
-            </span>
+            @foreach ($errors->all() as $error)
+                <span class="w-full bg-red-500 text-white px-2 py-1 rounded-lg shadow-sm">
+                    {{ $error }}
+                </span>
+            @endforeach
+
         @endif
 
         <div class="flex justify-between">
