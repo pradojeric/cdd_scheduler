@@ -2,15 +2,15 @@
     <x-auth-session-status :status="session('success')" />
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-            <div class="flex items-center space-x-3 w-screen">
-                <div class="flex flex-col items-start">
-                    <x-input id="code" type="text" wire:model="code" class="mt-1 w-auto" placeholder="Department Code" />
+            <div class="flex items-center space-x-3 w-full">
+                <div class="flex flex-col items-start w-1/2">
+                    <x-input id="code" type="text" wire:model="code" class="mt-1 w-full text-sm" placeholder="Department Code" />
                     @error('code')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="flex flex-col items-start">
-                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-96" placeholder="Department Name" />
+                <div class="flex flex-col items-start w-1/2">
+                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-full text-sm" placeholder="Department Name" />
                     @error('name')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
@@ -43,9 +43,9 @@
                 @foreach ($departments as $dept)
 
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $dept->name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $dept->code }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap"><a href="#" wire:click="editDepartment({{ $dept }})"
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $dept->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $dept->code }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="#" wire:click="editDepartment({{ $dept }})"
                             class="text-indigo-600 hover:text-indigo-900">Edit</a></td>
                 </tr>
                 @endforeach

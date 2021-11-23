@@ -193,6 +193,11 @@ class CurriculumCreate extends Component
         $this->subjects[$i]['term'][$j][$k]['total'] = $subTotal;
     }
 
+    public function hydrate()
+    {
+        $this->resetErrorBag();
+    }
+
     public function render()
     {
         return view('livewire.configurations.curriculum-create');

@@ -2,10 +2,10 @@
     <x-auth-session-status :status="session('success')" />
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
-            <div class="flex items-center space-x-3 w-screen">
+            <div class="flex items-center space-x-3 overflow-auto">
 
                 <div class="flex items-center">
-                    <x-select wire:model="department" id="department" class="mt-1 w-auto">
+                    <x-select wire:model="department" id="department" class="mt-1 w-auto text-sm">
                         <option value="">Select Department</option>
                         @foreach ($departments as $department)
                             <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -14,13 +14,13 @@
                 </div>
 
                 <div class="flex flex-col items-start">
-                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-96" placeholder="Course Name" />
+                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-96 text-sm" placeholder="Course Name" />
                     @error('name')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="flex flex-col items-start">
-                    <x-input id="code" type="text" wire:model="code" class="mt-1 w-auto" placeholder="Course Code" />
+                    <x-input id="code" type="text" wire:model="code" class="mt-1 w-auto text-sm" placeholder="Course Code" />
                     @error('code')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
@@ -52,9 +52,9 @@
                 @foreach ($courses as $course)
 
                 <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $course->name }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">{{ $course->code }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $course->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $course->code }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
                         <a href="{{ route('courses.show', $course) }}"
                             class="text-indigo-600 hover:text-indigo-900">View</a>
                         <a href="#" wire:click.prevent="editCourse({{ $course }})"

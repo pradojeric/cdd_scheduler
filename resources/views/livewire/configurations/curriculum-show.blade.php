@@ -1,14 +1,9 @@
 <div>
     <div class="w-full">
         @if($errors->any())
-        <ul>
-
-            @foreach ($errors->all() as $error)
-            <li class="text-red-500 text-xs">
-                {{ $error }}
-            </li>
-            @endforeach
-        </ul>
+            <span class="w-full text-red-500 text-xs">
+                Something's wrong!
+            </span>
         @endif
 
         <div class="flex justify-between mb-2">
@@ -56,7 +51,7 @@
                                     </tr>
                                     <tbody class="divide-y">
                                         @foreach ($term as $k => $subject)
-                                            <tr class="divide-x border ">
+                                            <tr class="divide-x @error("subjects.$i.term.$j.$k.*") bg-red-200 @enderror">
                                                 <td class="p-2 text-center">
                                                     <button class="bg-red-500 px-2 py-1 text-xs text-white rounded-lg" wire:click="subSubject({{ $i }}, {{ $j }}, {{ $k }})"><i class="fa fa-minus"></i></button>
                                                 </td>

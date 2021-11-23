@@ -70,6 +70,7 @@ class CurriculumShow extends Component
         $this->subjects = $subjects;
     }
 
+
     public function addYear()
     {
         $this->subjects[] = [
@@ -213,8 +214,14 @@ class CurriculumShow extends Component
         $this->subjects[$i]['term'][$j][$k]['total'] = $subTotal;
     }
 
+    public function hydrate()
+    {
+        $this->resetErrorBag();
+    }
+
     public function render()
     {
+
         return view('livewire.configurations.curriculum-show');
     }
 }
