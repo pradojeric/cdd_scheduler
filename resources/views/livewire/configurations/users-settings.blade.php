@@ -81,7 +81,7 @@
                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
                     <div class="bg-gray-200">
                         <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <span class="uppercase font-bold">{{ _('User') }}</span>
+                            <span class="uppercase font-bold">{{ __('User') }}</span>
                         </div>
 
                     </div>

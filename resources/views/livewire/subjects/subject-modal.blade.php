@@ -32,7 +32,7 @@
                 class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl w-screen">
                 <div class="bg-gray-200">
                     <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <span class="uppercase font-bold">{{ _('Updating Subjects') }}</span>
+                        <span class="uppercase font-bold">{{ __('Updating Subjects') }}</span>
                     </div>
                     <div class="bg-white w-screen px-6 py-2 ">
                         <div class="flex space-x-2">

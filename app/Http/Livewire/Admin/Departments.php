@@ -48,6 +48,11 @@ class Departments extends Component
         $this->isEditing = true;
     }
 
+    public function deleteDepartment(Department $dept)
+    {
+        $dept->delete();
+    }
+
     public function render()
     {
         return view('livewire.admin.departments', [

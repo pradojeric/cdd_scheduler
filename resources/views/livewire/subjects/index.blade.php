@@ -34,9 +34,6 @@
             </div>
 
         </div>
-        <div class="px-6 py-2">
-            {{ $subjects->links() }}
-        </div>
         <div class="overflow-auto mx-2 border">
             <table class="min-w-full divide-y-2 divide-double">
                 <thead class="bg-gray-100">
@@ -61,11 +58,11 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse ($subjects as $subject)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->course->code }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->code }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->title }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $subject->total_units }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $subject->course->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $subject->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $subject->title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $subject->total_units }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">
                                 <button type="button" class="text-red-500 hover:text-red-300" x-data
                                     x-on:click="
                                         event.preventDefault();
@@ -88,7 +85,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="px-6 py-2">
+        <div class="px-6 py-2 text-sm">
             {{ $subjects->links() }}
         </div>
     </div>

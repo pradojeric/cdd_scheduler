@@ -15,6 +15,14 @@ class CurriculumIndex extends Component
         $this->course = $course;
     }
 
+    public function deleteCurriculum(Curriculum $curriculum)
+    {
+        $course = $curriculum->course;
+        $curriculum->subjects()->delete();
+        $curriculum->delete();
+        $this->course = $course;
+    }
+
     public function activateCurriculum(Curriculum $curriculum)
     {
         //$curriculum->activateCurriculum();

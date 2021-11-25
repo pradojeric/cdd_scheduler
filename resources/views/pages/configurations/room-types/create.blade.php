@@ -12,7 +12,7 @@
                     <form action="{{ route('room-type.store') }}" method="post" class="space-y-2" autocomplete="off">
                         @csrf
                         <div>
-                            <x-label for="name" :value="_('Name')"></x-label>
+                            <x-label for="name" :value="__('Name')"></x-label>
                             <x-input id="name" type="text" name="name" :value="old('name')" class="mt-1 w-96" />
                         </div>
                         <div>

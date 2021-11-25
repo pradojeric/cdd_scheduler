@@ -45,8 +45,22 @@
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $dept->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $dept->code }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm"><a href="#" wire:click="editDepartment({{ $dept }})"
-                            class="text-indigo-600 hover:text-indigo-900">Edit</a></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm">
+                        <a href="{{ route('departments.show', $dept) }}"
+                            class="hover:text-gray-300">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a href="#" wire:click="editDepartment({{ $dept }})"
+                            class="text-indigo-600 hover:text-indigo-300">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        @role('superadmin')
+                            <a href="#" wire:click="deleteDepartment({{ $dept }})"
+                                class="text-red-600 hover:text-red-300">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        @endrole
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -45,7 +45,7 @@
                     <div class="flex items-center">
                         <x-input type="checkbox" class="mr-2"  wire:model="graduating" id="graduating" value="1"
                         :checked="$graduating ?? false " />
-                        <x-label for="graduating" :value="_('Graduating')"></x-label>
+                        <x-label for="graduating" :value="__('Graduating')"></x-label>
                     </div>
                     @if($isEditing)
                         <x-button type="button" wire:click.prevent="updateSection({{ $section }})" >Update</x-button>
@@ -77,10 +77,10 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($sections as $section)
                         <tr wire:key="{{ $section->id }}">
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->course->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->section_name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $section->graduating }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap flex space-x-2 justify-end">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->course->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->section_name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->graduating }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm flex space-x-2 justify-end">
                                 <a href="{{ route('sections.show', $section) }}" class="hover:text-gray-500">
                                     <i class="fa fa-eye"></i>
                                 </a>

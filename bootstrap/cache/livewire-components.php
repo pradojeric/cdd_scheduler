@@ -1,6 +1,7 @@
 <?php return array (
   'admin.courses' => 'App\\Http\\Livewire\\Admin\\Courses',
   'admin.departments' => 'App\\Http\\Livewire\\Admin\\Departments',
+  'admin.departments-show' => 'App\\Http\\Livewire\\Admin\\DepartmentsShow',
   'admin.room-types' => 'App\\Http\\Livewire\\Admin\\RoomTypes',
   'admin.settings' => 'App\\Http\\Livewire\\Admin\\Settings',
   'configurations.curriculum-create' => 'App\\Http\\Livewire\\Configurations\\CurriculumCreate',

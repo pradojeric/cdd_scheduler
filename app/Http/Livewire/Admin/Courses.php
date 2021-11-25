@@ -55,6 +55,11 @@ class Courses extends Component
         $this->isEditing = true;
     }
 
+    public function deleteCourse(Course $course)
+    {
+        $course->delete();
+    }
+
 
     public function render()
     {

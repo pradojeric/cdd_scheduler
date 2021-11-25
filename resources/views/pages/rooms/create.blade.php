@@ -13,7 +13,7 @@
                     <form action="{{ route('rooms.store') }}" method="post" class="space-y-2" autocomplete="off">
                         @csrf
                         <div>
-                            <x-label for="building" :value="_('Building')"></x-label>
+                            <x-label for="building" :value="__('Building')"></x-label>
                             <x-select name="building" id="building" class="mt-1 w-96">
                                 <option selected disabled>Select building</option>
                                 @foreach ($buildings as $building)
@@ -23,7 +23,7 @@
                             </x-select>
                         </div>
                         <div>
-                            <x-label for="room_type" :value="_('Room Type')"></x-label>
+                            <x-label for="room_type" :value="__('Room Type')"></x-label>
                             <x-select name="room_type" id="room_type" class="mt-1 w-96">
                                 <option selected disabled>Select Room Type</option>
                                 @foreach ($roomTypes as $roomType)
@@ -32,23 +32,23 @@
                             </x-select>
                         </div>
                         <div>
-                            <x-label for="name" :value="_('Room')"></x-label>
+                            <x-label for="name" :value="__('Room')"></x-label>
                             <x-input id="name" type="text" name="name" :value="old('name')" class="mt-1 w-96" />
                         </div>
                         <div>
-                            <x-label for="capacity" :value="_('Capacity')"></x-label>
+                            <x-label for="capacity" :value="__('Capacity')"></x-label>
                             <x-input id="capacity" type="text" name="capacity" :value="old('capacity')"
                                 class="mt-1 w-96" />
                         </div>
                         <div class="flex">
                             <x-input type="checkbox" class="mr-2" name="status" id="status" value="1"
                                 :checked="old('status') ?? true " />
-                            <x-label for="status" :value="_('Active Room')"></x-label>
+                            <x-label for="status" :value="__('Active Room')"></x-label>
                         </div>
                         <div class="flex">
                             <x-input type="checkbox" class="mr-2" name="is_room" id="is_room" value="1"
                                 :checked="old('is_room') ?? true " />
-                            <x-label for="is_room" :value="_('Is Room')"></x-label>
+                            <x-label for="is_room" :value="__('Is Room')"></x-label>
                         </div>
                         <div>
                             <x-button type="submit">Save</x-button>

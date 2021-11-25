@@ -8,7 +8,7 @@
             @endif
             <div class="flex flex-col justify-center space-y-2">
                 <div class="flex items-center">
-                    <x-label for="school_year" :value="_('School Year')" class="w-1/12" />
+                    <x-label for="school_year" :value="__('School Year')" class="w-1/12" />
                     <div>
                         <x-input id="school_year" type="number" name="school_year" class="mt-1 w-32" x-on:keyup="getNextYear()" x-on:change="getNextYear()" x-model="year1" />
                         {{ __('-') }}
@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="flex items-center">
-                    <x-label for="term" :value="_('Term')" class="w-1/12" />
+                    <x-label for="term" :value="__('Term')" class="w-1/12" />
                     <x-select wire:model="term" id="term" class="mt-1 w-auto">
                         @foreach ($terms as $i => $value)
                             <option value="{{ $i }}">{{ $value }}</option>

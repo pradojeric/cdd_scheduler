@@ -14,11 +14,11 @@
                         @csrf
                         @method('put')
                         <div>
-                            <x-label for="code" :value="_('BUILDING CODE')"></x-label>
+                            <x-label for="code" :value="__('BUILDING CODE')"></x-label>
                             <x-input id="code" type="text" name="code" :value="$building->code" class="mt-1 w-96" />
                         </div>
                         <div>
-                            <x-label for="name" :value="_('BUILDING NAME')"></x-label>
+                            <x-label for="name" :value="__('BUILDING NAME')"></x-label>
                             <x-input id="name" type="text" name="name" :value="$building->name" class="mt-1 w-96" />
                         </div>
                         <div>

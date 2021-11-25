@@ -14,7 +14,7 @@
                         @csrf
                         @method('put')
                         <div>
-                            <x-label for="name" :value="_('ROOM TYPE')"></x-label>
+                            <x-label for="name" :value="__('ROOM TYPE')"></x-label>
                             <x-input id="name" type="text" name="name" :value="$roomType->name" class="mt-1 w-96" />
                         </div>
                         <div>
