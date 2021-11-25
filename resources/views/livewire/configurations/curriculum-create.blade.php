@@ -8,15 +8,15 @@
         @endif
 
         <div class="flex justify-between">
-            <a href="{{ route('courses.show', $course) }}" class="bg-red-500 hover:bg-red-400 border px-2 py-1 text-sm text-white rounded-lg" >{{ _('Back') }}</a>
-            <button class="bg-green-500 hover:bg-green-400 border px-2 py-1 text-sm text-white rounded-lg" wire:click="saveCurriculum">{{ _('Save') }}</button>
+            <a href="{{ route('courses.show', $course) }}" class="bg-red-500 hover:bg-red-400 border px-2 py-1 text-sm text-white rounded-lg" >{{ __('Back') }}</a>
+            <button class="bg-green-500 hover:bg-green-400 border px-2 py-1 text-sm text-white rounded-lg" wire:click="saveCurriculum">{{ __('Save') }}</button>
         </div>
         <div>
-            <x-label for="effective_sy" :value="_('Effective SY')" />
+            <x-label for="effective_sy" :value="__('Effective SY')" />
             <x-input id="effective_sy" class="border p-2" wire:model.lazy="effective_sy" />
         </div>
         <div>
-            <x-label for="description" :value="_('Description')" />
+            <x-label for="description" :value="__('Description')" />
             <textarea id="description" rows="1" class="w-full border border-gray-300 rounded-lg shadow-sm resize-none" wire:model.lazy="description"></textarea>
         </div>
         <div class="py-2 w-full">
@@ -35,7 +35,7 @@
 
                                     <tr class="divide-x">
                                         <th class="p-2 w-32" rowspan=2>
-                                            <button class="text-xs p-2 bg-green-500 text-white rounded-lg" wire:click="addSubject({{ $i }}, {{ $j }})">{{ _('Add Subject') }}</button>
+                                            <button class="text-xs p-2 bg-green-500 text-white rounded-lg" wire:click="addSubject({{ $i }}, {{ $j }})">{{ __('Add Subject') }}</button>
                                         </th>
                                         <th class="w-28" rowspan=2>Course Code</th>
                                         <th rowspan=2>Course Title</th>
@@ -90,13 +90,13 @@
                         @endforeach
                         @if(count($year['term']) < count($terms))
                             <div>
-                                <button class="text-xs p-2 bg-green-500 text-white rounded-lg" wire:click="addTerm({{ $i }})">{{ _('Add Term') }}</button>
+                                <button class="text-xs p-2 bg-green-500 text-white rounded-lg" wire:click="addTerm({{ $i }})">{{ __('Add Term') }}</button>
                             </div>
                         @endif
                     </div>
                 @endforeach
             @if(count($subjects) < count($years))
-                <x-button wire:click="addYear">{{ _('Add Year') }}</x-button>
+                <x-button wire:click="addYear">{{ __('Add Year') }}</x-button>
             @endif
         </div>
     </div>

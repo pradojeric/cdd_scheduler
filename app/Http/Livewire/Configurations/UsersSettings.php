@@ -84,7 +84,9 @@ class UsersSettings extends Component
     public function render()
     {
         return view('livewire.configurations.users-settings', [
-            'users' => User::with('roles')->get(),
+            'users' => User::with(['roles' => function($query) {
+                $query->orderBy('name');
+            }])->get(),
             'roles' => Role::all(),
         ]);
     }
