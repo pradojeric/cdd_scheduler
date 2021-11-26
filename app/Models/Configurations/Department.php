@@ -2,6 +2,7 @@
 
 namespace App\Models\Configurations;
 
+use App\Models\Faculty;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,10 @@ class Department extends Model
     public function courses()
     {
         return $this->hasMany(Course::class);
+    }
+
+    public function faculties()
+    {
+        return $this->hasMany(Faculty::class);
     }
 }

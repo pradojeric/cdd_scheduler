@@ -13,12 +13,30 @@
             </span>
             <div class="bg-white mt-2 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-gray-50 border-b border-gray-200">
-                    <ul>
+                    <div class="border p-6 shadow rounded mb-6">
+                        <span class="text-lg ">
+                            {{ __('COURSES') }}
+                        </span>
+                        <ul class="mt-2">
 
-                        @foreach ($department->courses as $course)
-                            <li>{{ $course->name }}</li>
-                        @endforeach
-                    </ul>
+                            @foreach ($department->courses as $course)
+                                <li>{{ $course->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div class="border p-6 shadow rounded">
+                        <span class="text-lg ">
+                            {{ __('FACULTIES') }}
+                        </span>
+                        <ul class="mt-2">
+
+                            @foreach ($department->faculties as $faculty)
+                                <li>{{ $faculty->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>
