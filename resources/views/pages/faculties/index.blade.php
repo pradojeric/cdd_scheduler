@@ -18,13 +18,13 @@
                         <tr>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Code</th>
+                                Name</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Department</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Name</th>
+                                Code</th>
                             <th scope="col"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 Rate</th>
@@ -39,9 +39,9 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($faculties as $faculty)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->code }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->department->code }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->department->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->code }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->rate }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $faculty->active_status }}</td>
                             <td class="px-6 py-4 whitespace-nowrap flex space-x-2 justify-end">
