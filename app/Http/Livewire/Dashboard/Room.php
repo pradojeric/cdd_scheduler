@@ -68,7 +68,6 @@ class Room extends Component
         }
 
         if ($total != 0) {
-
             $occupied = ($data/$total) * 100;
             $unoccupied = ($total - $data)/$total * 100;
         }else{

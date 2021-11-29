@@ -1,33 +1,27 @@
 <div>
     <h2 class="font-semibold text-xl text-gray-800 leading-tight uppercase">
-        Rooms
+        Available Faculties
     </h2>
+
     <div class="flex my-2 space-x-2">
-        <x-select class="text-xs w-full" wire:model="selectedRoom">
-            <option value="" selected>All Rooms</option>
-            @foreach ($allRooms as $_room)
-                <option value="{{ $_room->id }}">{{ $_room->name }} ({{ strtolower($_room->roomType->name) }})</option>
+        <x-select class="text-xs w-full" wire:model="selectedDepartment">
+            <option value="" selected>All Department</option>
+            @foreach ($departments as $department)
+                <option value="{{ $department->id }}">{{ $department->name }}</option>
             @endforeach
         </x-select>
-        <div class="flex items-center">
-            <label for="start" class="text-sm w-10" >Start:</label>
-            <x-input type="time" class="text-xs" id="start" wire:model.lazy="start" />
-        </div>
 
-        <div class="flex items-center">
-            <label for="end" class="text-sm w-10" >End:</label>
-            <x-input type="time" class="text-xs" id="end" wire:model.lazy="end" />
-        </div>
     </div>
+
     <div class="max-w-md mx-auto">
 
-        <canvas id="roomChart" width="50" height="50"></canvas>
+        <canvas id="facultyChart" width="50" height="50"></canvas>
     </div>
 
     {{-- <x-slot name="script"> --}}
-        @push('script')
+    @push('script')
         <script>
-            var ctx = document.getElementById('roomChart');
+            var ctx = document.getElementById('facultyChart');
             var myChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
@@ -73,6 +67,6 @@
                 myChart.update();
             });
         </script>
-        @endpush
+    @endpush
     {{-- </x-slot> --}}
 </div>

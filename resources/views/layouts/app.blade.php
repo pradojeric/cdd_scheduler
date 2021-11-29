@@ -36,5 +36,5 @@
     </body>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    {{ $script ?? '' }}
+    @stack('script')
 </html>

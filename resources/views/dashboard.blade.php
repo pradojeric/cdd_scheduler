@@ -10,7 +10,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex">
                     <div class="p-6 bg-white border-b border-gray-200 w-1/2">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight uppercase">
+                        @livewire('dashboard.faculty', key('faculty'))
+                        {{-- <h2 class="font-semibold text-xl text-gray-800 leading-tight uppercase">
                             Available Faculties
                         </h2>
                         <table class="table min-w-full divide-y mt-2">
@@ -30,10 +31,10 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>
+                        </table> --}}
                     </div>
                     <div class="p-6 bg-white border-b border-gray-200 w-1/2">
-                        @livewire('dashboard.room')
+                        @livewire('dashboard.room', key('room'))
                     </div>
                 </div>
 

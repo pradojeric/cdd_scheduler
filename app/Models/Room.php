@@ -41,4 +41,5 @@ class Room extends Model
             $q->where('lab', 1);
         });
     }
+
 }
