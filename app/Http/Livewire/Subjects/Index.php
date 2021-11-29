@@ -33,8 +33,6 @@ class Index extends Component
     {
         $this->resetErrorBag();
 
-
-
         try {
             DB::transaction(function () {
                 $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
@@ -71,7 +69,7 @@ class Index extends Component
                 $allSubjects = CurriculumSubject::leftJoin('curricula', 'curricula.id', 'curriculum_id')
                         ->leftJoin('courses', 'courses.id', 'curricula.course_id')
                         ->when($delete, function($query) {
-                            $query->where('curriculate.active', true);
+                            $query->where('curricula.active', true);
                         })
                         ->select('*', 'curriculum_subjects.code as code')
                         ->get();

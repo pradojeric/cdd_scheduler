@@ -46,7 +46,13 @@ class SectionShow extends Component
 
     public function deleteTimeSchedule(TimeSchedule $timeSchedule)
     {
+        $schedule = $timeSchedule->schedule;
         $timeSchedule->delete();
+        if(count($schedule->timeSchedules) < 1)
+        {
+            $schedule->delete();
+        }
+
     }
 
     public function updateFaculty(Schedule $schedule, Faculty $faculty)

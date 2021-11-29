@@ -46,6 +46,7 @@ class RoomTypeController extends Controller
 
         RoomType::create([
             'name' => $request->name,
+            'lab' => $request->lab ?? 0,
         ]);
 
         return redirect()->route('room-type.index')->with('success', 'Room type successfully added');
@@ -91,6 +92,7 @@ class RoomTypeController extends Controller
 
         $roomType->update([
             'name' => $request->name,
+            'lab' => $request->lab ?? false,
         ]);
 
         return redirect()->route('room-type.index')->with('success', 'Room type successfully updated');

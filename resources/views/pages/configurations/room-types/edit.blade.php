@@ -17,6 +17,10 @@
                             <x-label for="name" :value="__('ROOM TYPE')"></x-label>
                             <x-input id="name" type="text" name="name" :value="$roomType->name" class="mt-1 w-96" />
                         </div>
+                        <div class="flex">
+                            <input type="checkbox" value="1" name="lab" id="lab" class="mr-2 rounded shadow-sm" {{ $roomType->lab ? 'checked' : '' }}>
+                            <x-label for="lab" :value="__('Laboratory')"></x-label>
+                        </div>
                         <div>
                             <x-button type="submit">Update</x-button>
                         </div>

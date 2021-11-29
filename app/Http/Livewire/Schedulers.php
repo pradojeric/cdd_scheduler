@@ -237,10 +237,13 @@ class Schedulers extends Component
 
         if(!$schedule)
         {
-            if($faculty->countRemainingUnits() - $subject->totalUnits() < 0)
+            if($faculty)
             {
-                $this->addError('error', 'The faculty has no remaining units');
-                return;
+                if($faculty->countRemainingUnits() - $subject->totalUnits() < 0)
+                {
+                    $this->addError('error', 'The faculty has no remaining units');
+                    return;
+                }
             }
         }
 
@@ -268,7 +271,7 @@ class Schedulers extends Component
             dd($e);
         }
 
-        $this->reset(  'selectedBuilding' ,'start', 'end', 'pickedDays', 'hours');
+        $this->reset('selectedBuilding' ,'start', 'end', 'pickedDays', 'hours');
         $this->resetDay();
 
         session()->flash('success', 'Schedule successfully added');

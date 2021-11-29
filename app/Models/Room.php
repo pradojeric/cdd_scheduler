@@ -38,7 +38,7 @@ class Room extends Model
     public function scopeLaboratory($query)
     {
         $query->whereHas('roomType', function($q){
-            $q->where('name', 'LABORATORY');
+            $q->where('lab', 1);
         });
     }
 }

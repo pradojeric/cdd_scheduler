@@ -46,6 +46,15 @@
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="px-6 py-2 text-right">
+            <x-select class="text-xs" wire:model="filter">
+                <option value="">Filter Building</option>
+                @foreach ($buildings as $building)
+                    <option value="{{ $building->id }}">{{ $building->name }} ({{ $building->code }})</option>
+                @endforeach
+            </x-select>
+        </div>
         <table class="min-w-full divide-y-2 divide-double">
             <thead class="bg-gray-100">
                 <tr>

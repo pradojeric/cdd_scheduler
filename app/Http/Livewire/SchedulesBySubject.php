@@ -99,11 +99,11 @@ class SchedulesBySubject extends Schedulers
         $roomsAvailable = resolve(ScheduleService::class)->getTimeSchedules($r, $get);
 
         return view('livewire.schedules-by-subject',[
-            'subjects' => Subject::termSubjects($this->config->term)->orderBy('code')->get()->unique('code'),
+            'subjects' => Subject::where('active', 1)->termSubjects($this->config->term)->orderBy('code')->get()->unique('code'),
             'faculties' => $faculties,
             'sections' => $sections,
             'buildings' => Building::all(),
-            'rooms' => $rooms->get(),
+            'rooms' => $rooms->orderBy('name')->get(),
             'timeRange' => $roomsAvailable,
             'days' => $this->dayNames,
         ]);

@@ -256,7 +256,7 @@ class SchedulesByCourse extends Schedulers
             $query->where('course_id', $this->selectedCourse);
         })->orderBy('year')->orderBy('block')->get();
 
-        $subjects = Subject::when($this->selectedSection, function ($query) use ($section){
+        $subjects = Subject::where('active', 1)->when($this->selectedSection, function ($query) use ($section){
             $query->where('year', $section->year)
                 ->where('term', $section->term)
                 ->where('course_id', $section->course_id);
@@ -328,7 +328,7 @@ class SchedulesByCourse extends Schedulers
             'faculties' => $faculties,
             'sections' => $sections,
             'subjects' => $subjects,
-            'rooms' => $rooms->get(),
+            'rooms' => $rooms->orderBy('name')->get(),
             'faculties' => $faculties,
             'blockSubjects' => $blockSubjects->subjects ?? [],
             'timeRange' => $roomsAvailable,

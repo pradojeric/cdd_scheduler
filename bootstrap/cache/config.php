@@ -3,7 +3,7 @@
   array (
     'name' => 'CDDScheduler',
     'env' => 'local',
-    'debug' => true,
+    'debug' => false,
     'url' => 'http://cdd-scheduler.test',
     'asset_url' => NULL,
     'timezone' => 'Asia/Manila',

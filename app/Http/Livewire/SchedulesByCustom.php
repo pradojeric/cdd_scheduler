@@ -75,7 +75,7 @@ class SchedulesByCustom extends Schedulers
             'faculties' => $faculties,
             'sections' => $sections,
             'buildings' => Building::all(),
-            'rooms' => $rooms->get(),
+            'rooms' => $rooms->orderBy('name')->get(),
             'timeRange' => $roomsAvailable,
             'days' => $this->dayNames,
         ]);

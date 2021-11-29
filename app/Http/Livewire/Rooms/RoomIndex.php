@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Rooms;
 
+use App\Models\Configurations\Building;
 use App\Models\Room;
 use Livewire\Component;
 use App\Services\RoomService;
@@ -24,6 +25,10 @@ class RoomIndex extends Component
     public $hours;
     public $pickedDays;
 
+    public $filter;
+
+    protected $queryString = ['filter'];
+
     public $rooms;
 
     public function mount()
@@ -32,6 +37,15 @@ class RoomIndex extends Component
 
         $this->pickedDays = collect($this->dayNames)
             ->mapWithKeys(fn ($day) => [$day => 0]);
+    }
+
+    public function updatedFilter($value)
+    {
+        $this->rooms = Room::when($value, function($query) use ($value){
+            $query->whereHas('building', function($query) use ($value){
+                $query->where('id', $value);
+            });
+        })->with(['building', 'roomType'])->orderBy('name')->get();
     }
 
     public function search()
@@ -54,6 +68,7 @@ class RoomIndex extends Component
         }
 
         return view('livewire.rooms.room-index', [
+            'buildings' => Building::all(),
             'days' => $this->dayNames,
         ]);
     }

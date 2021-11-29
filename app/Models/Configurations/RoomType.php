@@ -10,7 +10,7 @@ class RoomType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name', 'lab',
     ];
 
     public function setNameAttribute($value)

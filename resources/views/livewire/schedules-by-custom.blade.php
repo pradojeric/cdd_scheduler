@@ -76,7 +76,7 @@
                                 <x-select class="text-sm w-full" wire:model="selectedRoom">
                                     <option value="" selected>Select Room</option>
                                     @foreach ($rooms as $room)
-                                    <option value="{{ $room->id }}">{{ $room->name }} ({{ strtolower($room->roomType->name) }})</option>
+                                    <option value="{{ $room->id }}">{{ $room->name }} ({{ strtolower($room->roomType->name) }} ({{ $room->capacity }}))</option>
                                     @endforeach
                                 </x-select>
                             {{-- </div> --}}
