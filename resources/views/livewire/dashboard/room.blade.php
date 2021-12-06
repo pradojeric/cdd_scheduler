@@ -28,7 +28,7 @@
         @push('script')
         <script>
             var ctx = document.getElementById('roomChart');
-            var myChart = new Chart(ctx, {
+            var roomChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: {!! $labels !!},
@@ -69,8 +69,8 @@
 
             window.addEventListener('updateChart', event => {
 
-                myChart.data.datasets[0].data = event.detail.d;
-                myChart.update();
+                roomChart.data.datasets[0].data = event.detail.d;
+                roomChart.update();
             });
         </script>
         @endpush

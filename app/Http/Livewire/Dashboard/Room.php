@@ -72,7 +72,7 @@ class Room extends Component
             $unoccupied = ($total - $data)/$total * 100;
         }else{
             $occupied = 0;
-            $unoccupied = 0;
+            $unoccupied = 100;
         }
 
 

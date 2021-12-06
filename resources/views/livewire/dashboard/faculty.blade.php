@@ -22,7 +22,7 @@
     @push('script')
         <script>
             var ctx = document.getElementById('facultyChart');
-            var myChart = new Chart(ctx, {
+            var facultyChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
                     labels: {!! $labels !!},
@@ -61,10 +61,10 @@
                 }
             });
 
-            window.addEventListener('updateChart', event => {
+            window.addEventListener('updateFaculty', event => {
 
-                myChart.data.datasets[0].data = event.detail.d;
-                myChart.update();
+                facultyChart.data.datasets[0].data = event.detail.d;
+                facultyChart.update();
             });
         </script>
     @endpush

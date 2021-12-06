@@ -145,8 +145,7 @@ class Schedulers extends Component
             }
         }
 
-        if($errors)
-            return;
+        return $errors;
     }
 
     public function addSchedule()
@@ -168,7 +167,9 @@ class Schedulers extends Component
 
         if(!$this->override)
         {
-            $this->checkErrors();
+            $errors = $this->checkErrors();
+            if($errors)
+                return;
         }
 
         $isLab = false;
@@ -254,7 +255,7 @@ class Schedulers extends Component
             $timeScheds = collect([
                 'start' => $this->start,
                 'end' => $this->end,
-                'room_id' => $this->selectedRoom,
+                'room_id' => $this->selectedRoom == '' ? null : $this->selectedRoom,
                 'lab' => $isLab ?? false,
             ])->merge($this->pickedDays)->toArray();
 

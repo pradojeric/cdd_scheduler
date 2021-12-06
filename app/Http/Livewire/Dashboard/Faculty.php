@@ -30,15 +30,25 @@ class Faculty extends Component
             return $item->countUnits();
         });
 
-        $totalUnits = FacultyModel::all()->sum('rate');
+        $totalUnits = FacultyModel::when($this->selectedDepartment != '', function($query){
+            $query->where('department_id', $this->selectedDepartment);
+        })->get()->sum('rate');
 
-        $remaining = ($allRemaining / $totalUnits) * 100;
-        $used = ($usedUnits / $totalUnits) * 100;
+        if($totalUnits > 0) {
+
+            $remaining = ($allRemaining / $totalUnits) * 100;
+            $used = ($usedUnits / $totalUnits) * 100;
+        }else{
+            $remaining = 100;
+            $used = 0;
+        }
+
+
         $datasets = [ $used, $remaining ];
         $labels = ['Used Units', 'Remaining Units'];
 
 
-        $this->dispatchBrowserEvent('updateChart', ['d' => $datasets]);
+        $this->dispatchBrowserEvent('updateFaculty', ['d' => $datasets]);
 
         return view('livewire.dashboard.faculty', [
             'datasets' => json_encode($datasets),

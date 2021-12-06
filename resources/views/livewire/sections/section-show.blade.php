@@ -62,7 +62,7 @@
                                     @if ($item->schedules->first())
                                         <ul>
                                             @foreach (optional($item->schedules->first())->timeSchedules as $s)
-                                                <li>{{ $s->room->name }}</li>
+                                                <li>{{ optional($s->room)->name ?? 'No room' }}</li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -141,7 +141,7 @@
                                     @if ($customSubject->schedules->first())
                                         <ul>
                                             @foreach (optional($customSubject->schedules->first())->timeSchedules as $s)
-                                                <li>{{ $s->room->name }}</li>
+                                                <li>{{ optional($s->room)->name }}</li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -201,7 +201,7 @@
                                             {{ $time[$day]->schedule->section->section_name }}
                                         </div>
                                         <div>
-                                            {{ $time[$day]->room->name ?? "-" }}
+                                            {{ optional($time[$day]->room)->name ?? "-" }}
                                         </div>
                                         <div>
                                             {{ $time[$day]->schedule->faculty->name ?? "-" }}

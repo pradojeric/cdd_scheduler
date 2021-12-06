@@ -128,7 +128,7 @@
                                             @if ($item->schedules->first())
                                                 <ul>
                                                     @foreach (optional($item->schedules->first())->timeSchedules as $s)
-                                                        <li>{{ $s->room->name }}</li>
+                                                        <li>{{ optional($s->room)->name }}</li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -217,7 +217,7 @@
                                                     {{ $time[$day]->schedule->faculty->name ?? "-" }}
                                                 </div>
                                                 <div>
-                                                    {{ $time[$day]->room->name ?? "-" }}
+                                                    {{ optional($time[$day]->room)->name ?? "-" }}
                                                 </div>
                                             </td>
                                         @endif

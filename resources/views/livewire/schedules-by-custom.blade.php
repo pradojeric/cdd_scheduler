@@ -167,7 +167,7 @@
                                                     {{ $time[$day]->schedule->faculty->name ?? "-" }}
                                                 </div>
                                                 <div>
-                                                    {{ $time[$day]->room->name ?? "-" }}
+                                                    {{ optional($time[$day]->room)->name ?? "-" }}
                                                 </div>
                                             </td>
                                         @endif
