@@ -22,6 +22,8 @@ class TimeSchedule extends Model
         });
     }
 
+    protected $with = ['schedule.subject', 'room'];
+
     protected $fillable = [
         'room_id', 'schedule_id', 'start', 'end', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'lab',
     ];

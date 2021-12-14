@@ -210,45 +210,46 @@
                         <tr class="uppercase tracking-tighter border">
                             <th class="w-24">Time</th>
                             @foreach ($days as $i => $day)
-                            <th>{{ $day }}</th>
+                                <th>{{ $day }}</th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($timeRange as $i => $time)
-                        <tr class="border">
-                            <td class=" h-12 flex items-start justify-center">
-                                {{ $i }}
-                            </td>
-                            @foreach ($days as $day)
-                            @if(array_key_exists($day, $time) && $time[$day])
+                            <tr class="border">
+                                <td class=" h-12 flex items-start justify-center">
+                                    {{ $i }}
+                                </td>
+                                @foreach ($days as $day)
+                                    @if(array_key_exists($day, $time) && $time[$day])
 
-                            @if (strtotime($i) == strtotime($time[$day]->start))
-                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center"
-                                rowspan={{ $time[$day]->getBlockPer(30) }}>
-                                <div>
-                                    {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
-                                </div>
-                                <div class="truncate w-36 mx-1 italic">
-                                    {{ $time[$day]->schedule->subject->title }}
-                                </div>
-                                <div>
-                                    {{ $time[$day]->schedule->section->section_name }}
-                                </div>
-                                <div>
-                                    {{ optional($time[$day]->room)->name ?? "-" }}
-                                </div>
-                                <div>
-                                    {{ $time[$day]->schedule->faculty->name ?? "-" }}
-                                </div>
-                            </td>
-                            @endif
-                            @else
-                            <td>&nbsp</td>
-                            @endif
-                            @endforeach
-                        </tr>
+                                        @if (strtotime($i) == strtotime($time[$day]->start))
+                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center"
+                                                rowspan={{ $time[$day]->getBlockPer(30) }}>
+                                                <div>
+                                                    {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
+                                                </div>
+                                                <div class="truncate w-36 mx-1 italic">
+                                                    {{ $time[$day]->schedule->subject->title }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->section->section_name }}
+                                                </div>
+                                                <div>
+                                                    {{ optional($time[$day]->room)->name ?? "-" }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->faculty->name ?? "-" }}
+                                                </div>
+                                            </td>
+                                        @endif
+
+                                        @else
+                                            <td>&nbsp</td>
+                                    @endif
+                                @endforeach
+                            </tr>
                         @endforeach
 
                     </tbody>

@@ -18,11 +18,6 @@ class FacultyShow extends Component
 
     public function render()
     {
-        $r = TimeSchedule::whereHas('schedule', function($query){
-            $query->where('faculty_id', $this->faculty->id);
-        });
-
-        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
         $days = [
             'M' => 'monday',
             'T' => 'tuesday',
@@ -32,10 +27,17 @@ class FacultyShow extends Component
             'SAT' => 'saturday',
             'SUN' => 'sunday'
         ];
+        $r = TimeSchedule::whereHas('schedule', function($query){
+            $query->where('faculty_id', $this->faculty->id);
+        });
+
+        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
+
 
         return view('livewire.faculties.faculty-show', [
             'schedules' => $schedules,
             'days' => $days,
+            'r' => $r->get(),
         ]);
     }
 }

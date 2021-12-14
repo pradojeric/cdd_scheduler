@@ -132,4 +132,7 @@
             </div>
         </div>
     </div>
+    @foreach ($r as $i)
+        {{ $i->id }}
+    @endforeach
 </div>
