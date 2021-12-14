@@ -10,12 +10,16 @@ use App\Services\ScheduleService;
 class FacultyShow extends Component
 {
     public $faculty;
-    public $schedules;
-    public $days;
+    public $schedules = [];
+    public $days = [];
 
     public function mount(Faculty $faculty)
     {
         $this->faculty = $faculty;
+    }
+
+    public function init()
+    {
         $r = TimeSchedule::whereHas('schedule', function($query){
             $query->where('faculty_id', $this->faculty->id);
         });

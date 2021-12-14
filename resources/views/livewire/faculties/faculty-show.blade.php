@@ -37,7 +37,7 @@
                 @livewire('others.preferred-subjects', ['faculty' => $faculty])
             </div>
 
-            <div>
+            <div wire:init="init">
                 Schedules:
                 <table class="table w-full border">
                     <thead>
