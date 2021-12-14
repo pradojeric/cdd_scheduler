@@ -65,7 +65,6 @@
                     <option value="{{ $course->id }}">{{ $course->name }}</option>
                 @endforeach
             </x-select>
-
         </div>
         <div>
             <table class="min-w-full divide-y-2 divide-double" wire:target="deleteSection" wire:loading.class="inset-0 w-screen h-screen z-40 bg-blue-500">
@@ -86,32 +85,32 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    {{-- @foreach ($sections as $section)
-                        <tr wire:key="{{ $section->id }}">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->course->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->section_name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->graduating }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm flex space-x-2 justify-end">
-                                <a href="{{ route('sections.show', $section) }}" class="hover:text-gray-500">
-                                    <i class="fa fa-eye"></i>
-                                </a>
-                                <a href="#" wire:click.prevent="editSection({{ $section->id }})"
-                                    class="text-indigo-600 hover:text-indigo-900"><i class="fa fa-edit"></i></a>
-                                <a href="#" x-data x-on:click.prevent='
-                                        if(confirm("Are you sure about that?")){
-                                            $wire.deleteSection({{ $section }});
-                                        }
-                                    '
-                                    class="text-red-600 hover:text-red-900"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    @endforeach --}}
+                        {{-- @foreach ($sections as $section)
+                            <tr wire:key="{{ $section->id }}">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->course->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->section_name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->graduating }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm flex space-x-2 justify-end">
+                                    <a href="{{ route('sections.show', $section) }}" class="hover:text-gray-500">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="#" wire:click.prevent="editSection({{ $section->id }})"
+                                        class="text-indigo-600 hover:text-indigo-900"><i class="fa fa-edit"></i></a>
+                                    <a href="#" x-data x-on:click.prevent='
+                                            if(confirm("Are you sure about that?")){
+                                                $wire.deleteSection({{ $section }});
+                                            }
+                                        '
+                                        class="text-red-600 hover:text-red-900"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach --}}
                     @php
                         $row = 0;
                     @endphp
                     @foreach ($courses as $c)
                         <tr wire:key="{{ $c->id }}">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm w-1/6 border-r"
+                            <td class="px-6 py-4 whitespace-nowrap text-sm w-1/6 border-r "
                                 @php
                                     if($row != $c->id)
                                     {
@@ -119,7 +118,11 @@
                                         $row = $c->id;
                                     }
                                 @endphp
-                            >{{ $c->name }}</td>
+                            >
+                            <a href="{{ route('course.sections.show', $c) }}" class="text-indigo-500 hover:text-indigo-300">
+                                {{ $c->name }}
+                            </a>
+                            </td>
 
                             @foreach ($c->sections->sortBy('year') as $section)
 

@@ -138,7 +138,9 @@ class SectionIndex extends Component
         return view('livewire.sections.section-index', [
             'sections' => Section::with('course')->orderBy('course_id')->orderBy('year')->paginate($this->perPage),
             'allCourses' => Course::orderBy('name')->get(),
-            'courses' => Course::paginate($this->perPage),
+            'courses' => Course::when($this->filterCourse != '', function($query){
+                $query->where('id', $this->filterCourse);
+            })->paginate($this->perPage),
         ]);
     }
 }

@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/schedule/course', [ScheduleController::class, 'index'])->name('schedule.course');
         Route::get('/schedule/subject', [ScheduleController::class, 'bySubject'])->name('schedule.subject');
 
+        Route::get('/course/sections/{course}', [CourseController::class, 'showAllSections'])->name('course.sections.show');
+
     });
 
     Route::resource('faculties', FacultyController::class);

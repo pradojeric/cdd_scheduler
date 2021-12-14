@@ -121,4 +121,9 @@ class CourseController extends Controller
     {
         //
     }
+
+    public function showAllSections(Course $course)
+    {
+        return view('pages.sections.show-all-sections', compact('course'));
+    }
 }

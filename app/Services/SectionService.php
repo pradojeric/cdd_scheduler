@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Models\Section;
 use App\Models\Subject;
-use App\Models\Schedule;
-use App\Models\TimeSchedule;
 use App\Models\Configurations\Course;
 use App\Models\Configurations\Settings;
 
