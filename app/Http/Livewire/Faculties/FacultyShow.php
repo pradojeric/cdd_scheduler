@@ -47,9 +47,7 @@ class FacultyShow extends Component
                                 ->where('end', '>', $time);
                         })
                         ->where($day, 1)
-                        ->first();
-                if($exists)
-                    $a = $exists;
+                        ->dd();
 
                 $data[$day] = $exists;
             }
