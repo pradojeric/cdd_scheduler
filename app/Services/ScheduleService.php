@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Carbon\CarbonInterval;
-use App\Models\TimeSchedule;
 use Illuminate\Database\Eloquent\Builder;
 
 class ScheduleService

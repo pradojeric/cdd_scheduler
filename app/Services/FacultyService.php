@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Faculty;
-use Carbon\CarbonInterval;
 use App\Models\TimeSchedule;
 use App\Models\Configurations\Settings;
 use App\Models\Subject;

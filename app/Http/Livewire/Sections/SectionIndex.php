@@ -12,9 +12,10 @@ class SectionIndex extends Component
 {
     use WithPagination;
 
-    public $perPage = 25;
+    public $perPage = 15;
 
     public $section;
+    public $filterCourse = '';
 
     public $course = '';
     public $year = '';
@@ -39,6 +40,10 @@ class SectionIndex extends Component
         'course' => 'required',
         'year' => 'required',
         'graduating' => 'nullable'
+    ];
+
+    protected $queryString = [
+        'page'
     ];
 
     public function mount()
@@ -132,7 +137,8 @@ class SectionIndex extends Component
     {
         return view('livewire.sections.section-index', [
             'sections' => Section::with('course')->orderBy('course_id')->orderBy('year')->paginate($this->perPage),
-            'courses' => Course::all(),
+            'allCourses' => Course::orderBy('name')->get(),
+            'courses' => Course::paginate($this->perPage),
         ]);
     }
 }
