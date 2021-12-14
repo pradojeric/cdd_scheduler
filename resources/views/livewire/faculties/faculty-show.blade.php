@@ -132,5 +132,5 @@
             </div>
         </div>
     </div>
-    {{ var_dump($schedules) }}
+
 </div>
