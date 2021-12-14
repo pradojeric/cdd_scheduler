@@ -29,6 +29,7 @@ class ScheduleService
             if($get) {
                 foreach($this->dayNames as $day)
                 {
+                    $time->toTimeString();
                     $exists = (clone $r)->where(function($query) use ($time){
                                 $query->where('start', '<=', $time)
                                     ->where('end', '>', $time);
