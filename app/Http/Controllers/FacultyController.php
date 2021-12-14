@@ -109,9 +109,7 @@ class FacultyController extends Controller
             $query->where('faculty_id', $faculty->id);
         });
 
-        // $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
-
-        $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '20:00');
+        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
         $days = [
             'M' => 'monday',
             'T' => 'tuesday',
@@ -121,31 +119,6 @@ class FacultyController extends Controller
             'SAT' => 'saturday',
             'SUN' => 'sunday'
         ];
-        $data = [];
-        foreach($timeRange as $time)
-        {
-            $t = $time->format('h:i A');
-
-
-            foreach($days as $day)
-            {
-                $exists = (clone $r)->where(function($query) use ($time){
-                            $query->where('start', '<=', $time)
-                                ->where('end', '>', $time);
-                        })
-                        ->where($day, 1)
-                        ->first();
-
-                $data[$day] = $exists;
-            }
-
-
-            $roomsAvailable["$t"] = $data;
-        }
-
-        $schedules = $roomsAvailable;
-
-
 
         return view('pages.faculties.show', compact('faculty', 'schedules', 'days'));
     }
