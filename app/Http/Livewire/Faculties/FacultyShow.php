@@ -49,7 +49,7 @@ class FacultyShow extends Component
                                 ->where('end', '>', $time);
                         })
                         ->where($day, 1)
-                        ->first();
+                        ->dd();
 
                 $data[$day] = $exists;
             }
