@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\Others\PreferredSubjects;
+use App\Services\ScheduleService;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Configurations\Department;
-use App\Services\ScheduleService;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Livewire\Others\PreferredSubjects;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Faculty extends Model
@@ -15,6 +16,18 @@ class Faculty extends Model
     protected $fillable = [
         'code', 'department_id', 'first_name', 'middle_name', 'last_name', 'rate', 'status', 'user_id'
     ];
+
+        /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope('ancient', function (Builder $builder) {
+            $builder->orderBy('last_name');
+        });
+    }
 
     public function setCodeAttribute($value)
     {

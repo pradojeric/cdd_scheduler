@@ -14,9 +14,7 @@ class FacultyShow extends Component
     public function mount(Faculty $faculty)
     {
         $this->faculty = $faculty;
-
     }
-
 
     public function render()
     {
