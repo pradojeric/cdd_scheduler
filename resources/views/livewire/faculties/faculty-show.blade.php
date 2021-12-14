@@ -132,9 +132,4 @@
             </div>
         </div>
     </div>
-    <ul class="list-disc">
-        @foreach ($r as $i)
-            <li>{{ var_dump($i) }}</li>
-        @endforeach
-    </ul>
 </div>
