@@ -60,7 +60,7 @@ class FacultyShow extends Component
         return view('livewire.faculties.faculty-show', [
             'schedules' => $schedules,
             'days' => $days,
-            'r' => $a,
+            'r' => $roomsAvailable,
         ]);
     }
 }
