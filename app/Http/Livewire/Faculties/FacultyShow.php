@@ -35,8 +35,6 @@ class FacultyShow extends Component
             'SUN' => 'sunday'
         ];
 
-        dd($schedules);
-
         return view('livewire.faculties.faculty-show', [
             'schedules' => $schedules,
             'days' => $days,
