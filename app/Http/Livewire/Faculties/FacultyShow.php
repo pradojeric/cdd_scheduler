@@ -38,13 +38,14 @@ class FacultyShow extends Component
         $data = [];
         foreach($timeRange as $time)
         {
+
             $t = $time->format('h:i A');
 
             foreach($days as $day)
             {
                 $exists = (clone $r)->where(function($query) use ($time){
-                            $query->where('start', '<=', $time)
-                                ->where('end', '>', $time);
+                            $query->where('start', '<=', $time->toTimeString())
+                                ->where('end', '>', $time->toTimeString());
                         })
                         ->where($day, 1)
                         ->first();
