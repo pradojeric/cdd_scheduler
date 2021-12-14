@@ -105,22 +105,22 @@ class FacultyController extends Controller
         //
         $this->authorize('view-schedule', $faculty);
 
-        $r = TimeSchedule::whereHas('schedule', function($query) use ($faculty){
-            $query->where('faculty_id', $faculty->id);
-        });
+        // $r = TimeSchedule::whereHas('schedule', function($query) use ($faculty){
+        //     $query->where('faculty_id', $faculty->id);
+        // });
 
-        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
-        $days = [
-            'M' => 'monday',
-            'T' => 'tuesday',
-            'W' => 'wednesday',
-            'TH' => 'thursday',
-            'F' => 'friday',
-            'SAT' => 'saturday',
-            'SUN' => 'sunday'
-        ];
+        // $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
+        // $days = [
+        //     'M' => 'monday',
+        //     'T' => 'tuesday',
+        //     'W' => 'wednesday',
+        //     'TH' => 'thursday',
+        //     'F' => 'friday',
+        //     'SAT' => 'saturday',
+        //     'SUN' => 'sunday'
+        // ];
 
-        return view('pages.faculties.show', compact('faculty', 'schedules', 'days'));
+        return view('pages.faculties.show', compact('faculty'));
     }
 
     /**
