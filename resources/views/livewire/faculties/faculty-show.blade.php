@@ -132,7 +132,5 @@
             </div>
         </div>
     </div>
-    @foreach ($r as $i)
-        {{ $i->id }}
-    @endforeach
+    {{ var_dump($schedules) }}
 </div>
