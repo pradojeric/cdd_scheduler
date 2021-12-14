@@ -31,7 +31,7 @@
                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl">
                     <div class="bg-gray-200">
                         <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <span class="uppercase font-bold">{{ _('Add Faculty for') }} {{ $schedule->subject->title }} {{ "({$schedule->section->section_name})" }}</span>
+                            <span class="uppercase font-bold">{{ __('Add Faculty for') }} {{ $schedule->subject->title }} {{ "({$schedule->section->section_name})" }}</span>
                         </div>
 
                     </div>
@@ -64,7 +64,7 @@
                                                 <a href="#" class="w-full" wire:click.prevent="selectFaculty({{ $suggested }})">
                                                     <li class="w-full my-1 px-3 py-2  rounded-lg shadow-md text-white
                                                         {{ $suggested->hasNoUnits() ? 'bg-red-500 hover:bg-red-300' : 'bg-green-500 hover:bg-green-300' }}">
-                                                        {{ $suggested->name }} (RU: {{ $faculty->countRemainingUnits() }})
+                                                        {{ $suggested->name }} (RU: {{ $suggested->countRemainingUnits() }})
                                                     </li>
                                                 </a>
                                             @endforeach
@@ -146,7 +146,7 @@
                             class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                             Cancel
                         </button>
-                        <x-label for="override" :value="_('Override')" />
+                        <x-label for="override" :value="__('Override')" />
                         <x-input type="checkbox" id="override" wire:model="override" value="1" />
                     </div>
                 </div>

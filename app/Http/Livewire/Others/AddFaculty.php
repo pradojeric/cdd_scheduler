@@ -103,7 +103,7 @@ class AddFaculty extends Component
         $faculties = Faculty::query();
 
         $faculties->when($this->search != '', function($query){
-            $query->whereRaw("UPPER(name) LIKE '%". strtoupper($this->search) ."%'");
+            $query->whereRaw("UPPER(last_name) LIKE '%". strtoupper($this->search) ."%'");
         })->orderBy('last_name');
 
         return view('livewire.others.add-faculty', [
