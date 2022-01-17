@@ -64,7 +64,7 @@
                                             {{ $list->time }} {{ $list->lab ? '(LAB)' : '' }}
                                         </span>
                                         <span>
-                                            {{ $list->room->name }}
+                                            {{ optional($list->room)->name ?? 'No Room' }}
                                         </span>
                                     </div>
                                 @endforeach
