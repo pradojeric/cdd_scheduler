@@ -110,8 +110,8 @@ class SchedulesByCourse extends Schedulers
         $roomsAvailable = resolve(ScheduleService::class)->getTimeSchedules($r, $get);
 
         return view('livewire.schedules-by-course',[
-            'courses' => Course::all(),
-            'buildings' => Building::all(),
+            'courses' => Course::orderBy('name')->get(),
+            'buildings' => Building::orderBy('name')->get(),
             'faculties' => $faculties,
             'sections' => $sections,
             'subjects' => $subjects,

@@ -74,7 +74,7 @@ class SchedulesByCustom extends Schedulers
             'subjects' => Subject::orderBy('code')->get()->unique('code'),
             'faculties' => $faculties,
             'sections' => $sections,
-            'buildings' => Building::all(),
+            'buildings' => Building::orderBy('name')->get(),
             'rooms' => $rooms->orderBy('name')->get(),
             'timeRange' => $roomsAvailable,
             'days' => $this->dayNames,

@@ -64,7 +64,7 @@ class Courses extends Component
     public function render()
     {
         return view('livewire.admin.courses', [
-            'courses' => Course::all(),
+            'courses' => Course::orderBy('name')->get(),
             'departments' => Department::orderBy('name')->get(),
         ]);
     }

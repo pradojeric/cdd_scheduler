@@ -56,9 +56,19 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $course->code }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-right">
                         <a href="{{ route('courses.show', $course) }}"
-                            class="text-indigo-600 hover:text-indigo-900">View</a>
+                            class="text-indigo-600 hover:text-indigo-900">
+                            <i class="fa fa-eye"></i>
+                        </a>
                         <a href="#" wire:click.prevent="editCourse({{ $course }})"
-                            class="text-green-600 hover:text-green-900 ml-2">Edit</a>
+                            class="text-green-600 hover:text-green-900 ml-2">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        @role('superadmin')
+                        <a href="#" wire:click.prevent="deleteCourse({{ $course }})"
+                            class="text-red-600 hover:text-red-900 ml-2">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                        @endrole
                     </td>
                 </tr>
                 @endforeach
