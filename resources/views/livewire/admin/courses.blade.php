@@ -64,10 +64,10 @@
                             <i class="fa fa-edit"></i>
                         </a>
                         @role('superadmin')
-                        <a href="#" wire:click.prevent="deleteCourse({{ $course }})"
-                            class="text-red-600 hover:text-red-900 ml-2">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                            <a href="#" wire:click.prevent="deleteCourse({{ $course }})"
+                                class="text-red-600 hover:text-red-900 ml-2">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         @endrole
                     </td>
                 </tr>
