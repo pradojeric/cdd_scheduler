@@ -60,6 +60,11 @@ class Subject extends Model
         return $query->where('term', $term)->where('year', $year);
     }
 
+    public function scopeTermSubjects($query, $term)
+    {
+        return $query->where('term', $term);
+    }
+
     public function curriculum()
     {
         return $this->belongsTo(Curriculum::class);

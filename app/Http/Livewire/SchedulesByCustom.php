@@ -43,7 +43,10 @@ class SchedulesByCustom extends Schedulers
         }
 
         $sections = Section::orderBy('course_id')->orderBy('year')->orderBy('term')->orderBy('block')->get();
-        $faculties = Faculty::active()->get();
+        $faculties = Faculty::with([
+            'schedules',
+            'schedules.subject'
+        ])->active()->get();
 
 
         if($this->gridReport == 'faculty')

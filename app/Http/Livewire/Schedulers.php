@@ -64,7 +64,7 @@ class Schedulers extends Component
 
     public function mount()
     {
-        $this->config = Settings::first();
+        $this->config = Settings::getSettings();
         $this->resetDay();
         $this->pickedDays = collect($this->dayNames)
             ->mapWithKeys(fn ($day) => [$day => 0]);
