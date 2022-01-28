@@ -48,7 +48,7 @@ class SectionIndex extends Component
 
     public function mount()
     {
-        $this->config = Settings::first();
+        $this->config = Settings::getSettings();
     }
 
     public function massCreateSections()
@@ -138,7 +138,7 @@ class SectionIndex extends Component
         return view('livewire.sections.section-index', [
             'sections' => Section::with('course')->orderBy('course_id')->orderBy('year')->paginate($this->perPage),
             'allCourses' => Course::orderBy('name')->get(),
-            'courses' => Course::when($this->filterCourse != '', function($query){
+            'courses' => Course::with(['sections', 'sections.course'])->when($this->filterCourse != '', function($query){
                 $query->where('id', $this->filterCourse);
             })->paginate($this->perPage),
         ]);

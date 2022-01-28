@@ -11,28 +11,21 @@ class Faculty extends Component
 {
     public $selectedDepartment;
 
-    public function mount()
-    {
-        $this->config = Settings::first();
-    }
-
     public function render()
     {
-        $allRemaining = FacultyModel::when($this->selectedDepartment != '', function($query){
+        $faculties = FacultyModel::with(['schedules', 'schedules.subject'])->when($this->selectedDepartment != '', function($query){
             $query->where('department_id', $this->selectedDepartment);
-        })->get()->sum(function($item){
+        })->get();
+
+        $allRemaining = $faculties->sum(function($item){
             return $item->countRemainingUnits();
         });
 
-        $usedUnits = FacultyModel::when($this->selectedDepartment != '', function($query){
-            $query->where('department_id', $this->selectedDepartment);
-        })->get()->sum(function($item){
+        $usedUnits = $faculties->sum(function($item){
             return $item->countUnits();
         });
 
-        $totalUnits = FacultyModel::when($this->selectedDepartment != '', function($query){
-            $query->where('department_id', $this->selectedDepartment);
-        })->get()->sum('rate');
+        $totalUnits = $faculties->sum('rate');
 
         if($totalUnits > 0) {
 
@@ -42,7 +35,6 @@ class Faculty extends Component
             $remaining = 100;
             $used = 0;
         }
-
 
         $datasets = [ $used, $remaining ];
         $labels = ['Used Units', 'Remaining Units'];

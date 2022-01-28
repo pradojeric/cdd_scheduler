@@ -14,14 +14,17 @@ class Schedule extends Model
     protected static function booted()
     {
         static::addGlobalScope('current_sy', function (Builder $builder) {
-            $builder->where('school_year', Settings::first()->getRawOriginal('school_year'))
-                ->where('term', Settings::first()->term);
+            $builder->where('school_year', Settings::getSettings()->getRawOriginal('school_year'))
+                ->where('term', Settings::getSettings()->term);
         });
     }
 
     protected $fillable = [
         'room_id', 'section_id', 'subject_id', 'faculty_id', 'school_year', 'term',
     ];
+
+    protected $with = ['timeSchedules', 'faculty'];
+
 
     public function timeSchedules()
     {

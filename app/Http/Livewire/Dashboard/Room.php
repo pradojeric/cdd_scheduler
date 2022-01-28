@@ -29,7 +29,6 @@ class Room extends Component
 
     public function mount()
     {
-        $this->config = Settings::first();
         $this->pickedDays = collect($this->dayNames)
             ->mapWithKeys(fn ($day) => [$day => 0]);
     }

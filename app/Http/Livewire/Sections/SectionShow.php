@@ -64,15 +64,16 @@ class SectionShow extends Component
 
     public function render()
     {
-        $blockSubjects = resolve(SectionService::class)->getSubjects($this->section);
-        $customSubjects = Subject::with([
-                'schedules',
-                'schedules.timeSchedules'
-            ])->whereHas('schedules', function($query){
-                $query->where('section_id', $this->section->id);
-            }
-        )->whereNotIn('id', $blockSubjects->subjects->pluck('id'))
-        ->get();
+        // $blockSubjects = resolve(SectionService::class)->getSubjects($this->section);
+
+        // $customSubjects = Subject::with([
+        //         'schedules',
+        //         'schedules.timeSchedules'
+        //     ])->whereHas('schedules', function($query){
+        //         $query->where('section_id', $this->section->id);
+        //     }
+        // )->whereNotIn('id', $blockSubjects->subjects->pluck('id'))
+        // ->get();
 
         $r = TimeSchedule::with([
                 'schedule',
@@ -84,10 +85,12 @@ class SectionShow extends Component
         $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
 
         return view('livewire.sections.section-show', [
-            'blockSubjects' => $blockSubjects->subjects ?? [],
+            // 'blockSubjects' => $blockSubjects->subjects ?? [],
+            'blockSubjects' => $this->section->getBlockSubjects() ?? [],
             'days' => $this->dayNames,
             'schedules' => $schedules,
-            'customSubjects' => $customSubjects ?? [],
+            // 'customSubjects' => $customSubjects ?? [],
+            'customSubjects' => $this->section->getCustomSubjects() ?? [],
         ]);
     }
 }

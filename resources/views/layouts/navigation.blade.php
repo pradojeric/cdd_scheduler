@@ -31,6 +31,9 @@
                         <x-nav-link :href="route('faculties.index')" :active="request()->routeIs('faculties*')">
                             {{ __('Faculties') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('reports')" :active="request()->routeIs('reports*')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
                     @endrole
                 </div>
             </div>

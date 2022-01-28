@@ -27,6 +27,7 @@ class ScheduleService
             $t = $time->format('h:i A');
 
             if($get) {
+
                 foreach($this->dayNames as $day)
                 {
                     $exists = (clone $r)->where(function($query) use ($time){

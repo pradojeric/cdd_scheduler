@@ -6,6 +6,7 @@ use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Configurations\Course;
 use App\Models\Configurations\Settings;
+use Illuminate\Support\Facades\DB;
 
 class SectionService
 {
@@ -23,21 +24,21 @@ class SectionService
 
     public function __construct()
     {
-        $this->config = Settings::first();
+        $this->config = Settings::getSettings();
     }
 
     public function getSubjects(Section $section)
     {
         return Course::with([
-            'subjects' => function($query) use ($section){
+            'subjects' => function ($query) use ($section){
                 $query->where('year', $section->year)
                     ->where('term', $section->term)
                     ->where('active', true);
             },
-            'subjects.schedules' => function($query) use ($section){
+            'subjects.schedules' => function ($query) use ($section){
                 $query->where('section_id', $section->id);
             },
-            'subjects.schedules.section' => function($query) {
+            'subjects.schedules.section' => function ($query) {
                 $query->where('school_year', $this->config->getRawOriginal('school_year'));
             },
         ])

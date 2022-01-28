@@ -26,11 +26,11 @@ class Department extends Model
 
     public function courses()
     {
-        return $this->hasMany(Course::class);
+        return $this->hasMany(Course::class)->orderBy('name');
     }
 
     public function faculties()
     {
-        return $this->hasMany(Faculty::class);
+        return $this->hasMany(Faculty::class)->orderBy('last_name');
     }
 }

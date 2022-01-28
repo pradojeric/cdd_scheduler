@@ -17,8 +17,8 @@ class CourseController extends Controller
     public function index()
     {
         //
-        $courses = Course::orderBy('name')->get();
-        return view('pages.configurations.courses.index', compact('courses'));
+
+        return view('pages.configurations.courses.index');
     }
 
     /**

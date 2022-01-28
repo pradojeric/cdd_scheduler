@@ -2,8 +2,9 @@
 
 namespace App\Models\Configurations;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Settings extends Model
 {
@@ -40,5 +41,33 @@ class Settings extends Model
         }
 
         return "{$this->getRawOriginal('school_year')}, {$term}";
+    }
+
+    public static function getSettings()
+    {
+        return Cache::rememberForever('settings.all', function() {
+            return self::first();
+        });
+    }
+
+    /**
+     * Flush the cache
+     */
+    public static function flushCache()
+    {
+        Cache::forget('settings.all');
+    }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::updated(function () {
+            self::flushCache();
+        });
+
     }
 }

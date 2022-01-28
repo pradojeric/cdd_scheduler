@@ -69,6 +69,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/change-password', [SettingsController::class, 'changePassword'])->name('password.change');
     Route::post('/change-password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
 
+    Route::get('/reports', \App\Http\Livewire\Reports\Index::class)->name('reports');
+
 });
 
 require __DIR__.'/auth.php';

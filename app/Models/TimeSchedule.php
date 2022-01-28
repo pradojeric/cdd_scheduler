@@ -16,13 +16,13 @@ class TimeSchedule extends Model
     {
         static::addGlobalScope('current_sy', function (Builder $builder) {
             $builder->whereHas('schedule', function($query){
-                $query->where('school_year', Settings::first()->getRawOriginal('school_year'))
-                    ->where('term', Settings::first()->term);
+                $query->where('school_year', Settings::getSettings()->getRawOriginal('school_year'))
+                    ->where('term', Settings::getSettings()->term);
             });
         });
     }
 
-    protected $with = ['schedule.subject', 'room'];
+    protected $with = ['room'];
 
     protected $fillable = [
         'room_id', 'schedule_id', 'start', 'end', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'lab',

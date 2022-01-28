@@ -17,7 +17,12 @@ class Subject extends Model
 
     public function setCodeAttribute($value)
     {
-        $this->attributes['code'] = strtoupper($value);
+        $this->attributes['code'] = str_replace(' ', '', strtoupper($value));
+    }
+
+    public function getCodeAttribute()
+    {
+        return str_replace(' ', '', strtoupper($this->attributes['code']));
     }
 
     public function setTitleAttribute($value)
@@ -50,9 +55,9 @@ class Subject extends Model
         return $query->where('active', true);
     }
 
-    public function scopeTermSubjects($query, $term)
+    public function scopeTerm($query, $year, $term)
     {
-        return $query->where('term', $term);
+        return $query->where('term', $term)->where('year', $year);
     }
 
     public function curriculum()

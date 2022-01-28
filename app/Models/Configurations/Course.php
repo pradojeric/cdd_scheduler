@@ -32,7 +32,7 @@ class Course extends Model
 
     public function sections()
     {
-        return $this->hasMany(Section::class);
+        return $this->hasMany(Section::class)->orderBy('course_id')->orderBy('year');
     }
 
     public function subjects()
