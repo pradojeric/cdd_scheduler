@@ -52,7 +52,7 @@
 
                                     @foreach ($course->sections as $section)
                                         <div class="mt-2">
-                                            <a href="{{ route('sections.show', $section) }}" class="text-indigo-500 hover:text-indigo-700">
+                                            <a href="{{ route('sections.show', $section) }}" class="text-blue-500 hover:text-blue-700 underline">
                                                 {{ $section->section_name }}
                                             </a>
                                             <div class="text-sm">
@@ -183,8 +183,10 @@
                                     @if(!$faculty->status)
                                         @continue
                                     @endif
-                                    <div class="mt-2">
-                                        {{ $faculty->name }}
+                                    <div class="mt-2 uppercase">
+                                        <a href="{{ route('faculties.show', $faculty) }}" class="text-blue-500 hover:text-blue-700 underline">
+                                            {{ $faculty->name }}
+                                        </a>
                                     </div>
                                     <div>
                                         Units: <span class="{{ $faculty->hasNoUnits() ? 'text-red-500' : 'text-green-500' }}">{{ $faculty->countRemainingUnits() }}</span> ({{ $faculty->rate }})
@@ -259,12 +261,13 @@
         </div>
     </div>
 
-    <div x-data class="relative" wire:loading.remove>
 
-        <div class="absolute bottom-5 right-5">
+    <div class="sticky bottom-0" wire:loading.remove x-data >
+        <div class="flex justify-end p-5">
             <x-button type="button" @click="scrollTo({top: 0, behavior: 'smooth'})" class="h-16 w-16">Top</x-button>
         </div>
     </div>
+
 
 </div>
 

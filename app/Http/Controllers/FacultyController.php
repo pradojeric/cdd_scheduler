@@ -54,8 +54,8 @@ class FacultyController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
-            'email' => 'email|required',
+            'name' => 'required|unique:users,name',
+            'email' => 'email|required|unique:users,email',
             'code' => 'required',
             'first_name' => 'required',
             'middle_name' => 'nullable',
@@ -105,21 +105,6 @@ class FacultyController extends Controller
         //
         $this->authorize('view-schedule', $faculty);
 
-        // $r = TimeSchedule::whereHas('schedule', function($query) use ($faculty){
-        //     $query->where('faculty_id', $faculty->id);
-        // });
-
-        // $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
-        // $days = [
-        //     'M' => 'monday',
-        //     'T' => 'tuesday',
-        //     'W' => 'wednesday',
-        //     'TH' => 'thursday',
-        //     'F' => 'friday',
-        //     'SAT' => 'saturday',
-        //     'SUN' => 'sunday'
-        // ];
-
         return view('pages.faculties.show', compact('faculty'));
     }
 
@@ -147,7 +132,7 @@ class FacultyController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:users,name,'.$faculty->user->id,
             'email' => 'email|required|unique:users,email,'.$faculty->user->id,
             'code' => 'required',
             'first_name' => 'required',

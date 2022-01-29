@@ -28,7 +28,11 @@ class FacultyShow extends Component
             'SAT' => 'saturday',
             'SUN' => 'sunday'
         ];
-        $r = TimeSchedule::whereHas('schedule', function($query){
+        $r = TimeSchedule::with([
+            'schedule',
+            'schedule.subject',
+            'schedule.section',
+        ])->whereHas('schedule', function($query){
             $query->where('faculty_id', $this->faculty->id);
         });
 

@@ -51,7 +51,7 @@ class SchedulesByCustom extends Schedulers
 
         if($this->gridReport == 'faculty')
         {
-            $r = TimeSchedule::whereHas('schedule', function($query) {
+            $r = TimeSchedule::with(['schedule.faculty', 'schedule.subject', 'schedule.section'])->whereHas('schedule', function($query) {
                 $query->where('faculty_id', $this->selectedFaculty);
             });
             $get = $this->selectedFaculty;
@@ -59,13 +59,13 @@ class SchedulesByCustom extends Schedulers
 
         if($this->gridReport == 'room')
         {
-            $r = TimeSchedule::where('room_id', $this->selectedRoom);
+            $r = TimeSchedule::with(['schedule.faculty', 'schedule.subject', 'schedule.section'])->where('room_id', $this->selectedRoom);
             $get = $this->selectedRoom;
         }
 
         if($this->gridReport == 'section')
         {
-            $r = TimeSchedule::whereHas('schedule', function($query) {
+            $r = TimeSchedule::with(['schedule.faculty', 'schedule.subject', 'schedule.section'])->whereHas('schedule', function($query) {
                 $query->where('section_id', $this->selectedSection);
             });
             $get = $this->selectedSection;
