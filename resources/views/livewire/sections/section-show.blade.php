@@ -191,10 +191,8 @@
 
                                         @if (strtotime($i) == strtotime($time[$day]->start))
 
-                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center">
-                                                <div>
-                                                    {{ $day }}
-                                                </div>
+                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center" rowspan={{ $time[$day]->getBlockPer(30) }}>
+
                                                 <div>
                                                     {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
                                                 </div>
