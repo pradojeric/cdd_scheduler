@@ -180,20 +180,25 @@ class UpdateTimeSchedule extends Component
         if($this->timeSchedule){
             if($this->gridReport == 'room')
             {
-                $r = TimeSchedule::where('room_id', $this->selectedRoom);
                 $get = $this->selectedRoom;
+                $r = TimeSchedule::where('room_id', $get);
+
             }
 
             if($this->gridReport == 'section')
             {
-                $r = TimeSchedule::whereHas('schedule', function($query) {
-                    $query->where('section_id', $this->timeSchedule->schedule->section_id);
-                });
                 $get = $this->timeSchedule->schedule->section_id;
+
+                $r = TimeSchedule::whereHas('schedule', function($query) use ($get) {
+                    $query->where('section_id', $get);
+                });
+
 
             }
 
             $roomsAvailable = resolve(ScheduleService::class)->getTimeSchedules($r, $get);
+
+
         }
 
         $rooms = Room::query();
@@ -208,6 +213,7 @@ class UpdateTimeSchedule extends Component
                 $query->where('id', $this->selectedBuilding);
             });
         }
+
 
         return view('livewire.others.update-time-schedule', [
             'timeRange' => $roomsAvailable,

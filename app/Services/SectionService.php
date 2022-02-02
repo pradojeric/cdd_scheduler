@@ -97,7 +97,7 @@ class SectionService
     {
         $hours = 0;
 
-        if($schedule != null) {
+        if($schedule != null && $schedule->timeSchedules->count() > 1) {
             if($schedule->load(['timeSchedules']))
             {
                 $timeArrays = $schedule->timeSchedules->toQuery()->where('lab', $lab)

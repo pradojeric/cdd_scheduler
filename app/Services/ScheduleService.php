@@ -35,6 +35,7 @@ class ScheduleService
                                     ->where('end', '>', $time->toTimeString());
                             })
                             ->where($day, 1)
+                            ->orderBy('start')
                             ->first();
 
                     $data[$day] = $exists;

@@ -187,34 +187,39 @@
                                     {{ $i }}
                                 </td>
                                 @foreach ($days as $day)
-                            @if(array_key_exists($day, $time) && $time[$day])
+                                    @if(array_key_exists($day, $time) && $time[$day])
 
-                                @if (strtotime($i) == strtotime($time[$day]->start))
-                                    <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center" rowspan={{ $time[$day]->getBlockPer(30) }}>
-                                        <div>
-                                            {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
-                                        </div>
-                                        <div class="truncate w-36 mx-1 italic">
-                                            {{ $time[$day]->schedule->subject->title }}
-                                        </div>
-                                        <div>
-                                            {{ $time[$day]->schedule->section->section_name }}
-                                        </div>
-                                        <div>
-                                            {{ optional($time[$day]->room)->name ?? "-" }}
-                                        </div>
-                                        <div>
-                                            {{ $time[$day]->schedule->faculty->name ?? "-" }}
-                                        </div>
-                                    </td>
-                                @endif
+                                        @if (strtotime($i) == strtotime($time[$day]->start))
 
-                            @else
-                                <td>&nbsp</td>
-                            @endif
-                        @endforeach
+                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center">
+                                                <div>
+                                                    {{ $day }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
+                                                </div>
+                                                <div class="truncate w-36 mx-1 italic">
+                                                    {{ $time[$day]->schedule->subject->title }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->section->section_name }}
+                                                </div>
+                                                <div>
+                                                    {{ optional($time[$day]->room)->name ?? "-" }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->faculty->name ?? "-" }}
+                                                </div>
+                                            </td>
+                                        @endif
+
+                                    @else
+                                        <td>&nbsp</td>
+                                    @endif
+                                @endforeach
                             </tr>
                         @endforeach
+
 
                     </tbody>
                 </table>
