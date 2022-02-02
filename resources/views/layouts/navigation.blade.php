@@ -82,6 +82,9 @@
                                 <x-dropdown-link :href="route('settings.roles-permissions')">
                                     {{ __('Roles and Permissions') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link :href="route('api.tokens')">
+                                    {{ __('Tokens') }}
+                                </x-dropdown-link>
                             @endrole
                         @endrole
                         <x-dropdown-link :href="route('password.change')">

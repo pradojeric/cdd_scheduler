@@ -15,6 +15,7 @@ use App\Http\Controllers\Configurations\DepartmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Admin\ApiTokens;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/test', function () {
+    $response = Http::get('http://cdd-scheduler.test/api/v1/get-schedules');
+
+    dd($response->json());
+});
 
 Route::middleware(['auth'])->group(function(){
 
@@ -42,6 +48,8 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/backup/create', [BackupController::class, 'create'])->name('backup.create');
         Route::get('/backup/download/{file_name}', [BackupController::class, 'download'])->name('backup.download');
         Route::get('/backup/delete/{file_name}', [BackupController::class, 'delete'])->name('backup.delete');
+
+        Route::get('/api-tokens', ApiTokens::class)->name('api.tokens');
     });
 
     Route::middleware(['role:superadmin|admin'])->group(function(){

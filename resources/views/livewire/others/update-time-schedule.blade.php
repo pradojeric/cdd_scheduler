@@ -31,7 +31,7 @@
                 <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-7xl">
                     <div class="bg-gray-200">
                         <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <span class="uppercase font-bold">{{ _('Update Schedule') }} </span>
+                            <span class="uppercase font-bold">{{ __('Update Schedule') }} </span>
                         </div>
 
                     </div>
@@ -122,11 +122,11 @@
                                 </div>
                                 <div>
                                     <x-input type="radio" wire:model.lazy="gridReport" name="gridReport" value="room" id="room" />
-                                    <label for="room" class="text-sm" >{{ _('Room') }}</label>
+                                    <label for="room" class="text-sm" >{{ __('Room') }}</label>
                                 </div>
                                 <div>
                                     <x-input type="radio" wire:model.lazy="gridReport" name="gridReport" value="section" id="section" />
-                                    <label for="section" class="text-sm" >{{ _('Section') }}</label>
+                                    <label for="section" class="text-sm" >{{ __('Section') }}</label>
                                 </div>
                             </div>
 
@@ -192,7 +192,7 @@
                         <div class="flex justify-end">
                             <div class="flex items-center space-x-2 ml-5">
                                 <x-input type="checkbox" id="override" wire:model="override" value="1" />
-                                <x-label for="override" :value="_('Override')" />
+                                <x-label for="override" :value="__('Override')" />
                             </div>
                         </div>
                     </div>
