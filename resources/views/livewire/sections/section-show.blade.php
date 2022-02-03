@@ -170,7 +170,7 @@
 
             <div class="w-full overflow-x-auto mt-5">
                 Grid Report:
-                <table class="border min-w-full">
+                {{-- <table class="border min-w-full">
                     <thead>
                         <tr class="uppercase tracking-tighter border">
                             <th class="w-24">Time</th>
@@ -191,7 +191,8 @@
 
                                         @if (strtotime($i) == strtotime($time[$day]->start))
 
-                                            <td class="bg-blue-500 border-white border text-xs text-white w-36 text-center" rowspan={{ $time[$day]->getBlockPer(30) }}>
+                                            <td class="bg-blue-500 px-1 border text-xs text-white w-36 text-center"
+                                                rowspan={{ $time[$day]->getBlockPer(30) }} >
 
                                                 <div>
                                                     {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
@@ -206,8 +207,9 @@
                                                     {{ optional($time[$day]->room)->name ?? "-" }}
                                                 </div>
                                                 <div>
-                                                    {{ $time[$day]->schedule->faculty->name ?? "-" }}
+                                                    {{ optional($time[$day]->schedule->faculty)->name ?? "-" }}
                                                 </div>
+
                                             </td>
                                         @endif
 
@@ -220,7 +222,110 @@
 
 
                     </tbody>
-                </table>
+                </table> --}}
+
+                <div class="w-full">
+                    <div class="flex justify-around uppercase tracking-tighter border w-full">
+                        <div>
+                            Time
+                        </div>
+                        @foreach ($days as $i => $day)
+                            <div>
+                                {{ $day }}
+                            </div>
+                        @endforeach
+                    </div>
+
+
+                    @foreach ($schedules as $i => $time)
+                        <div class="flex justify-between h-12 w-full">
+                            <div class="flex justify-center w-32 border px-1">
+                                {{ $i }}
+                            </div>
+                            @foreach ($days as $day)
+
+                                {{-- @if($time[$day])
+
+                                    <div class="bg-blue-500 text-xs text-white w-40 text-center
+                                        {{ strtotime($i) == strtotime($time[$day]->start) ? 'border-t border-white' : '' }}
+                                        {{ strtotime($i) == strtotime($time[$day]->end) ? 'border-b border-white' : '' }} " >
+
+
+                                        @if ( strtotime($i) == strtotime($time[$day]->start) )
+                                            <div class="relative">
+
+                                                <div>
+                                                    {{ $time[$day]->schedule->subject->getCodeTitle($time[$day]->lab) }}
+                                                </div>
+                                                <div class="truncate mx-1 w-32 italic">
+                                                    {{ $time[$day]->schedule->subject->title }}
+                                                </div>
+                                                <div>
+                                                    {{ $time[$day]->schedule->section->section_name }}
+                                                </div>
+                                                <div>
+                                                    {{ optional($time[$day]->room)->name ?? "-" }}
+                                                </div>
+                                                <div>
+                                                    {{ optional($time[$day]->schedule->faculty)->name ?? "-" }}
+                                                </div>
+                                            </div>
+                                        @endif
+
+
+                                    </div>
+
+                                @else
+                                    <div class="w-40 bg-gray-500">&nbsp</div>
+                                @endif --}}
+
+                                <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40">
+                                    @forelse ($time[$day] as $s)
+
+
+                                        <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
+
+
+                                            @if ( strtotime($i) == strtotime($s->start) )
+
+                                                <div class="relative py-2 w-full">
+
+                                                    <div>
+                                                        {{ $s->schedule->subject->getCodeTitle($s->lab) }}
+                                                    </div>
+                                                    <div class="truncate mx-1 w-32 italic">
+                                                        {{ $s->schedule->subject->title }}
+                                                    </div>
+                                                    <div>
+                                                        {{ $s->schedule->section->section_name }}
+                                                    </div>
+                                                    <div>
+                                                        {{ optional($s->room)->name ?? "-" }}
+                                                    </div>
+                                                    <div>
+                                                        {{ optional($s->schedule->faculty)->name ?? "-" }}
+                                                    </div>
+                                                </div>
+
+                                            @endif
+                                        </div>
+
+
+                                    @empty
+                                        <div class="w-full bg-gray-300 border">&nbsp</div>
+                                    @endforelse
+                                </div>
+
+
+
+                            @endforeach
+                        </div>
+                    @endforeach
+
+
+
+                </div>
+
             </div>
         </div>
 

@@ -20,10 +20,10 @@ class Subject extends Model
         $this->attributes['code'] = str_replace(' ', '', strtoupper($value));
     }
 
-    public function getCodeAttribute()
-    {
-        return str_replace(' ', '', strtoupper($this->attributes['code']));
-    }
+    // public function getCodeAttribute()
+    // {
+    //     return str_replace(' ', '', strtoupper($this->attributes['code']));
+    // }
 
     public function setTitleAttribute($value)
     {

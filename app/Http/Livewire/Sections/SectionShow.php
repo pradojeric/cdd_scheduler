@@ -46,11 +46,16 @@ class SectionShow extends Component
 
     public function deleteTimeSchedule(TimeSchedule $timeSchedule)
     {
+
         $schedule = $timeSchedule->schedule;
-        $timeSchedule->delete();
-        if(count($schedule->timeSchedules) < 1)
+
+        if($schedule->timeSchedules->count() == 1)
         {
             $schedule->delete();
+        }
+        else
+        {
+            $timeSchedule->delete();
         }
 
     }
@@ -82,7 +87,7 @@ class SectionShow extends Component
                 $query->where('section_id', $this->section->id);
             });
 
-        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
+        $schedules = resolve(ScheduleService::class)->getTimeSchedulesSection($r, true);
 
         return view('livewire.sections.section-show', [
             // 'blockSubjects' => $blockSubjects->subjects ?? [],
