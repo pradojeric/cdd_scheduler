@@ -133,7 +133,7 @@
                     </div>
                 </div>
 
-                <table class="border min-w-full">
+                {{-- <table class="border min-w-full">
                     <thead>
                         <tr class="uppercase tracking-tighter border">
                             <th class="w-24">Time</th>
@@ -179,7 +179,89 @@
                         @endforeach
 
                     </tbody>
-                </table>
+                </table> --}}
+
+                <div class="w-full">
+                    <div class="flex justify-around uppercase tracking-tighter border w-full">
+                        <div>
+                            Time
+                        </div>
+                        @foreach ($days as $i => $day)
+                            <div>
+                                {{ $day }}
+                            </div>
+                        @endforeach
+                    </div>
+
+
+                    @foreach ($timeRange as $i => $time)
+                        <div class="flex justify-between h-auto w-full">
+                            <div class="flex justify-center w-32 border px-1">
+                                {{ $i }}
+                            </div>
+                            @foreach ($days as $day)
+                                @if(array_key_exists($day, $time))
+                                    <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40">
+
+                                        @forelse ($time[$day] as $s)
+
+                                            <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
+
+
+                                                @if ( strtotime($i) == strtotime($time[$day]->first()->start) )
+
+                                                    <div class="relative py-2 w-full z-40">
+                                                        @if(!$loop->first)
+                                                            <div class="pb-2">
+                                                                Conflict to
+                                                            </div>
+                                                        @endif
+                                                        <div>
+                                                            {{ $s->schedule->subject->getCodeTitle($s->lab) }}
+                                                        </div>
+                                                        <div class="truncate mx-1 w-32 italic">
+                                                            {{ $s->schedule->subject->title }}
+                                                        </div>
+                                                        <div>
+                                                            {{ $s->schedule->section->section_name }}
+                                                        </div>
+                                                        <div>
+                                                            {{ $s->time }}
+                                                        </div>
+                                                        <div>
+                                                            {{ optional($s->room)->name ?? "No Room" }}
+                                                        </div>
+                                                        <div>
+                                                            {{ optional($s->schedule->faculty)->name ?? "No Faculty" }}
+                                                        </div>
+                                                    </div>
+
+                                                @else
+
+                                                    &nbsp;
+
+                                                @endif
+                                            </div>
+
+
+                                        @empty
+                                            <div class="w-full bg-gray-300 border">&nbsp</div>
+                                        @endforelse
+                                    </div>
+                                @else
+                                    <div class="w-40 bg-gray-300 border">&nbsp</div>
+
+                                @endif
+
+
+                            @endforeach
+                        </div>
+                    @endforeach
+
+
+
+                </div>
+
             </div>
         </div>
     </div>

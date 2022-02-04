@@ -1,7 +1,7 @@
 <div>
     @if($isModalOpen)
         <!-- This example requires Tailwind CSS v2.0+ -->
-        <div class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="fixed z-40 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <!--
                 Background overlay, show/hide based on modal state.
@@ -79,37 +79,37 @@
                                     </div>
 
 
-                                    @if($selectedBuilding != '')
 
-                                        <div class="flex space-x-2">
 
-                                            <div class="flex items-center">
-                                                <label for="start" class="text-sm w-10" >Start</label>
-                                                <x-input type="time" id="start" wire:model="start" />
-                                            </div>
+                                    <div class="flex space-x-2">
 
-                                            <div class="flex items-center">
-                                                <label for="end" class="text-sm w-10" >End</label>
-                                                <x-input type="time"  id="end" wire:model="end" />
-                                            </div>
-
-                                            <div class="flex items-center">
-                                                <label for="hours" class="text-sm w-12" >Hours</label>
-                                                <x-input type="text" class="h-8 w-12 mr-1" id="hours" wire:model="hours" readonly />
-                                            </div>
-
-                                            <div class="flex items-center space-x-2">
-                                                @foreach ($days as $i => $day)
-                                                    <div class="flex">
-                                                        <x-input type="checkbox" wire:model="pickedDays.{{ $day }}" value=1 id="{{ $day }}" />
-                                                        <label for="{{ $day }}" class="text-sm ml-1" >{{ ucfirst($i) }}</label>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-
+                                        <div class="flex items-center">
+                                            <label for="start" class="text-sm w-10" >Start</label>
+                                            <x-input type="time" id="start" wire:model="start" />
                                         </div>
 
-                                    @endif
+                                        <div class="flex items-center">
+                                            <label for="end" class="text-sm w-10" >End</label>
+                                            <x-input type="time"  id="end" wire:model="end" />
+                                        </div>
+
+                                        <div class="flex items-center">
+                                            <label for="hours" class="text-sm w-12" >Hours</label>
+                                            <x-input type="text" class="h-8 w-12 mr-1" id="hours" wire:model="hours" readonly />
+                                        </div>
+
+                                        <div class="flex items-center space-x-2">
+                                            @foreach ($days as $i => $day)
+                                                <div class="flex">
+                                                    <x-input type="checkbox" wire:model="pickedDays.{{ $day }}" value=1 id="{{ $day }}" />
+                                                    <label for="{{ $day }}" class="text-sm ml-1" >{{ ucfirst($i) }}</label>
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -130,7 +130,7 @@
                                 </div>
                             </div>
 
-                            <table class="border min-w-full">
+                            {{-- <table class="border min-w-full">
                                 <thead>
                                     <tr class="uppercase tracking-tighter border">
                                         <th class="w-24">Time</th>
@@ -176,7 +176,72 @@
                                     @endforeach
 
                                 </tbody>
-                            </table>
+                            </table> --}}
+
+                            @foreach ($timeRange as $i => $time)
+                                <div class="flex justify-between max-h-40 h-auto w-full">
+                                    <div class="flex justify-center w-32 border px-1">
+                                        {{ $i }}
+                                    </div>
+                                    @foreach ($days as $day)
+                                        @if(array_key_exists($day, $time))
+                                            <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40">
+
+                                                @forelse ($time[$day] as $s)
+
+                                                    <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
+
+
+                                                        @if ( strtotime($i) == strtotime($time[$day]->first()->start) )
+
+                                                            <div class="py-2 w-full z-20">
+                                                                @if(!$loop->first)
+                                                                    <div class="pb-2">
+                                                                        Conflict to
+                                                                    </div>
+                                                                @endif
+                                                                <div>
+                                                                    {{ $s->schedule->subject->getCodeTitle($s->lab) }}
+                                                                </div>
+                                                                <div class="truncate mx-1 w-32 italic">
+                                                                    {{ $s->schedule->subject->title }}
+                                                                </div>
+                                                                <div>
+                                                                    {{ $s->schedule->section->section_name }}
+                                                                </div>
+                                                                <div>
+                                                                    {{ $s->time }}
+                                                                </div>
+                                                                <div>
+                                                                    {{ optional($s->room)->name ?? "No Room" }}
+                                                                </div>
+                                                                <div>
+                                                                    {{ optional($s->schedule->faculty)->name ?? "No Faculty" }}
+                                                                </div>
+                                                            </div>
+
+                                                        @else
+
+                                                            &nbsp;
+
+                                                        @endif
+                                                    </div>
+
+
+                                                @empty
+                                                    <div class="w-full bg-gray-300 border">&nbsp</div>
+                                                @endforelse
+                                            </div>
+                                        @else
+                                            <div class="h-full w-40 bg-gray-300 border">&nbsp</div>
+
+                                        @endif
+
+
+                                    @endforeach
+                                </div>
+                            @endforeach
+
                         </div>
 
                     </div>

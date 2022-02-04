@@ -34,8 +34,20 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($tokens as $token)
 
+                        @foreach ($tokens as $token)
+                            <tr>
+                                <td class="px-6 py-3">{{ $token->name }}</td>
+                                <td class="px-6 py-3">{{ $plainTokens->where('token_id',$tokens->first()->id)->first()->plain_token }}</td>
+                                <td class="px-6 py-3">
+                                    @foreach ($token->abilities as $ability)
+                                        {{ $ability }}
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <x-button>Delete</x-button>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -91,7 +103,7 @@
                         </div>
                     @endif
                     <div class="py-2">
-                        <x-input type="text" class="w-full" wire:model="name" placeholder="Name" />
+                        <x-input type="text" class="w-full" wire:model="tokenName" placeholder="Name" />
                     </div>
                     <div class="py-2">
                         <x-input type="email" class="w-full" wire:model="ability" placeholder="Ability" />
@@ -99,7 +111,7 @@
 
                 </div>
                 <div class="bg-gray-200 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" wire:click="addUser" wire:loading.class="disabled"
+                    <button type="button" wire:click="addToken" wire:loading.class="disabled"
                         class="mt-3 w-full inline-flex justify-center rounded-md border border-green-500 shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         {{ 'Add' }}
                     </button>

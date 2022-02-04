@@ -87,7 +87,7 @@ class SectionShow extends Component
                 $query->where('section_id', $this->section->id);
             });
 
-        $schedules = resolve(ScheduleService::class)->getTimeSchedulesSection($r, true);
+        $schedules = resolve(ScheduleService::class)->getTimeSchedules($r, true);
 
         return view('livewire.sections.section-show', [
             // 'blockSubjects' => $blockSubjects->subjects ?? [],

@@ -238,7 +238,7 @@
 
 
                     @foreach ($schedules as $i => $time)
-                        <div class="flex justify-between h-12 w-full">
+                        <div class="flex justify-between h-auto w-full">
                             <div class="flex justify-center w-32 border px-1">
                                 {{ $i }}
                             </div>
@@ -280,16 +280,20 @@
                                 @endif --}}
 
                                 <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40">
-                                    @forelse ($time[$day] as $s)
 
+                                    @forelse ($time[$day] as $s)
 
                                         <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
 
 
-                                            @if ( strtotime($i) == strtotime($s->start) )
+                                            @if ( strtotime($i) == strtotime($time[$day]->first()->start) )
 
-                                                <div class="relative py-2 w-full">
-
+                                                <div class="relative py-2 w-full z-40">
+                                                    @if(!$loop->first)
+                                                        <div class="pb-2">
+                                                            Conflict to
+                                                        </div>
+                                                    @endif
                                                     <div>
                                                         {{ $s->schedule->subject->getCodeTitle($s->lab) }}
                                                     </div>
@@ -300,12 +304,19 @@
                                                         {{ $s->schedule->section->section_name }}
                                                     </div>
                                                     <div>
-                                                        {{ optional($s->room)->name ?? "-" }}
+                                                        {{ $s->time }}
                                                     </div>
                                                     <div>
-                                                        {{ optional($s->schedule->faculty)->name ?? "-" }}
+                                                        {{ optional($s->room)->name ?? "No Room" }}
+                                                    </div>
+                                                    <div>
+                                                        {{ optional($s->schedule->faculty)->name ?? "No Faculty" }}
                                                     </div>
                                                 </div>
+
+                                            @else
+
+                                                &nbsp;
 
                                             @endif
                                         </div>
@@ -315,7 +326,6 @@
                                         <div class="w-full bg-gray-300 border">&nbsp</div>
                                     @endforelse
                                 </div>
-
 
 
                             @endforeach

@@ -52,7 +52,7 @@ class UpdateTimeSchedule extends Component
 
         $this->start = $schedule->start;
         $this->end = $schedule->end;
-        $this->selectedBuilding = $schedule->room->building->id;
+        $this->selectedBuilding = optional(optional($schedule->room)->building)->id;
         $this->selectedRoom = $schedule->room_id;
 
         foreach($this->dayNames as $day)

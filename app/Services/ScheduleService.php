@@ -17,37 +17,6 @@ class ScheduleService
         'SUN' => 'sunday'
     ];
 
-    public function getTimeSchedulesSection(Builder $r, $get = null)
-    {
-        $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '20:00');
-
-        $data = [];
-        foreach($timeRange as $time)
-        {
-            $t = $time->format('h:i A');
-
-            if($get) {
-
-                foreach($this->dayNames as $day)
-                {
-                    $exists = (clone $r)->where(function($query) use ($time, $day){
-                                $query->where('start', '<=', $time->toTimeString())
-                                    ->where('end', '>', $time->toTimeString())
-                                    ->where($day, 1);
-                            })
-                            ->orderBy('start')
-                            ->get();
-
-                    $data[$day] = $exists ?? null;
-                }
-            }
-
-            $roomsAvailable["$t"] = $data;
-        }
-
-        return $roomsAvailable;
-    }
-
     public function getTimeSchedules(Builder $r, $get = null)
     {
         $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '20:00');
@@ -66,11 +35,12 @@ class ScheduleService
                                     ->where('end', '>', $time->toTimeString())
                                     ->where($day, 1);
                             })
-                            ->orderBy('start')
-                            ->first();
+                            ->get();
 
-                    $data[$day] = $exists ?? null;
+                    $data[$day] = $exists;
+
                 }
+
             }
 
             $roomsAvailable["$t"] = $data;
@@ -78,6 +48,37 @@ class ScheduleService
 
         return $roomsAvailable;
     }
+
+    // public function getTimeSchedules(Builder $r, $get = null)
+    // {
+    //     $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '20:00');
+
+    //     $data = [];
+    //     foreach($timeRange as $time)
+    //     {
+    //         $t = $time->format('h:i A');
+
+    //         if($get) {
+
+    //             foreach($this->dayNames as $day)
+    //             {
+    //                 $exists = (clone $r)->where(function($query) use ($time, $day){
+    //                             $query->where('start', '<=', $time->toTimeString())
+    //                                 ->where('end', '>', $time->toTimeString())
+    //                                 ->where($day, 1);
+    //                         })
+    //                         ->orderBy('start')
+    //                         ->first();
+
+    //                 $data[$day] = $exists ?? null;
+    //             }
+    //         }
+
+    //         $roomsAvailable["$t"] = $data;
+    //     }
+
+    //     return $roomsAvailable;
+    // }
 
     public function checkInputHours($start, $end, $pickdays)
     {
