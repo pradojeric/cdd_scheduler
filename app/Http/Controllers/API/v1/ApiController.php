@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Faculties;
 use App\Http\Resources\Schedule as ResourcesSchedule;
+use App\Models\Faculty;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,4 +50,17 @@ class ApiController extends Controller
 
         return response()->json(ResourcesSchedule::collection($schedules));
     }
+
+    public function getFaculties(Request $request)
+    {
+        $faculties = Faculty::when($request->code != '', function ($query) use ($request) {
+            $query->whereHas('department', function($query) use ($request) {
+                $query->where('code', $request->code);
+            });
+        })->get();
+
+
+        return response()->json(Faculties::collection($faculties));
+    }
+
 }

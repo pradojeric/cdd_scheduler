@@ -21,5 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->namespace('API\v1')->prefix('v1')->group( function () {
     Route::get('/get-schedules', [ApiController::class, 'getSchedules']);
+    Route::get('/get-faculties', [ApiController::class, 'getFaculties']);
 });
 
