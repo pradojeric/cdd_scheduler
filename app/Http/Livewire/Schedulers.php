@@ -45,7 +45,7 @@ class Schedulers extends Component
     public $override = false;
 
     public $startingTime = "7:00";
-    public $endingTime = "19:00";
+    public $endingTime = "21:00";
 
     public $start = '';
     public $end = '';

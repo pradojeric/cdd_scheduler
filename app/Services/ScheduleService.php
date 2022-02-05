@@ -19,7 +19,7 @@ class ScheduleService
 
     public function getTimeSchedules(Builder $r, $get = null)
     {
-        $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '20:00');
+        $timeRange = CarbonInterval::minutes(30)->toPeriod('7:00', '21:00');
 
         $data = [];
         foreach($timeRange as $time)
