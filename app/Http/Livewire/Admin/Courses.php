@@ -14,6 +14,8 @@ class Courses extends Component
     public $name;
     public $department;
 
+    public $isSeniorHigh;
+
     public $isEditing = false;
 
     protected $rules = [
@@ -29,6 +31,7 @@ class Courses extends Component
             'code' => $this->code,
             'name' => $this->name,
             'department_id' => $this->department,
+            'senior_high' => $this->isSeniorHigh ?? false,
         ]);
         session()->flash('success', 'Section successfully added');
         $this->reset();
@@ -41,6 +44,7 @@ class Courses extends Component
             'code' => $this->code,
             'name' => $this->name,
             'department_id' => $this->department,
+            'senior_high' => $this->isSeniorHigh ?? false,
         ]);
         session()->flash('success', 'Section successfully updated');
         $this->reset();
@@ -52,6 +56,7 @@ class Courses extends Component
         $this->name = $course->name;
         $this->code = $course->code;
         $this->department = $course->department_id;
+        $this->isSeniorHigh = $course->senior_high;
         $this->isEditing = true;
     }
 

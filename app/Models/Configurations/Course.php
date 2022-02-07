@@ -12,7 +12,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'department_id', 'code', 'name'
+        'department_id', 'code', 'name', 'senior_high'
     ];
 
     public function setCodeAttribute($value)

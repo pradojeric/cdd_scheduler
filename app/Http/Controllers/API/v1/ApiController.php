@@ -41,7 +41,9 @@ class ApiController extends Controller
                 },
                 'room',
                 'subject',
-                'subject.course'
+                'subject.course' => function ($query) {
+                    $query->where('senior_high', false);
+                }
             ])
             ->without([
                 'timeSchedules'

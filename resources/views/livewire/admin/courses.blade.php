@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="flex flex-col items-start">
-                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-96 text-sm" placeholder="Course Name" />
+                    <x-input id="name" type="text" wire:model="name" class="mt-1 w-80 text-sm" placeholder="Course Name" />
                     @error('name')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
@@ -24,6 +24,13 @@
                     @error('code')
                         <span class="text-xs text-red-500">{{ $message }}</span>
                     @enderror
+                </div>
+                <div class="flex flex-col items-start">
+                    <div class="flex items-center">
+                        <x-input type="checkbox" class="mr-2 text-xs"  wire:model="isSeniorHigh" id="isSeniorHigh" value="1"
+                        :checked="$graduating ?? false " />
+                        <x-label for="isSeniorHigh" :value="__('Senior High')"></x-label>
+                    </div>
                 </div>
                 <div class="flex">
                     @if($isEditing)

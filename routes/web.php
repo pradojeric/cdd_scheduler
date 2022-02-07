@@ -32,12 +32,6 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/test', function () {
-    $response = Http::get('http://cdd-scheduler.test/api/v1/get-schedules');
-
-    dd($response->json());
-});
-
 Route::middleware(['auth'])->group(function(){
 
     Route::middleware(['role:superadmin'])->group(function(){
