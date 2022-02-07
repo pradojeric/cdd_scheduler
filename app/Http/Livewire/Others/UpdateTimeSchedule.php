@@ -32,7 +32,7 @@ class UpdateTimeSchedule extends Component
     public $allRooms = false;
 
     public $startingTime = "7:00";
-    public $endingTime = "19:00";
+    public $endingTime = "20:00";
 
     public $start = '';
     public $end = '';
@@ -197,7 +197,6 @@ class UpdateTimeSchedule extends Component
             }
 
             $roomsAvailable = resolve(ScheduleService::class)->getTimeSchedules($r, $get);
-
 
         }
 

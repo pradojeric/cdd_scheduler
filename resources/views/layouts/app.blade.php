@@ -13,6 +13,9 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+        <!-- Icon -->
+        <link rel="icon" href="{{ asset('img/logo.png') }}">
+
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
