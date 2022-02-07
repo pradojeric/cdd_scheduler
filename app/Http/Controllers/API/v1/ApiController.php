@@ -48,6 +48,19 @@ class ApiController extends Controller
             ->without([
                 'timeSchedules'
             ])
+            ->when($request->school_year, function ($query) use ($request) {
+                $query->where(function($query) use ($request) {
+                    $query->where('school_year', $request->school_year);
+                });
+            })
+            ->when($request->term, function ($query) use ($request) {
+                $query->where(function($query) use ($request) {
+                    $query->where('term', $request->term);
+                });
+            })
+            ->whereHas('subject.course', function ($query) use ($request) {
+                $query->where('senior_high', $request->senior_high ?? false);
+            })
             ->get();
 
         return response()->json(ResourcesSchedule::collection($schedules));

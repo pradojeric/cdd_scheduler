@@ -46,9 +46,16 @@ class Section extends Model
 
     public function getSectionNameAttribute()
     {
+        if($this->course->senior_high) {
+            $year = 10 + $this->year;
+            $section_name = "{$this->course->code}{$year}-";
+        } else {
+            $section_name = "{$this->year}{$this->term}-{$this->course->code}-";
+        }
+
         $block = str_pad($this->block, 2, '0', STR_PAD_LEFT);
 
-        return "{$this->year}{$this->term}-{$this->course->code}-{$block}";
+        return $section_name."".$block;
     }
 
     public function getBlockSubjects()
