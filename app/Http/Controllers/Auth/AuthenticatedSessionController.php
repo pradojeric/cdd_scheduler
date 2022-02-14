@@ -36,6 +36,10 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('faculties.show', Auth::user()->faculty->id);
         }
 
+        if(Auth::user()->hasRole('viewer')) {
+            return redirect()->route('reports');
+        }
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

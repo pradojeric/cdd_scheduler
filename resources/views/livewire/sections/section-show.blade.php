@@ -279,16 +279,16 @@
                                     <div class="w-40 bg-gray-500">&nbsp</div>
                                 @endif --}}
 
-                                <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40">
+                                <div class="flex {{ $time[$day]->count() > 1 ? 'flex-col' : '' }} w-40 px-1">
 
                                     @forelse ($time[$day] as $s)
 
-                                        <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
+                                        <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500 h-full' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
 
 
                                             @if ( strtotime($i) == strtotime($time[$day]->first()->start) )
 
-                                                <div class="relative py-2 w-full z-40">
+                                                <div class="relative py-2 w-full z-40 {{ $loop->first ? 'border-t' : '' }}">
                                                     @if(!$loop->first)
                                                         <div class="pb-2">
                                                             Conflict to

@@ -125,10 +125,10 @@
 
                                                     @foreach ($section->getCustomSubjects() as $customSubject)
                                                         <tr >
-                                                            <td class="px-2 w-1/2">{{ $customSubject->code }}</td>
-                                                            <td class="px-2 w-1/4 tracking-tight">{{ $customSubject->title }}</td>
-                                                            <td class="text-center px-2 w-1/2">{{ $customSubject->totalUnits() }}</td>
-                                                            <td class="pl-2 ">
+                                                            <td class="px-2 text-center w-1/12 text-sm">{{ $customSubject->code }}</td>
+                                                            <td class="px-2 text-center w-1/3 text-sm tracking-tight">{{ $customSubject->title }}</td>
+                                                            <td class="px-2 text-center w-1/12 text-sm">{{ $customSubject->totalUnits() }}</td>
+                                                            <td class="text-center w-1/12 text-sm">
                                                                 @if ($customSubject->schedules->first())
                                                                     <ul>
                                                                         @foreach (optional($customSubject->schedules->first())->timeSchedules as $s)
@@ -139,7 +139,7 @@
                                                                     </ul>
                                                                 @endif
                                                             </td>
-                                                            <td class="text-center px-2">
+                                                            <td class="px-2 text-center w-1/12 text-sm">
                                                                 @if ($customSubject->schedules->first())
                                                                     <ul>
                                                                         @foreach (optional($customSubject->schedules->first())->timeSchedules as $s)
@@ -148,7 +148,7 @@
                                                                     </ul>
                                                                 @endif
                                                             </td>
-                                                            <td class="text-center px-2 w-1/6">
+                                                            <td class="px-2 text-center w-max text-sm">
 
                                                                     {{ optional($customSubject->schedules)->first()->faculty->name ?? 'No Faculty' }}
 

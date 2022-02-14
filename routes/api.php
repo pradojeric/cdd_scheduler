@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->namespace('API\v1')->prefix('v1')->group( function () {
+Route::middleware(['auth:sanctum', 'ability:get-schedule'])->namespace('API\v1')->prefix('v1')->group( function () {
     Route::get('/get-schedules', [ApiController::class, 'getSchedules']);
     Route::get('/get-faculties', [ApiController::class, 'getFaculties']);
 });

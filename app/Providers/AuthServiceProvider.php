@@ -35,6 +35,10 @@ class AuthServiceProvider extends ServiceProvider
             return optional($user->faculty)->id == $faculty->id || $user->hasRole('admin');
         });
 
+        Gate::define('admin', function ($user) {
+            return $user->hasRole('admin');
+        });
+
 
     }
 }

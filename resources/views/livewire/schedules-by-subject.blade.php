@@ -255,12 +255,12 @@
 
                                         @forelse ($time[$day] as $s)
 
-                                            <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
+                                            <div class="{{ $time[$day]->count() > 1 ? 'bg-red-500 h-full' : 'bg-blue-500' }} text-xs text-white w-full text-center" >
 
 
                                                 @if ( strtotime($i) == strtotime($time[$day]->first()->start) )
 
-                                                    <div class="py-2 w-full z-40">
+                                                    <div class="py-2 w-full z-40 {{ $loop->first ? 'border-t' : '' }}">
                                                         @if(!$loop->first)
                                                             <div class="pb-2">
                                                                 Conflict to
