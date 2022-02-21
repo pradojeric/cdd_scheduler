@@ -28,6 +28,11 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function updatingSelectedCourse()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.reports.index', [
