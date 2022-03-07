@@ -13,6 +13,8 @@ use App\Services\ScheduleService;
 use App\Models\Configurations\Course;
 use App\Models\Configurations\Settings;
 
+use Illuminate\Support\Facades\Http;
+
 class SectionShow extends Component
 {
     private $dayNames = [
@@ -41,6 +43,29 @@ class SectionShow extends Component
 
     public function deleteSchedule(Schedule $schedule)
     {
+        $sy = $schedule->school_year;
+        $section = $schedule->section->section_name;
+        $room_name = $schedule->subject->title;
+
+        if($schedule->lab) {
+            $room_name = $room_name . " (Laboratory)";
+        }
+
+        $step_room = [
+            'name' => $room_name,
+            'section' => $section,
+            'sy' => $sy,
+        ];
+
+
+
+        $token = env('STEP_TOKEN');
+
+        // find and delete step room
+        $response = Http::withToken($token)
+            ->accept('application/json')
+            ->post('http://127.0.0.1:8080/api/rooms/delete', $step_room);
+
         $schedule->delete();
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Exception;
+use App\Events\ScheduleCreated;
 use App\Models\Room;
 use App\Models\Faculty;
 use App\Models\Section;
@@ -248,7 +249,6 @@ class Schedulers extends Component
             }
         }
 
-
         try{
             DB::beginTransaction();
 
@@ -267,6 +267,26 @@ class Schedulers extends Component
             $schedule->timeSchedules()->create($timeScheds);
 
             DB::commit();
+
+            $room_name = $schedule->subject->title;
+
+            if($timeScheds['lab']) {
+                $room_name = $room_name . " (Laboratory)";
+            }
+
+            $step_room = [
+                'name' => $room_name,
+                'section' => $schedule->section->section_name,
+                'course' => $schedule->section->course->name,
+                'subject' => $schedule->subject->title,
+                'faculty' => ['firstname' => $schedule->faculty->first_name, 'lastname' => $schedule->faculty->last_name, 'email' => $schedule->faculty->user->email ],
+                'year' => $schedule->section->year,
+                'sy' => $schedule->section->school_year,
+                'sem' => $schedule->section->term,
+            ];
+
+            ScheduleCreated::dispatch($step_room);
+
         }catch (Exception $e){
             DB::rollback();
             dd($e);

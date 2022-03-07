@@ -7,6 +7,8 @@ use App\Models\Schedule;
 use App\Services\FacultyService;
 use Livewire\Component;
 
+use Illuminate\Support\Facades\Http;
+
 class AddFaculty extends Component
 {
     public $isModalOpen;
@@ -79,6 +81,29 @@ class AddFaculty extends Component
         }
 
         $this->emitUp('updateFaculty', $this->schedule, $this->selectedFaculty);
+
+        // update faculty (step)
+        $sy = $this->schedule->school_year;
+        $section = $this->schedule->section->section_name;
+        $room_name = $this->schedule->subject->title;
+
+        if($this->schedule->lab) {
+            $room_name = $room_name . " (Laboratory)";
+        }
+
+        $step_room = [
+            'name' => $room_name,
+            'section' => $section,
+            'sy' => $sy,
+            'faculty' => ['firstname' => $this->selectedFaculty->first_name, 'lastname' => $this->selectedFaculty->last_name, 'email' => $this->selectedFaculty->user->email ]
+        ];
+
+        $token = env('STEP_TOKEN');
+
+        $response = Http::withToken($token)
+            ->accept('application/json')
+            ->post('http://127.0.0.1:8080/api/rooms/update/teacher', $step_room);
+
         $this->close();
     }
 
