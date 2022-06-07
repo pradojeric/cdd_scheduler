@@ -9,10 +9,15 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <x-auth-session-status :status="session('success')" />
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+                <div class="p-6 bg-white border-b border-gray-200 flex space-x-2">
                     <a href="{{ route('faculties.create') }}"
                         class="bg-gray-500 hover:bg-gray-700 rounded p-2 text-white text-sm">Add New Faculty</a>
+
+                    <a href="/faculties/store-to-step"
+                        class="bg-green-500 hover:bg-green-700 rounded p-2 text-white text-sm">Copy to STEP</a>
+
                 </div>
+
                 <table class="min-w-full divide-y-2 divide-double">
                     <thead class="bg-gray-100">
                         <tr>

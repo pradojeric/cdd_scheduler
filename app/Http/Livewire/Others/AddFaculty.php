@@ -98,11 +98,12 @@ class AddFaculty extends Component
             'faculty' => ['firstname' => $this->selectedFaculty->first_name, 'lastname' => $this->selectedFaculty->last_name, 'email' => $this->selectedFaculty->user->email ]
         ];
 
-        $token = env('STEP_TOKEN');
+        $token = config('step.step.token');
+        $url = config('step.step.url');
 
         $response = Http::withToken($token)
             ->accept('application/json')
-            ->post('http://127.0.0.1:8080/api/rooms/update/teacher', $step_room);
+            ->post($url.'/api/rooms/update/teacher', $step_room);
 
         $this->close();
     }

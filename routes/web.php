@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function(){
 
     });
 
+    Route::get('/faculties/store-to-step', [FacultyController::class, 'storeStep']);
     Route::resource('faculties', FacultyController::class);
     Route::get('/change-password', [SettingsController::class, 'changePassword'])->name('password.change');
     Route::post('/change-password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');

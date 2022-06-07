@@ -53,15 +53,8 @@ class CourseShow extends Component
     {
         foreach($this->course->sections as $s)
         {
-            $blockSubjects[$s->section_name] = resolve(SectionService::class)->getSubjects($s);
-            $customSubjects[$s->section_name] = Subject::with([
-                    'schedules',
-                    'schedules.timeSchedules'
-                ])->whereHas('schedules', function($query) use ($s) {
-                    $query->where('section_id', $s->id);
-                }
-            )->whereNotIn('id', $blockSubjects[$s->section_name]->subjects->pluck('id'))
-            ->get();
+            $blockSubjects[$s->section_name] = $s->getBlockSubjects() ?? [];
+            $customSubjects[$s->section_name] = $s->getCustomSubjects() ?? [];
         }
 
         return view('livewire.sections.course-show', [

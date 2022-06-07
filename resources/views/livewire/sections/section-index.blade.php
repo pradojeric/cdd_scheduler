@@ -112,10 +112,13 @@
                         <tr wire:key="{{ $c->id }}">
                             <td class="px-6 py-4 whitespace-nowrap text-sm w-1/6 border-r "
                                 @php
-                                    if($row != $c->id)
-                                    {
-                                        echo "rowspan=".$c->sections->count();
-                                        $row = $c->id;
+                                    if($c->sections->count() > 0 ){
+
+                                        if($row != $c->id)
+                                        {
+                                            echo "rowspan=".$c->sections->count();
+                                            $row = $c->id;
+                                        }
                                     }
                                 @endphp
                             >
@@ -124,7 +127,7 @@
                             </a>
                             </td>
 
-                            @foreach ($c->sections->sortBy('year') as $section)
+                            @forelse ($c->sections->sortBy('year') as $section)
 
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->section_name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm">{{ $section->graduating }}</td>
@@ -148,7 +151,12 @@
                                         echo "</tr>";
                                     }
                                 @endphp
-                            @endforeach
+                            @empty
+
+
+                                </tr>
+
+                            @endforelse
 
                     @endforeach
 

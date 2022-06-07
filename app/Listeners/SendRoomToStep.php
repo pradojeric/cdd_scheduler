@@ -11,9 +11,10 @@ class SendRoomToStep
 {
     public function handle(ScheduleCreated $event)
     {
-        $token = env('STEP_TOKEN');
+        $token = config('step.step.token');
+        $url = config('step.step.url');
         $response = Http::withToken($token)
             ->accept('application/json')
-            ->post('http://127.0.0.1:8080/api/rooms', $event->room);
+            ->post($url.'/api/rooms', $event->room);
     }
 }

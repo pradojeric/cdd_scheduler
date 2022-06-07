@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Str;
+use Hash;
 use App\Models\User;
 use App\Models\Faculty;
 use Carbon\CarbonInterval;
@@ -9,9 +11,8 @@ use App\Models\TimeSchedule;
 use Illuminate\Http\Request;
 use App\Services\FacultyService;
 use App\Services\ScheduleService;
+use Illuminate\Support\Facades\Http;
 use App\Models\Configurations\Department;
-use Hash;
-use Str;
 
 class FacultyController extends Controller
 {
@@ -193,5 +194,20 @@ class FacultyController extends Controller
         return redirect()->route('faculties.index')->with('success', 'Faculty successfully deleted');
     }
 
+    public function storeStep()
+    {
 
+        $token = config('step.step.token');
+        $url = config('step.step.url');
+
+        $faculties = Faculty::with('user')->get();
+
+
+        $response = Http::withToken($token)
+            ->accept('application/json')
+            ->post($url.'/api/faculties/store', $faculties->toArray());
+
+        dd($response->json());
+
+    }
 }
