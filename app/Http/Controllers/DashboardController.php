@@ -11,7 +11,6 @@ class DashboardController extends Controller
     public function index()
     {
 
-        dd(config('step.step.url'));
         $faculties = Faculty::with(['schedules', 'schedules.subject'])->orderBy('last_name')->orderBy('first_name')->take(10)->get();
 
         return view('dashboard', compact('faculties'));

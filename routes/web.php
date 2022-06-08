@@ -16,6 +16,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Admin\ApiTokens;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,16 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function(){
+
+    Route::get('/test-api/step', function(Request $request) {
+        $token = config('step.step.token');
+        $url = config('step.step.url');
+
+        $response = Http::withToken($token)
+            ->get($url.'/api/user');
+
+        return $response;
+    });
 
     Route::middleware(['role:superadmin'])->group(function(){
         Route::get('/roles-permissions', [SettingsController::class, 'rolesAndPermissions'])->name('settings.roles-permissions');
