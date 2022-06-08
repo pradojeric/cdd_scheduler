@@ -106,7 +106,7 @@ class AddFaculty extends Component
             ->post($url.'/api/rooms/update/teacher', $step_room);
 
 
-        dd($response);
+        dd($response->body());
 
 
         $this->close();
