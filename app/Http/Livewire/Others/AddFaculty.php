@@ -105,10 +105,9 @@ class AddFaculty extends Component
             ->accept('application/json')
             ->post($url.'/api/rooms/update/teacher', $step_room);
 
-        if($response->failed()) {
-            dd($response->throw());
-        }
-        dd($response->json());
+
+        dd($response->throw());
+
 
         $this->close();
     }
