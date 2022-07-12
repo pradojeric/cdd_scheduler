@@ -16,21 +16,23 @@
                 </x-select>
             </div>
             <div class="flex items-center">
-                @if($subjects->count() > 0)
+                @role('superadmin')
+                    @if($subjects->count() > 0)
 
-                <button type="button"
-                    class="bg-green-500 px-3 py-2 text-white text-sm rounded-md shadow-sm hover:bg-green-700" {{--
-                    wire:click="updateSubjects"> --}}
-                    wire:click="$emit('openModal')">
-                    <div wire:loading wire:target="updateSubjects"><i class="fa fa-spinner fa-spin"></i></div>
-                    Update Subject
-                </button>
-                @else
-                <div>
-                    <div wire:loading wire:target="importSubjects"><i class="fa fa-spinner fa-spin"></i></div>
-                    <x-button wire:click="importSubjects" wire:loading.remove>{{ _('Import Subjects') }}</x-button>
-                </div>
-                @endif
+                        <button type="button"
+                            class="bg-green-500 px-3 py-2 text-white text-sm rounded-md shadow-sm hover:bg-green-700" {{--
+                            wire:click="updateSubjects"> --}}
+                            wire:click="$emit('openModal')">
+                            <div wire:loading wire:target="updateSubjects"><i class="fa fa-spinner fa-spin"></i></div>
+                            Update Subject
+                        </button>
+                    @else
+                    <div>
+                        <div wire:loading wire:target="importSubjects"><i class="fa fa-spinner fa-spin"></i></div>
+                        <x-button wire:click="importSubjects" wire:loading.remove>{{ _('Import Subjects') }}</x-button>
+                    </div>
+                    @endif
+                @endrole
             </div>
 
         </div>

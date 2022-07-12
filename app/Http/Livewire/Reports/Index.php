@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Reports;
 
 use App\Models\Configurations\Course;
 use App\Models\Configurations\Department;
+use App\Models\Room;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -67,6 +68,7 @@ class Index extends Component
                 })
                 ->orderBy('name')
                 ->paginate(1),
+            'rooms' => Room::paginate(10),
         ]);
     }
 }

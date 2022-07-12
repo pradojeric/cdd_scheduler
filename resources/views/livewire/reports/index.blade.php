@@ -17,12 +17,17 @@
                             <input type="radio" id="faculty" wire:model="reportType" value="faculty">
                             <x-label for="faculty" value="By Faculty" />
                         </div>
+                        <div class="flex space-x-2">
+                            <input type="radio" id="room" wire:model="reportType" value="room">
+                            <x-label for="room" value="By Room" />
+                        </div>
                     </div>
                     <div wire:loading class="flex justify-center">
                         Loading...
                     </div>
                     <div wire:init="loadInit" wire:loading.remove>
 
+                        @if($reportType == 'section' || $reportType == 'faculty')
                         <span class="text-xs">Filter: </span>
                         <div>
                             <x-label for="selectedDept" value="Department" />
@@ -33,6 +38,8 @@
                                 @endforeach
                             </x-select>
                         </div>
+                        @endif
+
                         @if($reportType == 'section')
 
                             <div>
@@ -246,6 +253,54 @@
                             <div wire:loading.remove class="mt-2">
                                 @if($departments)
                                     {{ $departments->links() }}
+                                @endif
+                            </div>
+                        @endif
+
+                        @if($reportType == 'room')
+
+                            @foreach ($rooms as $room)
+                                <div class="mt-2 uppercase">
+                                    <a href="{{ route('rooms.show', $room) }}" class="text-blue-500 hover:text-blue-700 underline">
+                                        {{ $room->name }}
+                                    </a>
+                                </div>
+
+                                <div class="mt-2">
+                                    <table class="table w-full border">
+                                        <thead>
+                                            <tr class="uppercase">
+                                                <th>Code</th>
+                                                <th>Subject</th>
+                                                <th>Units</th>
+                                                <th>Section</th>
+                                                <th class="w-1/3">Time and Room</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y">
+
+                                            @foreach ($room->timeSchedules as $timeSched)
+                                            <tr class="align-top">
+                                                <td class="px-2 text-center text-sm w-1/12">{{ $timeSched->schedule->subject->code }}</td>
+                                                <td class="px-2 text-center text-sm w-1/3">{{ $timeSched->schedule->subject->title }}</td>
+                                                <td class="px-2 text-center text-sm w-1/12">{{ $timeSched->schedule->subject->total_units }}</td>
+                                                <td class="px-2 text-center text-sm w-1/3">{{ $timeSched->schedule->section->section_name }}</td>
+                                                <td class="px-2 text-center text-sm">
+                                                    {{ $timeSched->time }} {{ $timeSched->lab ? '(LAB)' : '' }}
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <hr>
+                            @endforeach
+
+                            <div wire:loading.remove class="mt-2">
+                                @if($departments)
+                                    {{ $rooms->links() }}
                                 @endif
                             </div>
                         @endif
