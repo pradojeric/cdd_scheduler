@@ -58,9 +58,12 @@ class SchedulesBySubject extends Schedulers
             $subject = Subject::find($this->selectedSubject);
             $sections = resolve(SectionService::class)->getSections($subject);
 
-            if(!is_numeric($this->selectedSubject))
+            if(!$this->allRooms)
             {
-                $rooms->laboratory();
+                if(!is_numeric($this->selectedSubject))
+                {
+                    $rooms->laboratory();
+                }
             }
         }
 

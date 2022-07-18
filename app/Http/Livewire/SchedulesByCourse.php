@@ -71,9 +71,12 @@ class SchedulesByCourse extends Schedulers
             });
         }
 
-        if(!is_numeric($this->selectedSubject))
+        if(!$this->allRooms)
         {
-            $rooms->laboratory();
+            if(!is_numeric($this->selectedSubject))
+            {
+                $rooms->laboratory();
+            }
         }
 
         if($this->allFaculties){
