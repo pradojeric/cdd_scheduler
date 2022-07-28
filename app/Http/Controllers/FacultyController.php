@@ -200,7 +200,7 @@ class FacultyController extends Controller
         $token = config('step.step.token');
         $url = config('step.step.url');
 
-        $faculties = Faculty::with('user')->get();
+        $faculties = Faculty::with(['user', 'department'])->get();
 
 
         $response = Http::withToken($token)
